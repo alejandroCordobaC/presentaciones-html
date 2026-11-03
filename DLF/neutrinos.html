@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutrinos: Las Partículas Fantasma - Descubriendo la Física</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+    :root {
+        /* Paleta de colores Dark Mode */
+        --primary: #63b3ed;       /* Azul claro para buen contraste */
+        --secondary: #90cdf4;     /* Azul más claro para textos secundarios */
+        --accent: #4299e1;        /* Azul de acento vibrante */
+        --text-dark: #f7fafc;     /* Texto principal claro */
+        --text-medium: #e2e8f0;   /* Texto secundario claro */
+        --text-light: #a0aec0;    /* Texto atenuado (captions, etc.) */
+        --bg-light: #1a202c;      /* Fondo oscuro principal (gris azulado muy oscuro) */
+        --bg-white: #2d3748;      /* Fondo de tarjetas, imágenes y bloques (gris oscuro) */
+        --border: #4a5568;        /* Bordes oscuros sutiles */
+        --shadow: rgba(0, 0, 0, 0.6); /* Sombras más profundas */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Fondo general oscuro */
+        color: var(--text-dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .presentation-container {
+        width: 95%;
+        max-width: 1200px;
+        height: 90vh;
+        position: relative;
+        box-shadow: 0 10px 40px var(--shadow);
+        background: var(--bg-light);
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+
+    .slide {
+        display: none;
+        padding: 50px 70px 90px 70px;
+        height: 100%;
+        overflow-y: auto;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .slide.active { display: block; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    h1 { 
+        color: var(--primary); font-size: 2.6em; margin-bottom: 20px; font-weight: 600;
+        letter-spacing: -0.5px; border-bottom: 3px solid var(--primary); padding-bottom: 15px;
+    }
+
+    h2 { 
+        color: var(--primary); font-size: 2em; margin-bottom: 25px; font-weight: 600;
+        border-bottom: 2px solid var(--border); padding-bottom: 12px;
+    }
+
+    h3 { color: var(--secondary); font-size: 1.5em; margin: 30px 0 15px 0; font-weight: 600; }
+    h4 { color: var(--text-dark); font-size: 1.2em; margin: 20px 0 10px 0; font-weight: 600; }
+    
+    p, li { font-size: 1.1em; line-height: 1.8; color: var(--text-medium); margin-bottom: 12px; }
+    ul { padding-left: 30px; margin: 15px 0; }
+    li { margin-bottom: 10px; }
+
+    .highlight { color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--accent); }
+
+    .math-block { 
+        background: var(--bg-white); padding: 25px 30px; border-left: 4px solid var(--primary);
+        margin: 25px 0; font-size: 1.15em;
+    }
+
+    .image-container {
+        margin: 30px 0; text-align: center; background: var(--bg-white);
+        padding: 20px; border: 1px solid var(--border);
+    }
+
+    .image-container img {
+        max-width: 100%; max-height: 380px; display: block; margin: 0 auto;
+        /* Opcional: un ligero brillo para que las imágenes resalten en modo oscuro */
+        filter: brightness(0.95) contrast(1.05); 
+    }
+
+    .image-caption {
+        font-size: 0.95em; color: var(--text-light); font-style: italic;
+        margin-top: 12px; text-align: center;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 25px 0; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; margin: 25px 0; }
+
+    .card {
+        background: var(--bg-white); padding: 25px; border: 1px solid var(--border);
+        border-top: 3px solid var(--primary); text-align: left;
+    }
+
+    /* Colores específicos para las tarjetas de radiación en modo oscuro */
+    .card.alpha { border-top-color: #fc8181; } /* Rojo claro */
+    .card.beta { border-top-color: #63b3ed; }  /* Azul claro */
+    .card.gamma { border-top-color: #f6e05e; } /* Amarillo claro */
+
+    .analogy {
+        background: var(--bg-white); border-left: 4px solid var(--accent);
+        padding: 20px 25px; margin: 25px 0; font-style: normal;
+    }
+
+    .analogy strong {
+        color: var(--primary); font-style: normal; display: block;
+        margin-bottom: 10px; font-size: 1.1em;
+    }
+
+    .controls {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 15px 70px; z-index: 10;
+        background: linear-gradient(to top, rgba(26, 32, 44, 0.98) 70%, rgba(26, 32, 44, 0) 100%);
+        border-top: 1px solid var(--border);
+    }
+
+    .controls-info {
+        position: absolute; left: 50%; transform: translateX(-50%);
+        font-size: 0.85em; color: var(--text-light); font-style: italic;
+    }
+
+    button {
+        background: var(--bg-white); color: var(--primary); border: 1px solid var(--primary);
+        padding: 8px 22px; font-size: 0.9em; font-family: inherit; cursor: pointer;
+        transition: all 0.2s; font-weight: 600; letter-spacing: 0.5px;
+    }
+
+    button:hover:not(:disabled) { 
+        background: var(--primary); 
+        color: #1a202c; /* Texto oscuro sobre botón azul claro al hacer hover */
+    }
+
+    button:disabled { 
+        background: #1a202c; 
+        color: #4a5568; 
+        border-color: #4a5568; 
+        cursor: not-allowed; 
+    }
+
+    .slide-number {
+        position: absolute; top: 25px; right: 35px; font-size: 0.95em;
+        color: var(--text-light); font-weight: 500;
+        background: var(--bg-white);
+        padding: 6px 12px;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+    }
+
+    .timeline {
+        display: flex; justify-content: space-between; margin: 40px 0; position: relative;
+    }
+
+    .timeline::before {
+        content: ''; position: absolute; top: 25px; left: 0; right: 0;
+        height: 2px; background: var(--border); z-index: 0;
+    }
+
+    .timeline-item {
+        flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 15px;
+    }
+
+    .timeline-year {
+        background: var(--primary); 
+        color: #1a202c; /* Texto oscuro para máximo contraste sobre el círculo azul */
+        width: 50px; height: 50px;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 15px; font-weight: 700; font-size: 0.95em;
+        border: 2px solid var(--bg-light);
+    }
+
+    .timeline-desc { font-size: 0.95em; color: var(--text-medium); line-height: 1.5; }
+
+    .fact-box {
+        background: var(--bg-white); border: 1px solid var(--border);
+        border-left: 4px solid var(--accent); padding: 20px 25px; margin: 25px 0;
+    }
+
+    .fact-box strong { color: var(--primary); font-size: 1.15em; display: block; margin-bottom: 10px; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-light); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
+
+    .subtitle { color: var(--text-light); font-size: 1.3em; margin-bottom: 30px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="presentation-container">
+    <div class="slide-number" id="slide-counter">1 / 12</div>
+
+    <!-- SLIDE 0: Portada -->
+    <div class="slide active" id="slide-0">
+        <h1 style="text-align: center; border-bottom: none; font-size: 3em;">Descubriendo la Física</h1>
+        <p style="text-align: center; font-size: 1.5em; color: var(--text-light); margin-bottom: 40px;">Noviembre de 2026</p>
+        
+        <div class="grid-2" style="align-items: center; margin: 40px 0;">
+            <div>
+                <h2 style="border-bottom: none; font-size: 1.8em;">Los Neutrinos</h2>
+                <p style="font-size: 1.2em; line-height: 1.9;">
+                    Las partículas fantasma que atraviesan el universo. Posiblemente las partículas fundamentales más fascinantes y esquivas que conocemos, clave para entender desde el interior del Sol hasta la asimetría del Big Bang.
+                </p>
+                <div class="fact-box" style="margin-top: 30px;">
+                    <strong>Temas que exploraremos:</strong>
+                    <ul style="margin: 15px 0 0 0;">
+                        <li>La predicción de Pauli y el descubrimiento experimental.</li>
+                        <li>El misterio de los neutrinos solares.</li>
+                        <li>Oscilación de neutrinos y masa.</li>
+                        <li>IceCube, Super-Kamiokande y el futuro de la detección.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="../imagenes/neutrinos/cultura-pop-neutrino.jpg" alt="Representación artística de neutrinos">
+                <div class="image-caption">Representación artística: billones de neutrinos atraviesan la Tierra cada segundo sin interactuar con la materia.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 1: Las tres radiaciones -->
+    <div class="slide" id="slide-1">
+        <h2>1. Las Tres Radiaciones Nucleares</h2>
+        
+        <div class="grid-2">
+            <div>
+                <h3>El legado de Ernest Rutherford</h3>
+                <p>A principios del siglo XX, Rutherford revolucionó la física atómica y nuclear caracterizando las tres radiaciones nucleares.</p>
+                
+                <h3>Separación por campos magnéticos</h3>
+                <p>Al colocar una muestra radiactiva en un campo magnético perpendicular, las partículas cargadas curvan su trayectoria:</p>
+                <ul>
+                    <li><strong>Radiación Alfa (α):</strong> Carga positiva, se desvía poco (mucha masa). Hoy sabemos que es un núcleo de helio (2 protones + 2 neutrones).</li>
+                    <li><strong>Radiación Beta (β):</strong> Carga negativa, se curva mucho (muy poca masa). Son electrones muy energéticos.</li>
+                    <li><strong>Radiación Gamma (γ):</strong> Sin carga, no se desvía. Son fotones de muy alta energía.</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/rutherford_radiaciones.png" alt="Separación de radiaciones en campo magnético">
+                    <div class="image-caption">Las tres radiaciones nucleares separadas por un campo magnético: alfa (poca desviación), beta (mucha desviación) y gamma (sin desviación).</div>
+                </div>
+
+                <div class="analogy">
+                    <strong>Poder de penetración</strong>
+                    La radiación alfa se detiene con una hoja de papel. La beta atraviesa el papel pero es detenida por aluminio. La gamma penetra cemento y requiere varios centímetros de plomo para ser atenuada.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: El problema del espectro beta -->
+    <div class="slide" id="slide-2">
+        <h2>2. El Gran Problema: El Espectro Continuo Beta</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>La desintegración beta</h3>
+                <p>Cuando el Bismuto-210 (83 protones, 210 nucleones) se transforma en Polonio-210 (84 protones), emite una partícula beta (electrón).</p>
+                
+                <h3>El problema de conservación</h3>
+                <p>En una desintegración de <strong>dos cuerpos</strong> (A → B + C), por conservación del momento y la energía, la energía de cada partícula debería ser <span class="highlight">fija y única</span>.</p>
+                
+                <div class="math-block">
+                    <strong>Energía en desintegración a dos cuerpos:</strong><br>
+                    Si A está en reposo: E_A = m_A c²<br>
+                    Por conservación: E_B y E_C están fijadas únicamente
+                </div>
+
+                <p>¡Pero el experimento muestra algo diferente!</p>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/espectro_beta_continuo.png" alt="Espectro continuo de energía en desintegración beta">
+                    <div class="image-caption">Espectro continuo de energía de los electrones en la desintegración beta. Debería ser un pico único, pero es una "joroba" continua.</div>
+                </div>
+
+                <div class="fact-box">
+                    <strong>La crisis de 1930</strong>
+                    Los electrones salen con energías que van desde casi cero hasta un máximo. Esto viola aparentemente la conservación de la energía. ¿Dónde está la energía "faltante"?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: La crisis de la conservación -->
+    <div class="slide" id="slide-3">
+        <h2>3. La Crisis: ¿Se Conserva la Energía?</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>Niels Bohr propone lo impensable</h3>
+                <p>En 1930, en las Faraday Lectures de la Royal Society, Niels Bohr sugirió algo revolucionario:</p>
+                
+                <div class="analogy">
+                    <strong>La propuesta de Bohr</strong>
+                    "Las propiedades de los átomos nucleares nos pueden forzar a renunciar a la misma idea de balance energético."
+                </div>
+
+                <p>Bohr estaba dispuesto a abandonar el <span class="highlight">principio de conservación de la energía</span>, uno de los pilares fundamentales de la física.</p>
+
+                <h3>El debate</h3>
+                <p>La comunidad física se dividió. Algunos, como Dirac, insistían en que las leyes de conservación debían preservarse a toda costa. Otros consideraban que en el ámbito cuántico quizás no se aplicaban las mismas reglas.</p>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/bohr_pauli.jpg" alt="Niels Bohr y Wolfgang Pauli">
+                    <div class="image-caption">Niels Bohr (izquierda) y Wolfgang Pauli (derecha): dos gigantes de la física cuántica enfrentados al misterio del espectro beta.</div>
+                </div>
+
+                <div class="fact-box">
+                    <strong>El dilema</strong>
+                    O bien nuestros modelos del núcleo son incorrectos, o bien la física de partículas está incompleta, o bien hay que renunciar a la conservación de la energía.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: La carta de Pauli -->
+    <div class="slide" id="slide-4">
+        <h2>4. El "Remedio Desesperado" de Pauli (1930)</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>La famosa carta de diciembre de 1930</h3>
+                <p>Wolfgang Pauli escribió una carta a Lise Meitner, Geiger y otros que se reunían en Tübingen. Comenzaba:</p>
+                
+                <div class="analogy">
+                    <strong>"Queridas señoras y señores radioactivos..."</strong>
+                    Pauli propuso un "remedio desesperado" para salvar el teorema de intercambio de la estadística y la conservación de la energía.
+                </div>
+
+                <h3>La propuesta</h3>
+                <p>Pauli sugirió la existencia de <span class="highlight">partículas eléctricamente neutras</span> en los núcleos que llamó "neutrones" (luego Fermi las llamaría "neutrinos").</p>
+                
+                <ul>
+                    <li>Deberían tener spin 1/2</li>
+                    <li>No moverse a la velocidad de la luz (tener masa)</li>
+                    <li>Masa del orden del electrón o menor a 0.1 veces la del protón</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/carta_pauli.jpg" alt="Carta de Wolfgang Pauli de 1930">
+                    <div class="image-caption">Extracto de la famosa carta de Pauli donde propone la existencia del neutrino para salvar la conservación de la energía.</div>
+                </div>
+
+                <div class="fact-box">
+                    <strong>La solución al problema</strong>
+                    Si en la desintegración beta se emiten <strong>tres partículas</strong> (electrón + neutrino + núcleo), la energía se puede repartir continuamente entre ellas, explicando el espectro observado.
+                </div>
+
+                <div class="analogy">
+                    <strong>La confesión de Pauli</strong>
+                    "Por ahora no me atrevo a publicar nada sobre esta idea porque es basura... quien no arriesga no gana."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: El neutrón y el neutrino -->
+    <div class="slide" id="slide-5">
+        <h2>5. Del Neutrón al Neutrino</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1932</div>
+                <div class="timeline-desc">
+                    <strong>Chadwick</strong><br>
+                    Descubre el neutrón: partícula sin carga con masa similar al protón que vive en los núcleos.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1934</div>
+                <div class="timeline-desc">
+                    <strong>Enrico Fermi</strong><br>
+                    Al neutrón de Pauli lo llama "il piccolo neutrino" (el pequeño neutro). Nace el nombre "neutrino".
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3>La teoría de Fermi</h3>
+                <p>Fermi dedujo que en la desintegración beta:</p>
+                
+                <div class="math-block">
+                    <strong>Desintegración beta:</strong><br>
+                    n → p + e⁻ + ν̄_e<br><br>
+                    Neutrón → Protón + Electrón + Antineutrino electrónico
+                </div>
+
+                <h3>Conservación de números cuánticos</h3>
+                <ul>
+                    <li><strong>Carga eléctrica:</strong> 0 → +1 + (-1) + 0 ✓</li>
+                    <li><strong>Spin:</strong> 1/2 → 1/2 + 1/2 + 1/2 ✓</li>
+                    <li><strong>Número bariónico:</strong> 1 → 1 + 0 + 0 ✓</li>
+                    <li><strong>Número leptónico:</strong> 0 → 0 + 1 + (-1) ✓</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/desintegracion_beta.png" alt="Diagrama de desintegración beta">
+                    <div class="image-caption">Desintegración beta: un neutrón se transforma en protón emitiendo un electrón y un antineutrino electrónico.</div>
+                </div>
+
+                <div class="analogy">
+                    <strong>La interacción débil</strong>
+                    Fermi dedujo la existencia de una <strong>nueva interacción</strong>: la interacción débil, mediada por los bosones W y Z, responsable de la desintegración beta.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: Helicidad y quiralidad -->
+    <div class="slide" id="slide-6">
+        <h2>6. Helicidad y Quiralidad: La Mano de las Partículas</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>Helicidad</h3>
+                <p>La helicidad describe cómo se orienta el <strong>spin</strong> de una partícula respecto a su <strong>dirección de movimiento</strong>:</p>
+                <ul>
+                    <li><strong>Helicidad positiva (derecha):</strong> Spin y momento apuntan en la misma dirección.</li>
+                    <li><strong>Helicidad negativa (izquierda):</strong> Spin y momento apuntan en direcciones opuestas.</li>
+                </ul>
+
+                <div class="analogy">
+                    <strong>Dependencia del observador</strong>
+                    Para partículas <strong>con masa</strong>, la helicidad depende del observador. Si te mueves más rápido que la partícula, ves el momento invertido pero el spin no, cambiando la helicidad.
+                </div>
+            </div>
+
+            <div>
+                <h3>Quiralidad</h3>
+                <p>La quiralidad es una propiedad <span class="highlight">intrínseca</span> de las partículas, como un guante: izquierdo o derecho, sin posibilidad de superposición.</p>
+                
+                <div class="fact-box">
+                    <strong>Partículas sin masa</strong>
+                    Para partículas que se mueven a la velocidad de la luz (como el fotón), la helicidad coincide con la quiralidad y es absoluta: todos los observadores coinciden.
+                </div>
+
+                <h3>La masa como puente</h3>
+                <p>La <strong>masa</strong> es lo que permite a una partícula cambiar de quiralidad izquierda a derecha. Sin masa, los sectores izquierdo y derecho no se mezclan.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: El Modelo Estándar y los neutrinos -->
+    <div class="slide" id="slide-7">
+        <h2>7. Los Neutrinos en el Modelo Estándar</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>Clasificación por interacciones</h3>
+                <p>En el Modelo Estándar, las partículas se clasifican según cómo interactúan:</p>
+                
+                <h4>Neutrinos izquierdos (ν_L)</h4>
+                <ul>
+                    <li>Sienten la interacción <strong>débil</strong> (SU(2))</li>
+                    <li>No sienten la interacción <strong>fuerte</strong> (singlete SU(3))</li>
+                    <li>Sin carga eléctrica</li>
+                    <li>Se acoplan al electrón vía bosón W</li>
+                </ul>
+
+                <h4>Neutrinos derechos (ν_R)</h4>
+                <ul>
+                    <li><strong>No sienten</strong> la interacción débil (singlete SU(2))</li>
+                    <li>No sienten la interacción fuerte</li>
+                    <li>Sin carga eléctrica</li>
+                    <li><strong>¡Neutrinos estériles!</strong></li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/modelo_estandar_neutrinos.png" alt="Neutrinos en el Modelo Estándar">
+                    <div class="image-caption">Los neutrinos izquierdos participan en la interacción débil, mientras que los derechos son estériles y no interactúan con nada del Modelo Estándar.</div>
+                </div>
+
+                <div class="fact-box">
+                    <strong>El problema de la masa</strong>
+                    Como el neutrino derecho es estéril (no interactúa con nada), no hay término de masa en el Modelo Estándar que conecte ν_L con ν_R. Por tanto, <strong>los neutrinos deberían tener masa cero</strong> en el Modelo Estándar original.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Tres sabores de neutrinos -->
+    <div class="slide" id="slide-8">
+        <h2>8. Tres Generaciones de Neutrinos</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <h4>Primera Generación</h4>
+                <ul>
+                    <li>Quark u, Quark d</li>
+                    <li>Electrón (e)</li>
+                    <li><strong>Neutrino electrónico (ν_e)</strong></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Segunda Generación</h4>
+                <ul>
+                    <li>Quark c, Quark s</li>
+                    <li>Muón (μ) - 200× más pesado que e</li>
+                    <li><strong>Neutrino muónico (ν_μ)</strong></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Tercera Generación</h4>
+                <ul>
+                    <li>Quark t, Quark b</li>
+                    <li>Tauón (τ) - aún más pesado</li>
+                    <li><strong>Neutrino tauónico (ν_τ)</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 30px;">
+            <div>
+                <h3>¿Cómo sabemos que hay tres?</h3>
+                <p>Mediante el estudio del <strong>bosón Z</strong> en el CERN (LEP). La anchura de la curva de resonancia del Z depende del número de neutrinos.</p>
+                
+                <div class="analogy">
+                    <strong>El experimento crucial</strong>
+                    Los datos experimentales caen exactamente sobre la curva teórica para <strong>tres familias de neutrinos</strong>. Ni dos, ni cuatro: exactamente tres.
+                </div>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/boson_z_tres_neutrinos.png" alt="Resonancia del bosón Z confirmando tres neutrinos">
+                    <div class="image-caption">La curva de resonancia del bosón Z confirma experimentalmente que existen exactamente tres tipos de neutrinos ligeros.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Detección experimental -->
+    <div class="slide" id="slide-9">
+        <h2>9. Detectando lo Indetectable</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1956</div>
+                <div class="timeline-desc">
+                    <strong>Cowan y Reines</strong><br>
+                    Primera detección del antineutrino electrónico usando un reactor nuclear. Nobel 1995.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1962</div>
+                <div class="timeline-desc">
+                    <strong>Lederman, Schwartz, Steinberger</strong><br>
+                    Descubren el neutrino muónico. Nobel 1988.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2000</div>
+                <div class="timeline-desc">
+                    <strong>Experimento DONUT</strong><br>
+                    Primera detección directa del neutrino tauónico.
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3>El experimento de Cowan y Reines</h3>
+                <p>Colocaron un detector de agua con cloruro de cadmio junto a un reactor nuclear:</p>
+                <ol>
+                    <li>El antineutrino choca con un protón: ν̄_e + p → n + e⁺</li>
+                    <li>El positrón se aniquila: e⁺ + e⁻ → 2γ (primer fogonazo)</li>
+                    <li>El neutrón es capturado por el cadmio: n + Cd → Cd* → Cd + γ (segundo fogonazo)</li>
+                </ol>
+                
+                <div class="fact-box">
+                    <strong>Señal en coincidencia</strong>
+                    La detección de dos fogonazos de fotones en una ventana temporal específica confirma la interacción del neutrino.
+                </div>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/cowan_reines_experimento.png" alt="Experimento de Cowan y Reines">
+                    <div class="image-caption">Esquema del experimento de Cowan y Reines que detectó por primera vez el antineutrino electrónico en 1956.</div>
+                </div>
+
+                <div class="analogy">
+                    <strong>¿Por qué detectores gigantes?</strong>
+                    La probabilidad de que un neutrino interactúe es ínfima. Para aumentar la probabilidad efectiva, necesitamos muchísimas partículas objetivo: detectores de miles de toneladas.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: El problema de los neutrinos solares -->
+    <div class="slide" id="slide-10">
+        <h2>10. El Misterio de los Neutrinos Solares</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>El experimento Homestake (1968)</h3>
+                <p>Raymond Davis Jr. construyó un detector con 615 toneladas de tetracloroetileno en una mina de Dakota del Sur para captar neutrinos del Sol.</p>
+                
+                <div class="fact-box">
+                    <strong>El déficit</strong>
+                    El modelo solar de John Bahcall predecía una cierta cantidad de neutrinos electrónicos. El experimento solo detectó <strong>un tercio (1/3)</strong> de lo esperado.
+                </div>
+
+                <h3>Dos posibilidades</h3>
+                <ol>
+                    <li>Nuestros modelos del interior del Sol son incorrectos.</li>
+                    <li>Algo le ocurre a los neutrinos en su viaje.</li>
+                </ol>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/problema_neutrinos_solares.png" alt="Déficit de neutrinos solares">
+                    <div class="image-caption">Comparación entre la predicción teórica del flujo de neutrinos solares y las mediciones experimentales: solo se detecta 1/3 de lo esperado.</div>
+                </div>
+
+                <div class="analogy">
+                    <strong>Nobel 2002</strong>
+                    Raymond Davis Jr. y Masatoshi Koshiba recibieron el Premio Nobel por la detección de neutrinos cósmicos y el descubrimiento del problema de los neutrinos solares.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: Oscilación de neutrinos -->
+    <div class="slide" id="slide-11">
+        <h2>11. Oscilación de Neutrinos: La Solución</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>Estados de sabor vs. estados de masa</h3>
+                <p>Los neutrinos tienen dos bases cuánticas:</p>
+                <ul>
+                    <li><strong>Estados de sabor:</strong> ν_e, ν_μ, ν_τ (definidos por la interacción débil)</li>
+                    <li><strong>Estados de masa:</strong> ν₁, ν₂, ν₃ (con masas m₁, m₂, m definidas)</li>
+                </ul>
+
+                <div class="math-block">
+                    <strong>Mezcla de neutrinos:</strong><br>
+                    ν_e = cos θ · ν₁ + sen θ · ν₂<br>
+                    ν_μ = -sen θ · ν₁ + cos θ · ν₂
+                </div>
+
+                <p>Cada estado de sabor es una <span class="highlight">combinación</span> de los estados de masa.</p>
+            </div>
+
+            <div>
+                <h3>El mecanismo de oscilación</h3>
+                <p>Conforme el neutrino viaja, los componentes de masa evolucionan con fases diferentes. Esto hace que el sabor cambie periódicamente:</p>
+                
+                <div class="analogy">
+                    <strong>La probabilidad de oscilación</strong>
+                    P(ν_e → ν_μ) = sen²(2θ) · sen²(1.27 · Δm² · L/E)<br><br>
+                    Donde Δm² es la diferencia de masas al cuadrado, L la distancia recorrida y E la energía del neutrino.
+                </div>
+
+                <div class="fact-box">
+                    <strong>Implicación crucial</strong>
+                    Para que haya oscilación, <strong>Δm² ≠ 0</strong>, lo que significa que al menos dos neutrinos tienen <strong>masa distinta de cero</strong>. ¡Primera evidencia de física más allá del Modelo Estándar!
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 30px;">
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/oscilacion_neutrinos.png" alt="Diagrama de oscilación de neutrinos">
+                    <div class="image-caption">Un neutrino electrónico producido en el Sol oscila a neutrino muónico o tauónico durante su viaje a la Tierra.</div>
+                </div>
+            </div>
+
+            <div>
+                <h3>Confirmación: Experimento SNO</h3>
+                <p>El Sudbury Neutrino Observatory (SNO) usó agua pesada (deuterio) capaz de detectar los tres tipos de neutrinos.</p>
+                
+                <div class="analogy">
+                    <strong>El resultado definitivo (2001-2002)</strong>
+                    SNO midió el <strong>total</strong> de neutrinos (ν_e + ν_μ + ν_τ) y coincidió exactamente con la predicción solar. Los neutrinos electrónicos se transforman en muónicos y tauónicos durante el viaje.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: IceCube y el Nobel 2026 -->
+    <div class="slide" id="slide-12">
+        <h2>12. IceCube y la Astrofísica de Neutrinos</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>Francis Halzen y IceCube</h3>
+                <p>El Nobel de Física 2026 fue concedido a Francis Halzen por el proyecto IceCube en la Antártida.</p>
+                
+                <h3>¿Por qué neutrinos para astronomía?</h3>
+                <ul>
+                    <li><strong>Partículas cargadas:</strong> Se desvían por campos magnéticos, no apuntan a su fuente.</li>
+                    <li><strong>Fotones:</strong> Son absorbidos o dispersados por polvo y gas interestelar.</li>
+                    <li><strong>Neutrinos:</strong> Viajan en línea recta, sin inmutarse, directamente desde la fuente.</li>
+                </ul>
+
+                <div class="fact-box">
+                    <strong>Astronomía de mensajeros múltiples</strong>
+                    Los neutrinos complementan la astronomía tradicional (radio, visible, rayos X) y las ondas gravitacionales, abriendo una nueva ventana al universo.
+                </div>
+            </div>
+
+            <div>
+                <div class="image-container">
+                    <img src="../imagenes/neutrinos/icecube_antartida.jpg" alt="Observatorio IceCube en la Antártida">
+                    <div class="image-caption">IceCube: un kilómetro cúbico de hielo antártico instrumentado con más de 5,000 detectores ópticos para captar neutrinos de altísima energía.</div>
+                </div>
+
+                <div class="analogy">
+                    <strong>El detector</strong>
+                    IceCube utiliza 1 km³ de hielo como detector. Cuando un neutrino interactúa, produce partículas cargadas que emiten luz Cherenkov, detectada por los sensores enterrados.
+                </div>
+
+                <h3>Descubrimientos</h3>
+                <p>IceCube ha detectado neutrinos de:</p>
+                <ul>
+                    <li>Núcleos activos de galaxias (blázares)</li>
+                    <li>Supernovas</li>
+                    <li>Agujeros negros supermasivos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analogy" style="margin-top: 30px; text-align: center; font-size: 1.2em;">
+            <strong>💡 Pregunta para pensar</strong><br>
+            Si billones de neutrinos te atraviesan cada segundo sin que lo notes, y son mensajeros directos de los eventos más violentos del cosmos, ¿qué más nos revelarán sobre los secretos del universo?
+        </div>
+    </div>
+
+    <!-- Controles de Navegación -->
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)" disabled>← Anterior</button>
+        <span class="controls-info">Use las teclas ← → para navegar</span>
+        <button id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('slide-counter');
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+        
+        counter.textContent = `${n + 1} / ${totalSlides}`;
+        
+        prevBtn.disabled = n === 0;
+        nextBtn.disabled = n === totalSlides - 1;
+
+        if (window.MathJax) {
+            MathJax.typesetPromise([slides[n]]);
+        }
+        
+        slides[n].scrollTop = 0;
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        showSlide(currentSlide);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') changeSlide(1);
+        if (event.key === 'ArrowLeft') changeSlide(-1);
+    });
+
+    showSlide(0);
+</script>
+
+</body>
+</html>
