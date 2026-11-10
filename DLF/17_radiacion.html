@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radiación - Presentación Académica</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+    };
+    </script>   
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -28,7 +36,7 @@
 
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
-            background: #cfb911;
+            background: #f7fafc;
             color: var(--text-dark);
             display: flex;
             justify-content: center;
@@ -371,7 +379,7 @@
             </div>
             
             <div class="image-container">
-                <img src="../images/homer_careful.gif" alt="Radiación en la cultura pop">
+                <img src="images/homer_careful.gif" alt="Radiación en la cultura pop">
                 <div class="image-caption"></div>
             </div>
         </div>
@@ -388,7 +396,7 @@
         <p class="subtitle">Un recorrido histórico desde la electrólisis hasta el núcleo atómico</p>
         
         <div class="image-container">
-            <img src="../images/EM_Spectrum_Properties_es.svg.webp" alt="Espectro electromagnético">
+            <img src="images//EM_Spectrum_Properties_es.svg.webp" alt="Espectro electromagnético">
             <div class="image-caption">El espectro electromagnético: desde ondas de radio hasta rayos gamma</div>
         </div>
 
@@ -406,6 +414,29 @@
 
         <h3 style="margin-top: 30px;">Hitos históricos del descubrimiento</h3>
         
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1800</div>
+                <div class="timeline-desc">
+                    <strong>Electrólisis</strong><br>
+                    <small>Faraday y Volta demuestran que la electricidad descompone la materia en sus elementos fundamentales</small>
+                </div>
+            </div>
+            <div class="timeline-item"><div class="timeline-year">1800</div><div class="timeline-desc"><b>Herschel</b><br>Infrarrojo</div></div>
+            <div class="timeline-item"><div class="timeline-year">1801</div><div class="timeline-desc"><b>Ritter</b><br>Ultravioleta</div></div>
+            <div class="timeline-item"><div class="timeline-year">1864</div><div class="timeline-desc"><b>Maxwell</b><br>Luz electromagnética</div></div>
+            <div class="timeline-item"><div class="timeline-year">1887</div><div class="timeline-desc"><b>Hertz</b><br>Ondas electromagnéticas</div></div>
+            <div class="timeline-item"><div class="timeline-year">1895</div><div class="timeline-desc"><b>Röntgen</b><br>Rayos X</div></div>
+            <div class="timeline-item"><div class="timeline-year">1896</div><div class="timeline-desc"><b>Becquerel</b><br>Radiactividad</div></div>
+            <div class="timeline-item">
+                <div class="timeline-year">1897</div>
+                <div class="timeline-desc">
+                    <strong>El Electrón</strong><br>
+                    <small>Thomson identifica los rayos catódicos como corpúsculos con carga negativa: los electrones</small>
+                </div>
+            </div>
+            </div>
+<!-- 
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-year">1800</div>
@@ -435,7 +466,8 @@
                     <small>Thomson identifica los rayos catódicos como corpúsculos con carga negativa: los electrones</small>
                 </div>
             </div>
-        </div>
+        </div> -->
+
 
         <div class="analogy" style="margin-top: 25px;">
             <strong>Filo conductor de la presentación</strong>
@@ -467,7 +499,7 @@
             
             <div class="image-container">
                 <!-- RECUERDA: Reemplaza esta ruta con la de tu imagen local, ej: src="../imagenes/electrolisis.jpg" -->
-                <img src="../images/electrolisis.gif" alt="Experimento de electrólisis del agua">
+                <img src="images//electrolisis.gif" alt="Experimento de electrólisis del agua">
                 <div class="image-caption">Electrólisis del agua: separación de hidrógeno y oxígeno mediante electrodos conectados a una fuente de corriente.</div>
             </div>
         </div>
@@ -525,7 +557,7 @@
             </div>
             <div class="image-container">
                 <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../imagenes/thomson.jpg" -->
-                <img src="../images/Thomson_cathode_ray_exp.gif" alt="Experimento de J.J. Thomson">
+                <img src="images//Thomson_cathode_ray_exp.gif" alt="Experimento de J.J. Thomson">
                 <div class="image-caption">Esquema del experimento de J.J. Thomson utilizando campos eléctricos y magnéticos para desviar los rayos.</div>
             </div>
         </div>
@@ -552,7 +584,7 @@
                 </ul>
                 
                 <div class="image-container" style="margin-top: 15px;">
-                    <img src="../images/X-ray_by_Wilhelm.jpg" alt="Radiografía o descubrimiento de los Rayos X">
+                    <img src="images//X-ray_by_Wilhelm.jpg" alt="Radiografía o descubrimiento de los Rayos X">
                     <div class="image-caption">Los Rayos X permiten visualizar estructuras internas, revolucionando la medicina y el estudio de la materia.</div>
                 </div>
             </div>
@@ -570,7 +602,7 @@
 
                 <!-- IMAGEN DE NIVELES DE ENERGÍA (Restaurada) -->
                 <div class="image-container">
-                    <img src="../images/espectroscopy_levels.png" alt="Diagrama de niveles de energía en fluorescencia">
+                    <img src="images//espectroscopy_levels.png" alt="Diagrama de niveles de energía en fluorescencia">
                     <div class="image-caption">Diagrama de niveles de energía: un fotón de alta energía (UV) excita el átomo, que luego decae en escalones menores, emitiendo luz visible.</div>
                 </div>
             </div>
@@ -584,7 +616,7 @@
             </p>
             
             <div class="image-container" style="width: 100%; max-width: 700px; margin: 0 auto; background: white;">
-                <img src="../images/Luz_fluorescente-LMB.png" alt="Diagrama de funcionamiento de una lámpara fluorescente">
+                <img src="images//Luz_fluorescente-LMB.png" alt="Diagrama de funcionamiento de una lámpara fluorescente">
                 <div class="image-caption">Diagrama de funcionamiento: Electrones emitidos por el filamento excitan el mercurio, generando fotones UV que el fósforo convierte en luz visible.</div>
             </div>
         </div>
@@ -596,9 +628,9 @@
 
         <div class="grid-2">
             <div class="image-container">
-                <img src="../images/diff_fluorescence-phosphorescence.png" alt="Diferencia entre fluorescencia y fosforescencia">
+                <img src="images//diff_fluorescence-phosphorescence.png" alt="Diferencia entre fluorescencia y fosforescencia">
                 <div class="image-caption">Diferencia temporal: la fluorescencia es inmediata, mientras que la fosforescencia persiste en el tiempo.
-                <img src="../images/Phosphorescence.jpg" alt="Diferencia entre fluorescencia y fosforescencia">
+                <img src="images//Phosphorescence.jpg" alt="Diferencia entre fluorescencia y fosforescencia">
                 </div>
             </div>
 
@@ -638,7 +670,7 @@
 
                 <h3>Mecanismo de Absorción y Emisión</h3>
                 <ul>
-                    <li><strong>Absorción:</strong> Un átomo absorbe un fotón de energía específica, haciendo que un electrón salte desde un nivel de energía inferior ($E_i$) a uno superior ($E_f$).</li>
+                    <p><strong>Absorción:</strong> Un átomo absorbe un fotón de energía específica, haciendo que un electrón salte desde un nivel de energía inferior ($E_i$) a uno superior ($E_f$).</p>
                     <li><strong>Emisión:</strong> Al regresar a su estado fundamental, el electrón realiza una transición descendente, emitiendo un fotón con una energía exactamente igual a la diferencia entre ambos niveles.</li>
                 </ul>
 
@@ -659,20 +691,20 @@
             <!-- COLUMNA DERECHA: Imágenes Ilustrativas -->
             <div>
                 <div class="image-container">
-                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../images/niveles_energia_abs_emision.png" -->
-                    <img src="../images/electron_transitions.jpg" alt="Diagrama de absorción y emisión de un electrón">
+                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="images//niveles_energia_abs_emision.png" -->
+                    <img src="images//electron_transitions.jpg" alt="Diagrama de absorción y emisión de un electrón">
                     <div class="image-caption">Transiciones electrónicas: absorción de energía (salto hacia arriba) y emisión de un fotón (salto hacia abajo).</div>
                 </div>
 
                 <div class="image-container">
-                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../images/niveles_energia_abs_emision.png" -->
-                    <img src="../images/H_spectrum.webp" alt="Diagrama de absorción y emisión de un electrón">
+                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="images//niveles_energia_abs_emision.png" -->
+                    <img src="images//H_spectrum.webp" alt="Diagrama de absorción y emisión de un electrón">
                     <div class="image-caption">Espectros de línea característicos: las líneas brillantes (emisión) y oscuras (absorción) coinciden en la misma posición para cada elemento (ej. H, He, Na, Hg).</div>
                 </div>
 
                 <div class="image-container" style="margin-top: 15px;">
-                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../images/espectros_linea_elementos.png" -->
-                    <img src="../images/spectrums.png" alt="Espectros de emisión y absorción de diferentes elementos">
+                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="images//espectros_linea_elementos.png" -->
+                    <img src="images//spectrums.png" alt="Espectros de emisión y absorción de diferentes elementos">
                     <div class="image-caption"></div>
                 </div>
             </div>
@@ -684,8 +716,8 @@
         <h2>6. El Espectro Electromagnético</h2>
 
         <div class="image-container">
-            <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../images/espectro_electromagnetico.png" -->
-            <img src="../images/EM_Spectrum_Properties_es.svg.webp" alt="Espectro electromagnético completo">
+            <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="images//espectro_electromagnetico.png" -->
+            <img src="images//EM_Spectrum_Properties_es.svg.webp" alt="Espectro electromagnético completo">
             <div class="image-caption">El espectro electromagnético: un continuo de radiación ordenado por longitud de onda y frecuencia.</div>
         </div>
 
@@ -785,10 +817,10 @@
             <!-- COLUMNA DERECHA: Gráficas y Ejemplos -->
             <div>
                 <div class="image-container">
-                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../images/cuerpo_negro_curvas.png" -->
-                    <img src="../images/lay_de_Wien.gif" alt="Curvas de radiación de cuerpo negro">
+                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="images//cuerpo_negro_curvas.png" -->
+                    <img src="images//lay_de_Wien.gif" alt="Curvas de radiación de cuerpo negro">
                     <div class="image-caption">A mayor temperatura, el pico de emisión se desplaza a la izquierda (Wien) y el área bajo la curva crece enormemente (Stefan-Boltzmann).</div>
-                    <img src="../images/rayleigh-jeans_plot_added.gif" alt="Curvas de radiación de cuerpo negro">
+                    <img src="images//rayleigh-jeans_plot_added.gif" alt="Curvas de radiación de cuerpo negro">
                 </div>
 
                 <div class="analogy" style="margin-top: 15px;">
@@ -824,7 +856,11 @@
    <!-- SLIDE 9: Radiactividad -->
     <div class="slide" id="slide-9">
         <h2>8. Radiactividad: La Inestabilidad del Núcleo Atómico</h2>
-
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-year">1896</div><div class="timeline-desc"><b>Becquerel</b><br>Emisión espontánea del uranio</div></div>
+                <div class="timeline-item"><div class="timeline-year">1898</div><div class="timeline-desc"><b>Rutherford</b><br>Clasifica emisiones alfa y beta</div></div>
+                <div class="timeline-item"><div class="timeline-year">1900</div><div class="timeline-desc"><b>Villard</b><br>Identifica radiación gamma</div></div>
+            </div>
         <div class="grid-2">
             <!-- COLUMNA IZQUIERDA: Historia y Definición -->
             <div>
@@ -844,8 +880,8 @@
             <!-- COLUMNA DERECHA: Imagen y Elementos -->
             <div>
                 <div class="image-container">
-                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="../images/becquerel_cruz_malta.jpg" -->
-                    <img src="../images/Becquerel_plate.jpg" alt="Placa fotográfica velada por radiación de uranio">
+                    <!-- RECUERDA: Reemplaza con tu imagen local, ej: src="images//becquerel_cruz_malta.jpg" -->
+                    <img src="images//Becquerel_plate.jpg" alt="Placa fotográfica velada por radiación de uranio">
                     <div class="image-caption">Placa fotográfica de Becquerel: la sombra de la cruz de Malta prueba que la radiación del uranio viaja en línea recta.</div>
                 </div>
 
@@ -898,7 +934,7 @@
                 <h3 style="color: #c53030; margin-top: 0;">Radiación α (Alfa)</h3>
                 
                 <!-- IMAGEN ESPECÍFICA: Núcleo de Helio / Partícula Alfa -->
-                <img src="../images/Alpha_part.jpg" alt="Diagrama de partícula Alfa (Núcleo de Helio)" style="max-height: 110px; object-fit: contain; margin-bottom: 15px;">
+                <img src="images//Alpha_part.jpg" alt="Diagrama de partícula Alfa (Núcleo de Helio)" style="max-height: 110px; object-fit: contain; margin-bottom: 15px;">
                 
                 <ul style="text-align: left; font-size: 0.95em; padding-left: 20px; line-height: 1.6;">
                     <li><strong>Composición:</strong> Flujo de núcleos de Helio (doblemente ionizados, ²He⁴⁺⁺).</li>
@@ -914,7 +950,7 @@
                 <h3 style="color: #2c5282; margin-top: 0;">Radiación β (Beta)</h3>
                 
                 <!-- IMAGEN ESPECÍFICA: Emisión de electrón desde el núcleo -->
-                <img src="../images/Beta-minus_Decay.svg.webp" alt="Diagrama de partícula Beta (Electrón)" style="max-height: 110px; object-fit: contain; margin-bottom: 15px;">
+                <img src="images//Beta-minus_Decay.svg.webp" alt="Diagrama de partícula Beta (Electrón)" style="max-height: 110px; object-fit: contain; margin-bottom: 15px;">
                 
                 <ul style="text-align: left; font-size: 0.95em; padding-left: 20px; line-height: 1.6;">
                     <li><strong>Composición:</strong> Flujo de electrones de alta energía.</li>
@@ -930,7 +966,7 @@
                 <h3 style="color: #d69e2e; margin-top: 0;">Radiación γ (Gamma)</h3>
                 
                 <!-- IMAGEN ESPECÍFICA: Onda electromagnética / Fotón -->
-                <img src="../images/Gamma-Decay.jpg" alt="Diagrama de radiación Gamma (Fotón)" style="max-height: 110px; object-fit: contain; margin-bottom: 15px;">
+                <img src="images//Gamma-Decay.jpg" alt="Diagrama de radiación Gamma (Fotón)" style="max-height: 110px; object-fit: contain; margin-bottom: 15px;">
                 
                 <ul style="text-align: left; font-size: 0.95em; padding-left: 20px; line-height: 1.6;">
                     <li><strong>Composición:</strong> Radiación electromagnética (corriente de fotones de alta energía).</li>
@@ -951,7 +987,7 @@
             
             <div class="image-container" style="width: 100%; max-width: 800px; margin: 0 auto; background: white;">
                 <!-- RECUERDA: Reemplaza con tu imagen local del diagrama comparativo -->
-                <img src="../images/penetrating-power-of-different-types-of-radiation.webp" alt="Diagrama comparativo de penetración: papel, aluminio y plomo">
+                <img src="images//penetrating-power-of-different-types-of-radiation.webp" alt="Diagrama comparativo de penetración: papel, aluminio y plomo">
                 <div class="image-caption">
                     Esquema clásico: La radiación Alfa es detenida por el papel, la Beta atraviesa el papel pero es detenida por el aluminio, y la Gamma atraviesa ambos, requiriendo plomo u hormigón para ser atenuada.
                 </div>
@@ -1018,7 +1054,7 @@
             <div class="image-container">
                 <!-- SUGERENCIA DE IMAGEN: El detector de neutrinos Super-Kamiokande (un tanque enorme con fotomultiplicadores brillando) 
                      O una composición artística que muestre un núcleo atómico desintegrándose y esa misma energía formando una nebulosa/galaxia. -->
-                <img src="../images/superkamiokande.jpg" alt="Conexión entre el mundo cuántico y el cosmos">
+                <img src="images//superkamiokande.jpg" alt="Conexión entre el mundo cuántico y el cosmos">
                 <div class="image-caption">
                     Interior del observatorio de neutrinos Super-Kamiokande, ubicado a 1.000 metros bajo tierra en la prefectura de Gifu, Japón. El tanque cilíndrico de acero inoxidable (39 metros de diámetro y 41 metros de altura) alberga 50.000 toneladas de agua ultrapura y está revestido por más de 11.000 tubos fotomultiplicadores diseñados para captar la tenue radiación de Cherenkov que emiten las partículas al interactuar con el agua.
                 </div>
@@ -1037,8 +1073,8 @@
     <div class="image-container">
                 <!-- SUGERENCIA DE IMAGEN: El detector de neutrinos Super-Kamiokande (un tanque enorme con fotomultiplicadores brillando) 
                      O una composición artística que muestre un núcleo atómico desintegrándose y esa misma energía formando una nebulosa/galaxia. -->
-                <img src="../images/porky-looney-tunes.gif" alt="Conexión entre el mundo cuántico y el cosmos">
-                <span style="font-size: 0.9em; font-weight: normal; color: var(--text-medium);">"La ciencia no es solo un conjunto de conocimientos, es una forma de pensar." —Carl Sagan</span>
+                <img src="images//porky-looney-tunes.gif" alt="Conexión entre el mundo cuántico y el cosmos">
+                <span style="font-size: 0.9em; font-weight: normal; color: var(--text-medium);"></span>
                 <div></div>
             </div>
     
