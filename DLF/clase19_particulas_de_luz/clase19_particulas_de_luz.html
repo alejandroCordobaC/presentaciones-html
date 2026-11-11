@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 19: ¿Partículas de luz? - Presentación Académica</title>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #2b6cb0;
+            --text-dark: #1a202c;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --red: #c53030;
+            --gold: #d69e2e;
+            --green: #2f855a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f7fafc;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            position: relative;
+            box-shadow: 0 4px 20px var(--shadow);
+            background: var(--bg-white);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 50px 70px 90px 70px;
+            height: 100%;
+            overflow-y: auto;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.6em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--text-dark);
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a { color: var(--accent); }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .math-block {
+            background: var(--bg-light);
+            padding: 25px 30px;
+            border-left: 4px solid var(--primary);
+            margin: 25px 0;
+            font-size: 1.15em;
+        }
+
+        .image-container {
+            margin: 30px 0;
+            text-align: center;
+            background: var(--bg-light);
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 380px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image-container img + img { margin-top: 15px; }
+
+        .img-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .img-row img {
+            max-width: 48%;
+            max-height: 300px;
+            margin: 0 !important;
+            width: auto;
+            flex: 0 1 auto;
+            min-width: 0;
+        }
+
+        .image-caption {
+            font-size: 0.95em;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: var(--bg-white);
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary);
+            text-align: left;
+        }
+
+        .card.alpha { border-top-color: #c53030; }
+        .card.beta  { border-top-color: #2c5282; }
+        .card.gamma { border-top-color: #d69e2e; }
+        .card.green { border-top-color: #2f855a; }
+
+        .card h4 { margin-top: 0; }
+        .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+
+        .analogy {
+            background: var(--bg-light);
+            border-left: 4px solid var(--secondary);
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-style: normal;
+        }
+
+        .fact-box {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+
+        .fact-box.warn { border-left-color: var(--red); }
+
+        .box-title {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+        }
+
+        .analogy > p:last-child, .fact-box > p:last-child { margin-bottom: 0; }
+
+        /* Controles de navegación */
+        .controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 70px;
+            z-index: 10;
+            background: linear-gradient(to top, rgba(255,255,255,0.98) 70%, rgba(255,255,255,0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        button {
+            background: var(--bg-white);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 22px;
+            font-size: 0.9em;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+        }
+
+        button:disabled {
+            background: var(--bg-light);
+            color: #cbd5e0;
+            border-color: var(--border);
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 0.95em;
+            color: var(--text-light);
+            font-weight: 500;
+            z-index: 11;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .timeline-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 8px;
+        }
+
+        .timeline-year {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .timeline-year.alt { background: var(--red); }
+
+        .timeline-desc {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light); }
+        ::-webkit-scrollbar-thumb { background: var(--text-light); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-medium); }
+
+        .subtitle {
+            color: var(--text-medium);
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 30px 0;
+        }
+
+        /* ---------- Añadidos para esta presentación ---------- */
+
+        table.tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+        }
+
+        .tabla th {
+            background: var(--primary);
+            color: #fff;
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .tabla td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-medium);
+            vertical-align: top;
+            line-height: 1.5;
+            font-size: 0.98em;
+        }
+
+        .tabla tr:nth-child(even) td { background: var(--bg-light); }
+        .tabla td.ok  { color: var(--green); font-weight: 600; }
+        .tabla td.bad { color: var(--red); font-weight: 600; }
+
+        .video-wrap iframe {
+            width: 100%;
+            height: 315px;
+            border: 0;
+            border-radius: 6px;
+            background: #000;
+        }
+
+        .link-btn {
+            display: inline-block;
+            border: 1px solid var(--primary);
+            padding: 8px 18px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.95em;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        .link-btn:hover { background: var(--primary); color: #fff; }
+
+        .small { font-size: 0.9em; color: var(--text-light); line-height: 1.5; }
+
+        .num-badge {
+            display: inline-flex;
+            width: 30px; height: 30px;
+            align-items: center; justify-content: center;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 0.95em;
+        }
+
+        .img-placeholder {
+            border: 2px dashed #a0aec0;
+            background: #fff;
+            padding: 28px 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .img-placeholder .ph-tag {
+            display: inline-block;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 2px 10px;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .img-placeholder code { color: var(--secondary); font-size: 0.95em; }
+
+        .spectrum-bar {
+            height: 22px;
+            background: linear-gradient(to right, #7f00ff, #3b3bff, #00b7ff, #00d26a, #e6e600, #ff9a00, #ff1a1a);
+            margin: 14px 0 4px 0;
+        }
+        .spectrum-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: var(--text-light);
+        }
+
+        details.qa {
+            border: 1px solid var(--border);
+            background: #fff;
+            margin: 12px 0;
+            padding: 14px 20px;
+        }
+        details.qa summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+        details.qa[open] { background: var(--bg-light); }
+        details.qa .ans { margin-top: 10px; }
+        details.qa .ans p { font-size: 1em; margin-bottom: 6px; }
+
+        /* Explorador interactivo */
+        .explorer {
+            border: 1px solid var(--border);
+            background: #fff;
+            padding: 20px 22px;
+            margin: 10px 0 20px 0;
+        }
+        .explorer label {
+            display: block;
+            font-size: 0.95em;
+            color: var(--text-medium);
+            margin: 12px 0 4px 0;
+        }
+        .explorer label b { color: var(--primary); }
+        .explorer select, .explorer input[type=range] { width: 100%; }
+        .explorer select {
+            padding: 6px 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            border: 1px solid var(--border);
+        }
+        .swatch {
+            height: 26px;
+            border: 1px solid var(--border);
+            margin-top: 6px;
+        }
+        .readouts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            margin-top: 14px;
+            font-size: 0.95em;
+            color: var(--text-medium);
+        }
+        .readouts div b { color: var(--primary); }
+        .status {
+            margin-top: 12px;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .status.yes { background: #f0fff4; color: var(--green); border: 1px solid #9ae6b4; }
+        .status.no  { background: #fff5f5; color: var(--red);   border: 1px solid #feb2b2; }
+        .ebar {
+            display: flex;
+            height: 26px;
+            margin-top: 6px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            font-size: 0.8em;
+            color: #fff;
+            overflow: hidden;
+        }
+        .ebar span { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+        .ebar .w { background: #718096; }
+        .ebar .k { background: var(--accent); }
+        .ebar .x { background: var(--red); }
+        .meter {
+            height: 12px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            margin-top: 4px;
+        }
+        .meter > div { height: 100%; background: var(--accent); width: 0; transition: width 0.15s; }
+        .meter.i > div { background: var(--gold); }
+
+        @media (max-width: 900px) {
+            .slide { padding: 40px 24px 90px 24px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .timeline { flex-wrap: wrap; row-gap: 20px; }
+            .timeline::before { display: none; }
+            .controls { padding: 15px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+    <div class="slide-number" id="slide-counter">1 / 20</div>
+
+    <!-- SLIDE 0: Portada -->
+    <div class="slide active" id="slide-0">
+        <h1 style="text-align: center; border-bottom: none; font-size: 3em;">Descubriendo la Física</h1>
+        <p style="text-align: center; font-size: 1.5em; color: var(--text-light); margin-bottom: 40px;">2026-1 · Mayo 12, 2026</p>
+
+        <div class="grid-2" style="align-items: center; margin: 40px 0;">
+            <div>
+                <h2 style="border-bottom: none; font-size: 1.8em;">Clase 19: ¿Partículas de luz?</h2>
+                <p style="font-size: 1.2em; line-height: 1.9;">
+                    Durante tres siglos la luz fue un campo de batalla entre dos imágenes: una corriente de partículas o una onda. Hoy veremos cómo un experimento aparentemente sencillo —iluminar un metal— obligó a la física a reinventarse y dio origen a la idea del <span class="highlight">fotón</span>.
+                </p>
+                <div class="fact-box" style="margin-top: 30px;">
+                    <span class="box-title">Temas que exploraremos:</span>
+                    <ul style="margin: 15px 0 0 0;">
+                        <li>La luz como onda y como partícula</li>
+                        <li>Efecto fotoeléctrico y la ecuación de Einstein</li>
+                        <li>El fotón: energía, momento y presión de radiación</li>
+                        <li>Éter, campos y acción a distancia</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="images/portada.jpg" alt="Luz y sombra">
+                <div class="image-caption"></div>
+            </div>
+        </div>
+
+        <div class="analogy" style="text-align: center; font-size: 1.1em;">
+            <span class="box-title">Pregunta guía</span>
+            Si la luz fuese solo una onda continua, una potente lámpara roja debería arrancar electrones de un metal con más facilidad que un tenue haz ultravioleta. En el laboratorio ocurre exactamente lo contrario. ¿Por qué?
+        </div>
+    </div>
+
+    <!-- SLIDE 1: Hoja de ruta -->
+    <div class="slide" id="slide-1">
+        <h2>Tres siglos de debate: ¿qué es la luz?</h2>
+        <p class="subtitle">Cada modelo explicó bien una parte de los fenómenos y fracasó en otra</p>
+
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-year">1704</div><div class="timeline-desc"><b>Newton</b><br>Luz como corpúsculos</div></div>
+            <div class="timeline-item"><div class="timeline-year">1801</div><div class="timeline-desc"><b>Young</b><br>Interferencia: luz como onda</div></div>
+            <div class="timeline-item"><div class="timeline-year">1862</div><div class="timeline-desc"><b>Maxwell</b><br>Luz = onda electromagnética</div></div>
+            <div class="timeline-item"><div class="timeline-year">1887</div><div class="timeline-desc"><b>Hertz</b><br>Ondas de radio y, sin querer, el efecto fotoeléctrico</div></div>
+            <div class="timeline-item"><div class="timeline-year alt">1905</div><div class="timeline-desc"><b>Einstein</b><br>Cuantos de luz (fotones)</div></div>
+            <div class="timeline-item"><div class="timeline-year alt">1916</div><div class="timeline-desc"><b>Millikan</b><br>Verifica la ecuación de Einstein</div></div>
+            <div class="timeline-item"><div class="timeline-year alt">1923</div><div class="timeline-desc"><b>Compton</b><br>El fotón tiene momento</div></div>
+        </div>
+
+        <div class="grid-2">
+            <div class="analogy">
+                <span class="box-title">Filo conductor de la clase</span>
+                Primero reunimos las pruebas de que la luz es una onda. Luego veremos un fenómeno —el efecto fotoeléctrico— que esa teoría no puede explicar, y cómo Einstein lo resolvió con una idea radical: la energía de la luz viene en paquetes. Al final nos preguntaremos qué tipo de «cosa» es la luz y qué papel juegan el éter y los campos.
+            </div>
+            <div class="fact-box">
+                <span class="box-title">Una idea para llevar</span>
+                La luz no «cambió» durante estos tres siglos: lo que cambió fue nuestra descripción. Los modelos de onda y de partícula son aproximaciones útiles de un objeto cuántico que no es exactamente ninguno de los dos.
+            </div>
+        </div>
+
+        <h3>Mapa de la clase</h3>
+        <div class="grid-3">
+            <div class="card"><h4>Parte I · Luz como onda</h4><p>Young, Maxwell, Hertz: interferencia, difracción e intensidad.</p></div>
+            <div class="card alpha"><h4>Parte II · Luz como fotón</h4><p>Efecto fotoeléctrico, ecuación de Einstein, aplicaciones, momento y presión de radiación.</p></div>
+            <div class="card beta"><h4>Parte III · Campos</h4><p>Por qué no necesitamos éter y cómo los campos resuelven la acción a distancia.</p></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Luz como onda -->
+    <div class="slide" id="slide-2">
+        <h2>1. Antecedentes: la luz como onda</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>El experimento de la doble rendija (Young, 1801)</h3>
+                <p>Al pasar luz por dos rendijas muy cercanas, Young obtuvo en la pantalla <span class="highlight">franjas brillantes y oscuras alternadas</span>. Las franjas oscuras son la clave: sumar luz con luz produjo oscuridad. Con corpúsculos que simplemente se suman eso es imposible; con ondas sí, porque en esos puntos llega una cresta de una rendija junto con un valle de la otra y se anulan (<strong>interferencia destructiva</strong>).</p>
+
+                <div class="math-block">
+                    <strong>Franjas brillantes:</strong> \( d\,\sin\theta = m\lambda \quad (m = 0, \pm1, \pm2, \dots) \)<br>
+                    <strong>Separación entre franjas:</strong> \( \Delta y \approx \dfrac{\lambda L}{d} \)
+                    <small style="display: block; margin-top: 8px; color: var(--text-medium);">
+                        \(d\): separación entre rendijas, \(L\): distancia a la pantalla, \(\lambda\): longitud de onda. Con \(\lambda = 650\) nm, \(d = 0{,}25\) mm y \(L = 2\) m resulta \(\Delta y \approx 5{,}2\) mm: franjas visibles a simple vista.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <div class="image-container" style="margin-top: 20px;">
+                    <img src="images/doble_rendija_animacion.gif" alt="Animación de la doble rendija">
+                    <div class="image-caption">Al abrir ambas rendijas aparece un patrón de franjas: la intensidad no es la suma de las dos rendijas por separado.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 0;">
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/ondas_luz_rejilla.png" alt="Ondas de luz atravesando una rejilla">
+                <div class="image-caption">Frentes de onda que salen de dos rendijas y se superponen.</div>
+            </div>
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/patron_interferencia_laser.png" alt="Patrón de interferencia de un láser rojo">
+                <div class="image-caption">Patrón real con un láser rojo: franjas brillantes separadas por zonas oscuras.</div>
+            </div>
+        </div>
+
+        <h3>Cuatro pruebas a favor de la onda</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>Young (1801): interferencia</h4>
+                <p>Luz + luz puede dar oscuridad. Además, la separación de las franjas permite medir \(\lambda\): para la luz visible es de unos 0,4–0,7 μm.</p>
+            </div>
+            <div class="card">
+                <h4>Huygens y Fresnel: difracción</h4>
+                <p>Huygens (1678) propuso que cada punto de un frente de onda actúa como fuente de ondas secundarias. Fresnel lo completó con interferencia. Poisson, su crítico, dedujo de esa teoría un resultado «absurdo»: un punto brillante en el centro de la sombra de un disco. Arago lo observó en 1819.</p>
+            </div>
+            <div class="card">
+                <h4>Maxwell (1862–1865): la teoría</h4>
+                <p>Los campos eléctricos y magnéticos oscilantes se propagan con rapidez \( c = 1/\sqrt{\mu_0 \varepsilon_0} \approx 3\times10^{8}\) m/s, justo la rapidez medida para la luz. Conclusión: la luz <em>es</em> una onda electromagnética.</p>
+            </div>
+            <div class="card">
+                <h4>Hertz (1887): la prueba experimental</h4>
+                <p>Veinticinco años después, Hertz usó circuitos que producen chispas para generar y detectar ondas de radiofrecuencia. Se reflejaban, refractaban y polarizaban como la luz. Eran ondas electromagnéticas reales.</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-container">
+                <img class="sug" src="images/huygens_frentes_de_onda.png" alt="Diagrama del principio de Huygens: cada punto del frente de onda emite ondas secundarias" data-search="Huygens principle wavefront diagram">
+                <div class="image-caption">Principio de Huygens: cada punto de un frente de onda es fuente de ondas secundarias.</div>
+            </div>
+            <div class="image-container">
+                <img class="sug" src="images/mancha_poisson_arago.jpg" alt="Fotografía de la mancha brillante de Poisson-Arago en el centro de la sombra de un disco" data-search="Arago spot Poisson spot photo circular obstacle">
+                <div class="image-caption">Mancha de Poisson-Arago: punto brillante en el centro de la sombra de un disco, predicho por la teoría ondulatoria.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Video Young + Intensidad -->
+    <div class="slide" id="slide-3">
+        <h2>2. Midiendo la luz como onda: longitud de onda e intensidad</h2>
+
+        <div class="grid-2">
+            <div>
+                <div class="image-container video-wrap">
+                    <iframe src="https://www.youtube.com/embed/zJY4d2MLhXI" title="Experimento de Young con un láser rojo (ProCiencia)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="image-caption">Experimento de Young con un láser rojo (canal ProCiencia): a partir de la separación entre rendijas, la distancia a la pantalla y la separación entre franjas oscuras consecutivas se mide indirectamente \(\lambda\).</div>
+                    <a class="link-btn" href="https://www.youtube.com/watch?v=zJY4d2MLhXI" target="_blank" rel="noopener">Abrir en YouTube ↗</a>
+                </div>
+
+                <div class="analogy">
+                    <span class="box-title">Receta para medir λ</span>
+                    Mide \(d\), \(L\) y la separación \(\Delta y\) entre franjas consecutivas. Despeja
+                    \[ \lambda \approx \frac{d\,\Delta y}{L} \]
+                    Una regla y un láser bastan para «pesar» la longitud de onda de la luz.
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-top: 0;">Intensidad de la onda electromagnética</h3>
+                <p>La <span class="highlight">intensidad</span> es la potencia que atraviesa cada metro cuadrado (W/m²). Para una onda electromagnética:</p>
+                <div class="math-block">
+                    \[ I = \tfrac{1}{2}\, c\, \varepsilon_0\, E_0^{2} \]
+                    <small style="display: block; margin-top: 8px; color: var(--text-medium);">
+                        \(E_0\): amplitud del campo eléctrico, \(c\): rapidez de la luz, \(\varepsilon_0 = 8{,}85\times10^{-12}\) F/m.
+                    </small>
+                </div>
+                <ul>
+                    <li>La intensidad crece con el <strong>cuadrado de la amplitud</strong>: el doble de campo, cuatro veces la intensidad.</li>
+                    <li>La energía está <strong>repartida de forma continua</strong> sobre todo el frente de onda.</li>
+                    <li>Un orden de magnitud: la luz solar (\(I \approx 1000\) W/m²) corresponde a \(E_0 \approx 870\) V/m.</li>
+                </ul>
+
+                <div class="fact-box warn">
+                    <span class="box-title">Una predicción que pondremos a prueba</span>
+                    En el modelo ondulatorio, «más brillante» significa «campo más intenso», y por tanto cada electrón del metal debería recibir <em>más energía y más rápido</em>. La energía de la luz no depende de su color, solo de su amplitud. Guardemos esta predicción: el efecto fotoeléctrico la va a contradecir.
+                </div>
+
+                <div class="image-container">
+                    <img class="sug" src="images/onda_electromagnetica.png" alt="Onda electromagnética con campo eléctrico y magnético perpendiculares" data-search="electromagnetic wave diagram electric magnetic field perpendicular">
+                    <div class="image-caption">Onda electromagnética: los campos \(\vec E\) y \(\vec B\) oscilan perpendiculares entre sí y a la dirección de propagación.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Nacimiento de la física cuántica -->
+    <div class="slide" id="slide-4">
+        <h2>3. Nacimiento de la física cuántica</h2>
+
+        <p>A finales del siglo XIX la mecánica de Newton, el electromagnetismo de Maxwell y la termodinámica describían casi todo lo conocido. Pero tres fenómenos se resistían a cualquier arreglo «clásico»:</p>
+
+        <h3 style="margin-top: 10px;">Limitaciones de la física clásica</h3>
+        <div class="grid-3">
+            <div class="card alpha">
+                <h4>Radiación de cuerpo negro</h4>
+                <p>La teoría clásica predecía emisión infinita en el ultravioleta. Planck (1900) lo resolvió suponiendo que la energía se intercambia en paquetes: \(E = hf\).</p>
+            </div>
+            <div class="card beta">
+                <h4>Efecto fotoeléctrico</h4>
+                <p>La onda clásica no explicaba el umbral de frecuencia ni la emisión instantánea. Einstein (1905) lo resolvió con los cuantos de luz. <strong>Es el tema de hoy.</strong></p>
+            </div>
+            <div class="card gamma">
+                <h4>Espectros de emisión y absorción</h4>
+                <p>Los átomos emiten solo líneas de colores muy precisos. Bohr (1913) lo explicó con niveles de energía cuantizados.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; font-size: 1.6em; color: var(--text-light); margin: -5px 0 5px 0;">↓</div>
+
+        <div class="grid-2" style="align-items: start;">
+            <div>
+                <h3 style="margin-top: 0;">Nuevos conceptos</h3>
+                <ul>
+                    <li><strong>Mecánica cuántica y sus formulaciones:</strong> Heisenberg (matrices, 1925), Schrödinger (ondas, 1926), Dirac y Feynman: distintos lenguajes matemáticos para una misma teoría.</li>
+                    <li><strong>Modelos de partículas elementales:</strong> quarks, leptones (como el electrón) y los bosones que transmiten las interacciones, entre ellos el fotón.</li>
+                    <li><strong>Fuerza fuerte y fuerza débil:</strong> las dos interacciones nucleares que se suman a la gravedad y al electromagnetismo. La fuerte mantiene unidos protones y neutrones; la débil gobierna la desintegración beta.</li>
+                </ul>
+            </div>
+            <div class="image-container" style="margin-top: 10px;">
+                <!-- TODO: confirma el origen de esta imagen (tomada de la presentación original) y ajusta el pie de figura -->
+                <img src="images/cuantico_falso_color.png" alt="Distribución en falso color" style="max-height: 220px;">
+                <div class="image-caption">Distribución en falso color (imagen de la presentación original).</div>
+            </div>
+        </div>
+
+        <div class="analogy">
+            <span class="box-title">Rampa frente a escalera</span>
+            En la física clásica la energía puede variar de forma continua, como al subir por una <em>rampa</em>: cualquier altura es posible. En la física cuántica la energía se intercambia en <em>escalones</em> bien definidos (cuantos): solo hay ciertos valores permitidos. Hoy vemos el primer escalón de la luz: el fotón.
+        </div>
+    </div>
+
+    <!-- SLIDE 5: Luz como partícula -->
+    <div class="slide" id="slide-5">
+        <h2>4. Antecedentes: la luz como partícula</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-top: 0;">Newton (1704): los corpúsculos</h3>
+                <p>En su <em>Óptica</em>, Isaac Newton describió la luz como una <span class="highlight">corriente de partículas o corpúsculos</span>. Con ese modelo explicaba la propagación en línea recta (las sombras nítidas) y la reflexión como un rebote.</p>
+                <p>Pero tenía un punto débil: para explicar la refracción tenía que suponer que la luz <em>viaja más rápido</em> en el agua que en el aire. En 1850 Foucault midió lo contrario, y el modelo corpuscular perdió fuerza.</p>
+
+                <h3>Einstein (1905): los cuantos de luz</h3>
+                <p>Einstein publicó un trabajo que le valió el Premio Nobel de Física de 1921. Desafiaba la teoría ondulatoria: la luz no interactúa con la materia como una onda continua (como concebía Maxwell), sino en forma de <strong>paquetes diminutos de energía</strong> que hoy llamamos <span class="highlight">fotones</span>.</p>
+            </div>
+
+            <div class="image-container" style="margin-top: 0;">
+                <img class="sug" src="images/newton_prisma.jpg" alt="Experimento de Newton con un prisma que descompone la luz blanca" data-search="Newton prism experiment Opticks diagram">
+                <div class="image-caption">Newton estudió la luz con prismas: la luz blanca contiene todos los colores.</div>
+            </div>
+        </div>
+
+        <h3>No son la misma partícula</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>Corpúsculo de Newton</h4>
+                <ul>
+                    <li>Una «bolita» clásica que sigue trayectorias.</li>
+                    <li>Su energía no está ligada a ninguna frecuencia.</li>
+                    <li>No puede producir interferencia.</li>
+                </ul>
+            </div>
+            <div class="card alpha">
+                <h4>Fotón de Einstein</h4>
+                <ul>
+                    <li>Un <em>cuanto</em> de energía indivisible: se emite o se absorbe completo.</li>
+                    <li>Su energía depende de una propiedad ondulatoria: \(E = hf\).</li>
+                    <li>Convive con el comportamiento ondulatorio.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analogy">
+            <span class="box-title">Por qué importa la diferencia</span>
+            La partícula de Einstein lleva el «color» en su energía: un fotón violeta es más energético que un fotón rojo. Un corpúsculo de Newton no tiene color propio. Por eso, el fotón no es una vuelta al modelo corpuscular, sino una idea nueva que ya contiene a la onda.
+        </div>
+    </div>
+
+    <!-- SLIDE 6: Dualidad onda-partícula -->
+    <div class="slide" id="slide-6">
+        <h2>5. Dualidad onda-partícula</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>El descubrimiento de Einstein <strong>no eliminó</strong> la concepción de las ondas luminosas. En lugar de ello, indicó que la luz es al mismo tiempo una onda y una partícula: se estableció la <span class="highlight">dualidad onda-partícula</span> para la luz.</p>
+
+                <div class="fact-box">
+                    <span class="box-title">Cuidado con la frase «a veces onda, a veces partícula»</span>
+                    La luz no cambia de naturaleza. Es un objeto cuántico que no es ni una bolita ni una ola clásica. Según el experimento que hagamos, muestra rasgos de uno u otro modelo (principio de complementariedad de Bohr).
+                </div>
+
+                <table class="tabla">
+                    <tr><th>Cuando la luz…</th><th>Se describe como…</th></tr>
+                    <tr><td>Se propaga, se difracta, interfiere o se polariza</td><td class="ok">Onda</td></tr>
+                    <tr><td>Se emite o se absorbe (efecto fotoeléctrico, Compton, detección en un CCD)</td><td class="bad">Fotones</td></tr>
+                </table>
+            </div>
+
+            <div>
+                <div class="image-container video-wrap" style="margin-top: 0;">
+                    <iframe src="https://www.youtube.com/embed/DkcEAz09Buo" title="Dualidad onda-partícula (Date un voltio)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="image-caption">¿Qué es la luz? ¿Es una onda o es una partícula? Javier Santaolalla (canal «Date un voltio») explica la dualidad.</div>
+                    <a class="link-btn" href="https://youtu.be/DkcEAz09Buo" target="_blank" rel="noopener">Abrir en YouTube ↗</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/photon_identity.png" alt="Caricatura: el problema de identidad del fotón">
+                <div class="image-caption">«¿Soy un fotón de rayos X, de radio o visible?... ¿Y ni siquiera sé si soy una onda o una partícula?». El problema de identidad del fotón.</div>
+            </div>
+            <div class="image-container" style="margin-top: 0;">
+                <img class="sug" src="images/doble_rendija_un_foton.jpg" alt="Formación gradual del patrón de interferencia al detectar fotones o electrones uno a uno" data-search="double slit experiment single photon buildup interference pattern">
+                <div class="image-caption">Doble rendija con un fotón a la vez: cada detección es un punto, pero con miles de eventos aparecen las franjas.</div>
+            </div>
+        </div>
+
+        <div class="analogy">
+            <span class="box-title">El experimento que resume la dualidad</span>
+            Si se envían fotones <em>uno por uno</em> a una doble rendija, cada uno se detecta en un solo punto de la pantalla (comportamiento de partícula). Pero al acumular miles de detecciones, los puntos se agrupan formando las franjas de interferencia (comportamiento de onda). La onda no describe «dónde está» el fotón, sino la <strong>probabilidad</strong> de detectarlo en cada lugar.
+        </div>
+    </div>
+
+    <!-- SLIDE 7: Efecto fotoeléctrico: el experimento -->
+    <div class="slide" id="slide-7">
+        <h2>6. Efecto fotoeléctrico: el experimento</h2>
+
+        <p><span class="highlight">Efecto fotoeléctrico:</span> desprendimiento de electrones de diversas superficies metálicas mediante luz.</p>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-top: 10px;">Cómo leer el montaje</h3>
+                <ol>
+                    <li>La luz cae sobre una superficie metálica <strong>fotosensible</strong> (el cátodo, conectado al polo negativo) dentro de un tubo al vacío. El vacío evita que los electrones choquen con moléculas de aire.</li>
+                    <li>La luz libera electrones de esa superficie (<strong>fotoelectrones</strong>).</li>
+                    <li>Los electrones liberados son atraídos por la placa positiva (el ánodo) y producen una <strong>corriente medible</strong> en el amperímetro.</li>
+                    <li>Si se invierte la polaridad, los electrones son frenados. El voltaje al que la corriente cae a cero, \(V_0\), es el <strong>potencial de frenado</strong> y permite calcular su energía cinética: \(K_{\max} = e\,V_0\).</li>
+                </ol>
+                <p>Se encontró que los electrones son expulsados <strong>tan pronto como se enciende la luz</strong>.</p>
+
+                <a class="link-btn" href="https://phet.colorado.edu/es/simulation/photoelectric" target="_blank" rel="noopener">Simulación PhET: Efecto fotoeléctrico ↗</a>
+            </div>
+
+            <div>
+                <div class="image-container" style="margin-top: 10px;">
+                    <img src="images/efecto_fotoelectrico_circuito.jpg" alt="Circuito del efecto fotoeléctrico">
+                    <div class="image-caption">Montaje: la luz expulsa electrones del cátodo (−) hacia el ánodo (+); el amperímetro mide la corriente.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="fact-box">
+                <span class="box-title">Una historia de ironías</span>
+                En 1887 Hertz confirmó las ondas electromagnéticas con un circuito de chispas. Notó además que las chispas saltaban más fácilmente si iluminaba los electrodos con luz ultravioleta. El mismo experimento que consagró la teoría ondulatoria descubrió el fenómeno que la pondría en crisis. Hallwachs (1888) lo estudió en placas de zinc, y J.J. Thomson (1899) mostró que las partículas liberadas eran <strong>electrones</strong>.
+            </div>
+            <div class="image-container" style="margin-top: 25px;">
+                <img class="sug" src="images/hertz_aparato.jpg" alt="Aparato de Hertz con circuito de chispas" data-search="Hertz spark gap apparatus 1887 oscillator resonator">
+                <div class="image-caption">Aparato de Hertz: emisor y receptor de chispas, con el que generó y detectó ondas electromagnéticas.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Observaciones -->
+    <div class="slide" id="slide-8">
+        <h2>7. Observaciones sobre el efecto fotoeléctrico</h2>
+        <p>Los experimentos de Hallwachs y sobre todo de Lenard (1902) dejaron cuatro resultados robustos:</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h4><span class="num-badge">1</span>Emisión inmediata</h4>
+                <p>Los primeros electrones aparecen sin retraso apreciable (hoy se sabe que es menor de unos nanosegundos). Ese retraso <strong>no depende del brillo ni de la frecuencia</strong> de la luz.</p>
+            </div>
+            <div class="card">
+                <h4><span class="num-badge">2</span>Frecuencia umbral</h4>
+                <p>El efecto es notable con luz violeta o ultravioleta, pero <strong>no ocurre con luz roja</strong>, por muy intensa que sea. Cada metal tiene su frecuencia mínima.</p>
+            </div>
+            <div class="card">
+                <h4><span class="num-badge">3</span>Corriente ∝ intensidad</h4>
+                <p>Si la frecuencia es suficiente, la <strong>cantidad de electrones</strong> expulsados es proporcional a la intensidad de la luz.</p>
+            </div>
+            <div class="card">
+                <h4><span class="num-badge">4</span>Energía máxima ∝ frecuencia</h4>
+                <p>La energía máxima de los electrones expulsados <strong>no se afecta por la intensidad</strong>. Sí depende de la frecuencia de la luz, creciendo con ella.</p>
+            </div>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+            <div class="image-container">
+                <img src="images/efecto_fotoelectrico_circuito.jpg" alt="Circuito del efecto fotoeléctrico">
+                <div class="image-caption">Los cuatro resultados se obtienen variando la intensidad (brillo) y la frecuencia (color) de la luz.</div>
+            </div>
+            <div class="analogy">
+                <span class="box-title">Dos perillas independientes</span>
+                En el experimento tienes dos «perillas»: el <strong>brillo</strong> (intensidad) y el <strong>color</strong> (frecuencia). Los cuatro resultados dicen que cada una controla una cosa distinta: el brillo controla <em>cuántos</em> electrones salen; el color controla <em>con cuánta energía</em> salen y si salen o no.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Clásica vs observación -->
+    <div class="slide" id="slide-9">
+        <h2>8. El choque con la física clásica</h2>
+        <p>Si la luz fuese únicamente una onda con energía continua, ¿qué deberíamos esperar? Comparemos con lo que se midió:</p>
+
+        <table class="tabla">
+            <tr><th style="width: 22%;">Aspecto</th><th style="width: 39%;">Predicción de la teoría ondulatoria</th><th style="width: 39%;">Lo observado</th></tr>
+            <tr><td><strong>Intensidad y energía de los electrones</strong></td><td>Más brillo = campo más intenso = electrones más veloces.</td><td class="bad">La energía máxima no cambia con la intensidad.</td></tr>
+            <tr><td><strong>Frecuencia</strong></td><td>No debería existir un umbral: cualquier color serviría con suficiente brillo.</td><td class="bad">Por debajo de \(f_0\) no sale ningún electrón, sin importar el brillo.</td></tr>
+            <tr><td><strong>Tiempo de respuesta</strong></td><td>Con luz débil el electrón tardaría en acumular la energía necesaria.</td><td class="bad">Emisión casi instantánea, incluso con luz muy débil.</td></tr>
+            <tr><td><strong>Energía vs. color</strong></td><td>La energía no depende de la frecuencia, solo de la amplitud.</td><td class="bad">La energía máxima crece linealmente con la frecuencia.</td></tr>
+        </table>
+
+        <div class="grid-2">
+            <div class="fact-box warn">
+                <span class="box-title">El argumento del tiempo de acumulación</span>
+                Supón que el electrón recoge la energía de la onda que cae sobre el área de un átomo, \(A \approx 3\times10^{-20}\) m². Con una luz débil de \(I = 1\) W/m², para acumular \(W = 2\) eV tardaría
+                \[ t = \frac{W}{I\,A} \approx 10\ \text{s} \]
+                <small style="display: block; margin-top: 6px; color: var(--text-medium);">Estimación de orden de magnitud. Se observa menos de 10⁻⁹ s.</small>
+            </div>
+            <div class="analogy">
+                <span class="box-title">Analogía del muro</span>
+                Imagina que el electrón está en un foso y el metal es un muro de altura \(W\). Un solo salto grande, que supere el muro, lo saca (y le sobra energía para salir corriendo). Mil saltitos pequeños no se suman, porque entre uno y otro el electrón vuelve a caer. Brillo = cuántas personas saltan; color = qué tan fuerte salta cada una.
+            </div>
+        </div>
+
+        <div class="fact-box">
+            <span class="box-title">Conclusión</span>
+            El efecto fotoeléctrico no es un detalle: contradice cuatro predicciones de la teoría ondulatoria. Para explicarlo, la energía de la luz no puede estar repartida de forma continua. Debe llegar concentrada en paquetes.
+        </div>
+    </div>
+
+    <!-- SLIDE 10: Explicación de Einstein -->
+    <div class="slide" id="slide-10">
+        <h2>9. La explicación de Einstein (1905)</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>Con luz brillante se expulsan <strong>más electrones</strong>, pero no a mayores rapideces. En cambio, un débil rayo de luz ultravioleta produce pocos electrones, pero con rapideces <strong>mucho mayores</strong>.</p>
+                <p>Einstein atribuyó propiedades cuánticas a la luz y consideró que la radiación tenía carácter corpuscular. <span class="highlight">Un fotón se absorbe por completo en cada electrón expulsado del metal.</span></p>
+
+                <h3>Tres ideas clave</h3>
+                <ol>
+                    <li>La luz de frecuencia \(f\) está formada por <strong>fotones</strong>, cada uno con energía \(E = hf\).</li>
+                    <li>La <strong>cantidad de fotones</strong> en un rayo controla el brillo de todo el rayo; la <strong>frecuencia</strong> controla la energía de cada fotón individual.</li>
+                    <li>Un fotón cede <strong>toda</strong> su energía a <strong>un solo</strong> electrón: todo o nada, sin acumulación entre varios fotones.</li>
+                </ol>
+            </div>
+
+            <div class="image-container" style="margin-top: 0;">
+                <div class="img-row">
+                    <img src="images/fotoelectrico_intensidad.png" alt="Más luz expulsa más electrones con la misma energía cinética">
+                    <img src="images/fotoelectrico_frecuencia.png" alt="La luz de baja frecuencia no expulsa electrones; la de alta frecuencia sí">
+                </div>
+                <div class="image-caption">Izquierda: más luz (más fotones) expulsa más electrones con la misma energía cinética. Derecha: la luz de baja frecuencia no expulsa electrones; la de alta frecuencia sí.</div>
+            </div>
+        </div>
+
+        <h3>Cómo explica cada observación</h3>
+        <table class="tabla">
+            <tr><th style="width: 30%;">Observación</th><th>Explicación con fotones</th></tr>
+            <tr><td><strong>Emisión inmediata</strong></td><td>La energía llega concentrada en un solo fotón. No hay nada que acumular.</td></tr>
+            <tr><td><strong>Frecuencia umbral</strong></td><td>Si la energía de un fotón es menor que el trabajo de extracción, ningún fotón individual puede liberar un electrón, por muchos fotones que lleguen.</td></tr>
+            <tr><td><strong>Corriente ∝ intensidad</strong></td><td>Más fotones por segundo → más electrones liberados por segundo (a razón de un electrón por cada fotón absorbido).</td></tr>
+            <tr><td><strong>Energía máxima ∝ frecuencia</strong></td><td>La energía que sobra después de pagar el costo de salir depende solo de la energía de cada fotón, es decir, de su frecuencia.</td></tr>
+        </table>
+    </div>
+
+    <!-- SLIDE 11: Energía del fotón -->
+    <div class="slide" id="slide-11">
+        <h2>10. ¿Cuánta energía lleva un fotón?</h2>
+
+        <div class="grid-2">
+            <div>
+                <div class="math-block">
+                    <strong>Energía de un fotón:</strong>
+                    \[ E = h f = \frac{h c}{\lambda} \]
+                    <small style="display: block; margin-top: 8px; color: var(--text-medium);">
+                        \(h = 6{,}626\,070\,15\times10^{-34}\) J·s \(= 4{,}135\,667\,7\times10^{-15}\) eV·s<br>
+                        \(\hbar = h/2\pi = 1{,}054\,571\,8\times10^{-34}\) J·s \(= 6{,}582\,119\,6\times10^{-16}\) eV·s
+                    </small>
+                </div>
+
+                <div class="fact-box">
+                    <span class="box-title">Atajo práctico</span>
+                    Como \(hc \approx 1240\) eV·nm,
+                    \[ E\,(\text{eV}) \approx \frac{1240}{\lambda\,(\text{nm})} \]
+                    Un fotón de 400 nm (violeta) lleva 3,1 eV; uno de 700 nm (rojo), 1,77 eV: casi el doble.
+                </div>
+
+                <p>Y para un haz completo, la intensidad es el número de fotones que cruzan cada m² por segundo (\(\Phi\)) multiplicado por la energía de cada uno:</p>
+                <div class="math-block" style="padding: 15px 30px;">
+                    \[ I = \Phi\, h f \]
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-top: 0;">La luz visible en electronvoltios</h3>
+                <table class="tabla" style="font-size: 0.92em;">
+                    <tr><th>Color</th><th>λ (nm)</th><th>f (THz)</th><th>E (eV)</th></tr>
+                    <tr><td>Violeta</td><td>380–450</td><td>668–789</td><td>2,76–3,26</td></tr>
+                    <tr><td>Azul</td><td>450–475</td><td>631–668</td><td>2,61–2,76</td></tr>
+                    <tr><td>Cian</td><td>476–495</td><td>606–630</td><td>2,50–2,60</td></tr>
+                    <tr><td>Verde</td><td>495–570</td><td>526–606</td><td>2,18–2,50</td></tr>
+                    <tr><td>Amarillo</td><td>570–590</td><td>508–526</td><td>2,10–2,18</td></tr>
+                    <tr><td>Naranja</td><td>590–620</td><td>484–508</td><td>2,00–2,10</td></tr>
+                    <tr><td>Rojo</td><td>620–750</td><td>400–484</td><td>1,65–2,00</td></tr>
+                </table>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-scale"><span>380 nm · 3,3 eV</span><span>550 nm · 2,25 eV</span><span>750 nm · 1,65 eV</span></div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="analogy">
+                <span class="box-title">¿Por qué la luz parece continua?</span>
+                Un puntero láser verde de 5 mW (532 nm) emite unos \(1{,}3\times10^{16}\) fotones por segundo. Cada fotón lleva apenas \(3{,}7\times10^{-19}\) J, así que el «granulado» es imposible de notar. Solo con detectores sensibles (o con luz muy tenue) se ven los fotones uno a uno. El ojo humano detecta del orden de 5 a 10 fotones absorbidos en la retina.
+            </div>
+            <div class="fact-box">
+                <span class="box-title">Un fotón violeta vs. uno rojo</span>
+                Tienen la misma rapidez en el vacío, pero el violeta lleva casi el doble de energía. Por eso la luz violeta o ultravioleta puede arrancar electrones donde la luz roja, aunque sea miles de veces más intensa, no puede.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: Ecuación de Einstein -->
+    <div class="slide" id="slide-12">
+        <h2>11. Energía en el efecto fotoeléctrico</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>En un metal los electrones se sostienen mediante fuerzas de atracción eléctricas. Un mínimo de energía, llamado <span class="highlight">trabajo de extracción</span> \(W\) (o función de trabajo), se requiere para que el electrón salga de la superficie. Así, la energía del fotón que entra es igual a la energía cinética del electrón saliente más la energía necesaria para extraerlo:</p>
+
+                <div class="math-block">
+                    \[ \underbrace{h f}_{\text{fotón}} = \underbrace{W}_{\text{salir del metal}} + \underbrace{\tfrac{1}{2} m_e v^2_{\max}}_{K_{\max}} \]
+                    <small style="display: block; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px;">
+                        Umbral: \( W = h f_0 \;\Rightarrow\; f_0 = \dfrac{W}{h},\quad \lambda_0 = \dfrac{hc}{W} \)<br>
+                        Potencial de frenado: \( e\,V_0 = K_{\max} = h f - W \)
+                    </small>
+                </div>
+
+                <div class="analogy">
+                    <span class="box-title">¿Por qué «energía cinética máxima»?</span>
+                    \(W\) es el costo <em>mínimo</em>: lo paga el electrón más débilmente ligado, cerca de la superficie. Los electrones que estaban más profundos gastan energía adicional (en choques dentro del metal) y salen más lentos. Los más rápidos son los de la superficie: de ahí el «máx».
+                </div>
+
+                <div class="fact-box">
+                    <span class="box-title">El electronvoltio (eV)</span>
+                    1 eV es la energía que adquiere un electrón al ser acelerado a través de una diferencia de potencial de 1 V.<br>
+                    1 eV = 1,602 176 634 × 10⁻¹⁹ J &nbsp;·&nbsp; \(m_e = 9{,}109\times10^{-31}\) kg
+                </div>
+            </div>
+
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/potasio_fotones.gif" alt="Fotones de 700, 550 y 400 nm incidiendo sobre potasio">
+                    <div class="image-caption">Potasio con \(W = 2{,}0\) eV (valor de la figura; en tablas suele aparecer ≈ 2,3 eV según la superficie). El fotón de 700 nm (1,77 eV) no extrae electrones; el de 550 nm (2,25 eV) y el de 400 nm (3,1 eV) sí, y el segundo les da más velocidad.</div>
+                </div>
+
+                <div class="card">
+                    <h4>Ejemplo resuelto</h4>
+                    <p>Luz de 400 nm sobre potasio (\(W = 2{,}3\) eV):</p>
+                    <ul style="font-size: 0.95em; line-height: 1.6;">
+                        <li>\(E = 1240/400 = 3{,}10\) eV</li>
+                        <li>\(K_{\max} = 3{,}10 - 2{,}3 = 0{,}80\) eV</li>
+                        <li>\(v_{\max} = \sqrt{2K_{\max}/m_e} \approx 5{,}3\times10^{5}\) m/s</li>
+                        <li>\(V_0 = 0{,}80\) V</li>
+                        <li>Umbral: \(\lambda_0 = 1240/2{,}3 \approx 539\) nm. La luz roja (700 nm) no sirve.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3>Cada metal tiene su umbral</h3>
+        <table class="tabla">
+            <tr><th>Metal</th><th>W (eV)</th><th>f₀ (10¹⁴ Hz)</th><th>λ₀ (nm)</th><th>Se activa con…</th></tr>
+            <tr><td>Cesio (Cs)</td><td>≈ 2,1</td><td>5,1</td><td>590</td><td>Luz visible (hasta el naranja)</td></tr>
+            <tr><td>Potasio (K)</td><td>≈ 2,3</td><td>5,6</td><td>539</td><td>Luz visible (hasta el verde)</td></tr>
+            <tr><td>Zinc (Zn)</td><td>≈ 4,3</td><td>10,4</td><td>288</td><td>Solo ultravioleta</td></tr>
+            <tr><td>Cobre (Cu)</td><td>≈ 4,7</td><td>11,4</td><td>264</td><td>Solo ultravioleta</td></tr>
+            <tr><td>Platino (Pt)</td><td>≈ 5,65</td><td>13,7</td><td>219</td><td>Solo ultravioleta lejano</td></tr>
+        </table>
+        <p class="small">Valores aproximados: W depende de la limpieza y de la orientación cristalina de la superficie.</p>
+    </div>
+
+    <!-- SLIDE 13: Verificación y explorador -->
+    <div class="slide" id="slide-13">
+        <h2>12. Verificando la ecuación: la recta de Millikan</h2>
+
+        <div class="grid-2" style="align-items: start;">
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/fototubo.jpg" alt="Fototubo iluminado con luz de distintos colores">
+                    <div class="image-caption">Fototubo: al iluminar el cátodo con luz de distintos colores, cada color da un potencial de frenado distinto.</div>
+                </div>
+
+                <p>La ecuación \(K_{\max} = hf - W\) es una <strong>recta</strong> en un gráfico de energía contra frecuencia:</p>
+                <ul>
+                    <li>La <strong>pendiente es \(h\)</strong>, la misma para todos los metales.</li>
+                    <li>La intersección con el eje horizontal es la <strong>frecuencia umbral</strong> \(f_0\).</li>
+                    <li>Metales distintos dan rectas <strong>paralelas</strong> desplazadas por su \(W\).</li>
+                </ul>
+
+                <div class="fact-box">
+                    <span class="box-title">Millikan (1914–1916)</span>
+                    Robert Millikan, escéptico de la idea del fotón, midió con cuidado extremo el potencial de frenado para varias frecuencias en metales alcalinos al vacío. Sus rectas confirmaron la ecuación de Einstein y le dieron \(h \approx 6{,}57\times10^{-34}\) J·s, con un error menor del 1 %. Millikan recibió el Nobel en 1923, y Einstein el suyo en 1921.
+                </div>
+                <a class="link-btn" href="https://phet.colorado.edu/es/simulation/photoelectric" target="_blank" rel="noopener">También en PhET: Efecto fotoeléctrico ↗</a>
+            </div>
+
+            <div>
+                <div class="explorer" id="explorer">
+                    <span class="box-title" style="margin-bottom: 0;">Explorador del efecto fotoeléctrico</span>
+                    <label>Metal <select id="ex-metal">
+                        <option value="Cs">Cesio (W ≈ 2,1 eV)</option>
+                        <option value="K" selected>Potasio (W ≈ 2,3 eV)</option>
+                        <option value="Zn">Zinc (W ≈ 4,3 eV)</option>
+                        <option value="Cu">Cobre (W ≈ 4,7 eV)</option>
+                        <option value="Pt">Platino (W ≈ 5,65 eV)</option>
+                    </select></label>
+                    <label>Longitud de onda: <b id="ex-l-val"></b> <span id="ex-region"></span>
+                        <input type="range" id="ex-l" min="200" max="1000" step="1" value="400"></label>
+                    <div class="swatch" id="ex-swatch"></div>
+                    <label>Brillo (número de fotones por segundo): <b id="ex-b-val"></b>
+                        <input type="range" id="ex-b" min="1" max="100" step="1" value="50"></label>
+
+                    <div class="status" id="ex-status"></div>
+
+                    <label style="margin-bottom: 0;">Reparto de la energía del fotón</label>
+                    <div class="ebar" id="ex-ebar"></div>
+
+                    <div class="readouts">
+                        <div>Energía del fotón: <b id="ex-E"></b></div>
+                        <div>Trabajo de extracción: <b id="ex-W"></b></div>
+                        <div>Energía cinética máx.: <b id="ex-K"></b></div>
+                        <div>Rapidez máx.: <b id="ex-v"></b></div>
+                        <div>Potencial de frenado: <b id="ex-V0"></b></div>
+                        <div>Umbral: <b id="ex-f0"></b></div>
+                    </div>
+
+                    <label style="margin-bottom: 0;">Corriente (≈ electrones por segundo)</label>
+                    <div class="meter i"><div id="ex-cur"></div></div>
+                    <label style="margin-bottom: 0;">Energía cinética máxima de los electrones</label>
+                    <div class="meter"><div id="ex-kbar"></div></div>
+
+                    <svg id="ex-chart" viewBox="0 0 360 250" style="width: 100%; margin-top: 14px; background: #fff; border: 1px solid var(--border);"></svg>
+                    <div class="small" style="margin-top: 6px;">Gráfico: la recta azul es el metal elegido y las grises son los demás; todas tienen la misma pendiente \(h\). Prueba: sube el brillo y observa que solo cambia la corriente, no la energía de cada electrón. Luego cambia la longitud de onda y verás el efecto contrario.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 14: Aplicaciones -->
+    <div class="slide" id="slide-14">
+        <h2>13. Aplicaciones del efecto fotoeléctrico</h2>
+
+        <p>En todas ellas un fotón libera o desplaza un electrón y esa carga se convierte en una señal eléctrica útil.</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h4>Efecto fotoeléctrico externo</h4>
+                <p>El electrón <strong>sale</strong> del material hacia el vacío. Es el que explicó Einstein. Lo usan los fototubos, los fotomultiplicadores y la espectroscopía de fotoelectrones.</p>
+            </div>
+            <div class="card green">
+                <h4>Efecto fotoeléctrico interno (fotovoltaico)</h4>
+                <p>El electrón <strong>no sale</strong>: pasa a la banda de conducción dentro de un semiconductor. Sigue la misma lógica de umbral, ahora con la <em>brecha de energía</em> \(E_g\) en lugar de \(W\). Lo usan las celdas solares, los CCD y los fotodiodos.</p>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/celda_solar.gif" alt="Esquema de una celda solar de silicio" style="max-height: 230px;">
+                    <div class="image-caption">Celda solar: los fotones generan pares electrón-hueco en la unión p-n.</div>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img class="sug" src="images/sensor_ccd_cmos.jpg" alt="Sensor de imagen CCD o CMOS de una cámara" data-search="CCD image sensor camera chip" style="max-height: 230px;">
+                    <div class="image-caption">Sensor de imagen: cada píxel acumula carga proporcional al número de fotones.</div>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img class="sug" src="images/fotomultiplicador.png" alt="Esquema de un tubo fotomultiplicador con dínodos" data-search="photomultiplier tube diagram dynodes" style="max-height: 230px;">
+                    <div class="image-caption">Fotomultiplicador: un fotoelectrón se multiplica en los dínodos hasta dar un pulso medible.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-top: 0;">Celdas o paneles solares</h3>
+                <p>Asociadas a energías limpias, especialmente la suministrada por la luz del Sol. En el silicio \(E_g = 1{,}12\) eV, lo que corresponde a \(\lambda \le 1100\) nm. Los fotones infrarrojos de mayor longitud de onda no generan corriente, y los muy energéticos pierden el exceso como calor. Por eso una celda de una sola unión tiene un límite teórico de eficiencia de alrededor de 30–33 % (límite de Shockley-Queisser).</p>
+
+                <h3>Dispositivo de carga acoplada (CCD)</h3>
+                <p>Asociado a las cámaras fotográficas y a los telescopios: cada píxel convierte fotones en electrones, que se cuentan como imagen.</p>
+            </div>
+            <div>
+                <h3 style="margin-top: 0;">Sensores (fotodiodos)</h3>
+                <p>Controles remotos, lectores de código de barras, receptores de fibra óptica y medidores de luz de las cámaras.</p>
+
+                <h3>Automatización</h3>
+                <p>Puertas automáticas, barreras de luz que cuentan piezas en una banda transportadora, alarmas de humo y encendido automático del alumbrado. Es un sensor que cambia su señal cuando cambia el número de fotones.</p>
+
+                <h3>Fotomultiplicadores</h3>
+                <p>Detectan fotones individuales. El observatorio de neutrinos Super-Kamiokande usa más de 11 000 de ellos para ver destellos tenues en agua.</p>
+            </div>
+        </div>
+
+        <div class="fact-box">
+            <span class="box-title">Parque solar La Loma (El Paso, Cesar)</span>
+            <div class="grid-2" style="margin: 10px 0 0 0; align-items: center; gap: 20px;">
+                <div class="image-container" style="margin: 0;">
+                    <img src="images/parque_solar_noticia.png" alt="Noticia: se inauguró el Parque Solar La Loma">
+                </div>
+                <div>
+                    <p>Inaugurado el 13 de febrero de 2024, fue el parque solar más grande de Colombia en ese momento: <strong>187 MW</strong> instalados, unos <strong>400 000 paneles bifaciales</strong> en <strong>387 hectáreas</strong> y una generación media cercana a 420 GWh por año.</p>
+                    <p class="small">Fuentes: MinEnergía (13-feb-2024), Enel Américas, El Tiempo.</p>
+                    <a class="link-btn" href="https://www.minenergia.gov.co/es/sala-de-prensa/noticias-index/la-transici%C3%B3n-energ%C3%A9tica-avanza-en-colombia-en-cesar-se-inaugur%C3%B3-el-parque-solar-la-loma-con-387-hect%C3%A1reas-de-paneles-solares/" target="_blank" rel="noopener">Noticia MinEnergía ↗</a>
+                    <a class="link-btn" href="https://www.solmic.co/panorama-de-los-proyectos-de-energia-solar-en-colombia" target="_blank" rel="noopener">Parques solares en Colombia ↗</a>
+                    <a class="link-btn" href="https://www.youtube.com/watch?v=hs6Gft6vaDM" target="_blank" rel="noopener">Video ↗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 15: El fotón -->
+    <div class="slide" id="slide-15">
+        <h2>14. La partícula de luz: el fotón</h2>
+
+        <div class="grid-2">
+            <div>
+                <p><span class="highlight">Fotón:</span> cuanto de radiación electromagnética con energía \(E = hf\) y momento lineal \(p = E/c\). Es la partícula que viaja a la velocidad de la luz y <strong>media la interacción</strong> con la materia: la luz puede ejercer presión sobre una superficie (presión de radiación).</p>
+
+                <table class="tabla">
+                    <tr><th style="width: 38%;">Propiedad</th><th>Valor</th></tr>
+                    <tr><td>Energía</td><td>\(E = hf = hc/\lambda\)</td></tr>
+                    <tr><td>Momento lineal</td><td>\(p = E/c = h/\lambda\)</td></tr>
+                    <tr><td>Masa en reposo</td><td>0 (cota experimental: menos de 10⁻¹⁸ eV/c²)</td></tr>
+                    <tr><td>Carga eléctrica</td><td>0</td></tr>
+                    <tr><td>Espín</td><td>1 (es un bosón)</td></tr>
+                    <tr><td>Rapidez</td><td>\(c = 299\,792\,458\) m/s en el vacío, para todos los observadores</td></tr>
+                </table>
+            </div>
+
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/dualidad_onda_particula.png" alt="Dualidad onda-partícula: la luz ante un espejo">
+                <div class="image-caption">El fotón es la cara «partícula» de un campo que también se comporta como onda. (Ilustración: molesaber.org)</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="analogy">
+                <span class="box-title">¿Por qué \(p = E/c\)?</span>
+                Para una partícula sin masa la relatividad da \(E = pc\). Un fotón de 550 nm lleva \(p = h/\lambda \approx 1{,}2\times10^{-27}\) kg·m/s: minúsculo, pero medible. A menor longitud de onda, mayor momento <em>por fotón</em>.
+            </div>
+            <div class="fact-box">
+                <span class="box-title">El fotón mediador</span>
+                Cuando dos cargas se repelen, la descripción cuántica dice que intercambian fotones (virtuales). El fotón es el «mensajero» de la interacción electromagnética. Es la respuesta moderna al problema de la acción a distancia que veremos más adelante.
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-top: 0;">Prueba del momento: efecto Compton (1923)</h3>
+                <p>Cuando los rayos X chocan con electrones casi libres, salen dispersados con mayor longitud de onda:</p>
+                <div class="math-block" style="padding: 15px 30px;">
+                    \[ \Delta\lambda = \frac{h}{m_e c}\,(1-\cos\theta), \qquad \frac{h}{m_e c} = 2{,}43\ \text{pm} \]
+                </div>
+                <p>Este resultado solo se entiende si el fotón choca como una partícula con energía y momento definidos, y comparte parte de ellos con el electrón.</p>
+            </div>
+            <div class="image-container">
+                <img class="sug" src="images/compton_dispersion.png" alt="Diagrama de la dispersión Compton: un fotón choca con un electrón y sale con mayor longitud de onda" data-search="Compton scattering diagram photon electron">
+                <div class="image-caption">Dispersión Compton: el fotón pierde energía y momento al chocar con el electrón.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 16: Radiómetro y presión de radiación -->
+    <div class="slide" id="slide-16">
+        <h2>15. Presión de radiación y radiómetro</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3 style="margin-top: 0;">La luz empuja</h3>
+                <p>Cada fotón lleva momento \(p = E/c\). Al absorberse, entrega ese momento a la superficie; al reflejarse entrega el doble. Para una intensidad \(I\):</p>
+                <div class="math-block" style="padding: 15px 30px;">
+                    <strong>Superficie absorbente:</strong> \( P_{\text{rad}} = \dfrac{I}{c} \)<br>
+                    <strong>Superficie reflectante:</strong> \( P_{\text{rad}} = \dfrac{2I}{c} \)
+                </div>
+                <p>Con luz solar en la Tierra (\(I \approx 1361\) W/m²) resultan solo 4,5 μPa (absorbente) y 9,1 μPa (reflectante): como el peso de unos 0,5 mg sobre cada metro cuadrado. Es pequeño, pero se mide.</p>
+
+                <div class="analogy">
+                    <span class="box-title">Precisión conceptual</span>
+                    Sabemos que a menor longitud de onda cada fotón tiene más momento. Pero, <em>a igual intensidad</em>, la luz roja tiene más fotones y la azul menos, y la presión total \(I/c\) es la misma. La presión depende de la energía que llega por segundo, no del color.
+                </div>
+            </div>
+
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/radiometro.gif" alt="Radiómetro de Crookes girando">
+                <div class="image-caption">Radiómetro: una veleta con caras blancas y negras alternadas dentro de una burbuja de vidrio al vacío (parcial).</div>
+            </div>
+        </div>
+
+        <h3>El radiómetro</h3>
+        <p>La idea de la clase: el blanco refleja la luz y el negro la absorbe, así que el intercambio de momento es <strong>mayor sobre la cara blanca</strong> que sobre la negra.</p>
+
+        <div class="fact-box warn">
+            <span class="box-title">Aviso: el radiómetro comercial no mide la presión de radiación</span>
+            En un radiómetro de Crookes real la veleta gira con la cara <em>negra</em> alejándose de la luz. La presión de radiación empujaría al revés (más fuerte sobre la cara reflectante). Lo que mueve la veleta es un efecto térmico: la cara negra se calienta y las moléculas del gas residual rebotan en ella con más energía. La presión de radiación se midió de forma convincente en alto vacío por Lebedev (1900) y por Nichols y Hull (1901).
+        </div>
+
+        <div class="grid-2">
+            <div class="image-container">
+                <img class="sug" src="images/vela_solar_ikaros.jpg" alt="Vela solar IKAROS desplegada en el espacio" data-search="IKAROS solar sail JAXA">
+                <div class="image-caption">Vela solar IKAROS (JAXA, 2010): navega empujada por la luz del Sol.</div>
+            </div>
+            <div class="image-container">
+                <img class="sug" src="images/cola_cometa.jpg" alt="Cometa con cola de polvo y cola de iones" data-search="comet dust tail ion tail photo">
+                <div class="image-caption">La cola de polvo de un cometa es empujada, en parte, por la presión de radiación solar.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 17: Éter vs campos -->
+    <div class="slide" id="slide-17">
+        <h2>16. Ondas mecánicas (éter) vs. campos</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>La concepción mecánica de la luz implica un <strong>medio</strong> para que se propague, como el aire para el sonido o el agua para las olas. El medio propuesto fue el <span class="highlight">éter lumínico</span>, que tenía propiedades contradictorias:</p>
+                <ul>
+                    <li>Debía ser <strong>tan rígido como el acero</strong>: un medio solo transmite ondas transversales (como la luz) si es rígido, y para viajar a rapidez \(c\) esa rigidez debía ser enorme...</li>
+                    <li>...pero <strong>más tenue que el aire</strong>, pues los planetas se mueven sin resistencia apreciable.</li>
+                    <li>Además debía llenar todo el espacio, por lo que los grandes cuerpos debían moverse a través de él.</li>
+                </ul>
+            </div>
+            <div class="image-container" style="margin-top: 0;">
+                <img class="sug" src="images/michelson_morley_interferometro.png" alt="Esquema del interferómetro de Michelson-Morley" data-search="Michelson Morley interferometer diagram">
+                <div class="image-caption">Interferómetro de Michelson-Morley: compara el tiempo de viaje de la luz en dos brazos perpendiculares.</div>
+            </div>
+        </div>
+
+        <div class="fact-box warn">
+            <span class="box-title">El experimento de Michelson-Morley (1887) demostró que el éter no existe</span>
+            Si la Tierra se moviera a través del éter a unos 30 km/s, al girar el interferómetro debería desplazarse el patrón de franjas en unas 0,4 franjas. Midieron menos de 0,02 de franja (resultado nulo, compatible con cero). Los experimentos posteriores, cada vez más precisos, confirmaron lo mismo.
+        </div>
+
+        <h3>Campos en lugar de éter</h3>
+        <table class="tabla">
+            <tr><th style="width: 34%;"></th><th>Onda mecánica (sonido, olas)</th><th>Onda electromagnética (luz)</th></tr>
+            <tr><td><strong>¿Necesita un medio material?</strong></td><td class="bad">Sí</td><td class="ok">No: se propaga en el vacío</td></tr>
+            <tr><td><strong>¿Transporta energía?</strong></td><td>Sí</td><td>Sí</td></tr>
+            <tr><td><strong>¿Transporta momento?</strong></td><td>Sí</td><td>Sí (presión de radiación)</td></tr>
+            <tr><td><strong>Rapidez</strong></td><td>Depende del medio y del movimiento respecto a él</td><td>\(c\) en el vacío, la misma para todos los observadores</td></tr>
+        </table>
+
+        <div class="grid-2">
+            <div class="analogy" style="border-left-color: var(--accent);">
+                <span class="box-title">En conclusión</span>
+                No es necesario tener un medio para que el campo electromagnético se propague, pero mantiene las características mecánicas: <strong>transporte de momento y energía</strong>. El campo es una entidad física por derecho propio. Einstein (1905) declaró el éter «superfluo».
+            </div>
+            <div class="image-container" style="margin: 25px 0;">
+                <img class="sug" src="images/lineas_de_campo_limaduras.jpg" alt="Limaduras de hierro alrededor de un imán que dibujan las líneas del campo magnético" data-search="iron filings magnetic field lines bar magnet">
+                <div class="image-caption">Las líneas de campo se «ven» con limaduras: el campo existe en el espacio vacío alrededor del imán.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 18: Acción a distancia -->
+    <div class="slide" id="slide-18">
+        <h2>17. Fuerzas de acción a distancia</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>La gravedad de Newton y la ley de Coulomb describían fuerzas que actúan <strong>instantáneamente</strong> entre cuerpos separados por el vacío. El propio Newton consideraba absurda la idea de que un cuerpo pueda actuar sobre otro a distancia sin nada que lo medie.</p>
+                <p>El <span class="highlight">campo electromagnético</span> resuelve el problema de la acción a distancia entre dos cargas que interactúan eléctricamente: no hay una acción a distancia, sino una <strong>acción mediada</strong> por ondas electromagnéticas que viajan a la velocidad de la luz.</p>
+
+                <div class="analogy">
+                    <span class="box-title">Un ejemplo con tiempos</span>
+                    Si sacudes una carga, una carga vecina responde después de un retraso \(\Delta t = r/c\). Una señal de radio a la Luna (384 000 km) tarda 1,3 s; la luz del Sol (1 UA) llega en unos 8,3 minutos. Ninguna influencia electromagnética es instantánea.
+                </div>
+            </div>
+
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/accion_fantasmal.jpg" alt="Einstein y la «acción fantasmal»">
+                <div class="image-caption">«Horripilante acción fantasmal». Ojo: Einstein usó esa expresión (en una carta a Born, 1947) para el entrelazamiento cuántico, un problema distinto al de la acción a distancia clásica.</div>
+            </div>
+        </div>
+
+        <div class="fact-box">
+            <span class="box-title">La velocidad de la luz es absoluta</span>
+            Es la misma para todos los observadores. Sin éter no hay un «sistema de referencia privilegiado» respecto al cual medirla, y esa constancia es el segundo postulado de la relatividad especial de Einstein. Su valor, \(c = 299\,792\,458\) m/s, es exacto: hoy el metro se define a partir de él.
+        </div>
+
+        <h3>De la acción a distancia al intercambio de fotones</h3>
+        <div class="grid-3">
+            <div class="card">
+                <h4>1. Newton / Coulomb</h4>
+                <p>Fuerza instantánea entre cuerpos distantes. Sin mecanismo.</p>
+            </div>
+            <div class="card beta">
+                <h4>2. Faraday / Maxwell</h4>
+                <p>Las cargas crean campos en el espacio. El campo actúa localmente y sus cambios se propagan a \(c\).</p>
+            </div>
+            <div class="card alpha">
+                <h4>3. Teoría cuántica</h4>
+                <p>El campo está cuantizado: la interacción es un intercambio de fotones (mediadores).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 19: Síntesis -->
+    <div class="slide" id="slide-19">
+        <h2>Síntesis: ¿Partículas de luz?</h2>
+
+        <div class="grid-2" style="align-items: start;">
+            <div>
+                <div class="timeline" style="margin: 0 0 25px 0;">
+                    <div class="timeline-item"><div class="timeline-year">1</div><div class="timeline-desc"><strong>Onda</strong><br>Young, Maxwell, Hertz</div></div>
+                    <div class="timeline-item"><div class="timeline-year">2</div><div class="timeline-desc"><strong>Crisis</strong><br>Efecto fotoeléctrico</div></div>
+                    <div class="timeline-item"><div class="timeline-year">3</div><div class="timeline-desc"><strong>Fotón</strong><br>\(E = hf\), \(p = h/\lambda\)</div></div>
+                    <div class="timeline-item"><div class="timeline-year">4</div><div class="timeline-desc"><strong>Campo</strong><br>Sin éter, acción mediada</div></div>
+                </div>
+
+                <h3 style="margin-top: 0;">Conceptos fundamentales</h3>
+                <div class="grid-2" style="gap: 15px; margin: 10px 0 20px 0; font-size: 0.95em;">
+                    <div class="card" style="padding: 15px;">
+                        <h4 style="font-size: 1.1em;">Luz como onda</h4>
+                        <ul style="padding-left: 15px; margin: 0;">
+                            <li>Interferencia y difracción.</li>
+                            <li>\(c = 1/\sqrt{\mu_0\varepsilon_0}\).</li>
+                            <li>Intensidad \(\propto E_0^2\).</li>
+                        </ul>
+                    </div>
+                    <div class="card alpha" style="padding: 15px;">
+                        <h4 style="font-size: 1.1em;">Luz como fotón</h4>
+                        <ul style="padding-left: 15px; margin: 0;">
+                            <li>\(hf = W + K_{\max}\).</li>
+                            <li>Brillo = número de fotones.</li>
+                            <li>Color = energía por fotón.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analogy" style="border-left-color: var(--accent);">
+                    <span class="box-title">Pregunta para pensar</span>
+                    ¿Es la luz onda o partícula? Esa pregunta quizá esté mal planteada. La luz es un <em>objeto cuántico</em>: se propaga siguiendo reglas de onda (probabilidades que interfieren) y se detecta en paquetes (fotones). Las dos imágenes son herramientas, y saber cuál usar en cada caso es parte de saber física.
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-top: 0;">Pon a prueba tu comprensión</h3>
+
+                <details class="qa">
+                    <summary>1. Una lámpara roja de 100 W no libera electrones del zinc, pero un LED ultravioleta de 1 mW (254 nm) sí. ¿Por qué?</summary>
+                    <div class="ans"><p>Cada fotón rojo (650 nm) lleva 1,9 eV, menos que \(W_{\text{Zn}} \approx 4{,}3\) eV: ninguno puede extraer un electrón, por muchos que lleguen. Cada fotón ultravioleta de 254 nm lleva 4,9 eV y sí supera el umbral.</p></div>
+                </details>
+
+                <details class="qa">
+                    <summary>2. Se duplica el brillo de una luz azul que ya libera electrones. ¿Qué cambia: la corriente, la energía máxima o ambas?</summary>
+                    <div class="ans"><p>Cambia la <strong>corriente</strong> (llegan el doble de fotones, salen el doble de electrones). La energía máxima de cada electrón no cambia, porque depende solo de la frecuencia.</p></div>
+                </details>
+
+                <details class="qa">
+                    <summary>3. ¿Luz de 300 nm libera electrones del cobre (W ≈ 4,7 eV)?</summary>
+                    <div class="ans"><p>\(E = 1240/300 \approx 4{,}13\) eV, menor que 4,7 eV. <strong>No</strong>: está por debajo del umbral (\(\lambda_0 \approx 264\) nm). Con 250 nm (4,96 eV) sí habría emisión, con \(K_{\max} \approx 0{,}26\) eV.</p></div>
+                </details>
+
+                <details class="qa">
+                    <summary>4. ¿Por qué un panel de silicio no aprovecha fotones infrarrojos de 1500 nm?</summary>
+                    <div class="ans"><p>Su energía es \(1240/1500 \approx 0{,}83\) eV, menor que la brecha del silicio (1,12 eV). No pueden crear pares electrón-hueco.</p></div>
+                </details>
+
+                <details class="qa">
+                    <summary>5. Si la luz es una onda, ¿por qué un sensor de cámara registra puntos individuales?</summary>
+                    <div class="ans"><p>Porque la <em>absorción</em> es un proceso cuántico: la energía se entrega en fotones completos a un solo píxel. La onda determina la <em>probabilidad</em> de dónde caerá cada fotón; la acumulación de muchos fotones reconstruye la imagen (y las franjas de interferencia).</p></div>
+                </details>
+
+                <details class="qa">
+                    <summary>6. ¿Por qué el radiómetro de Crookes gira «al revés» de lo que predice la presión de radiación?</summary>
+                    <div class="ans"><p>Porque su movimiento es un efecto térmico del gas residual, no de la luz que empuja. La presión de radiación es demasiado pequeña (μPa) para vencer ese efecto en un vacío parcial.</p></div>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles de Navegación -->
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)" disabled>← Anterior</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+</div>
+
+<script>
+    /* ---------- Navegación ---------- */
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('slide-counter');
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+
+        counter.textContent = `${n + 1} / ${totalSlides}`;
+        prevBtn.disabled = n === 0;
+        nextBtn.disabled = n === totalSlides - 1;
+
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise([slides[n]]);
+        }
+
+        slides[n].scrollTop = 0;
+        try { history.replaceState(null, '', '#' + (n + 1)); } catch (e) {}
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        showSlide(currentSlide);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT')) return;
+        if (event.key === 'ArrowRight') changeSlide(1);
+        if (event.key === 'ArrowLeft') changeSlide(-1);
+        if (event.key === 'Home') { currentSlide = 0; showSlide(0); }
+        if (event.key === 'End') { currentSlide = totalSlides - 1; showSlide(currentSlide); }
+    });
+
+    /* ---------- Imágenes sugeridas: si el archivo no existe, mostrar un marcador ---------- */
+    function imgFallback(img) {
+        if (img.dataset.done) return;
+        img.dataset.done = '1';
+        const box = document.createElement('div');
+        box.className = 'img-placeholder';
+        const file = (img.getAttribute('src') || '').split('/').pop();
+        const q = img.dataset.search ? '<br>Buscar: <em>' + img.dataset.search + '</em>' : '';
+        box.innerHTML = '<span class="ph-tag">Imagen sugerida</span><br>' + (img.alt || '') +
+                        '<br>Guardar como <code>images/' + file + '</code>' + q;
+        img.replaceWith(box);
+    }
+    document.querySelectorAll('img').forEach(img => {
+        if (img.complete && img.naturalWidth === 0) imgFallback(img);
+        else img.addEventListener('error', () => imgFallback(img));
+    });
+
+    /* ---------- Explorador del efecto fotoeléctrico ---------- */
+    const HC = 1239.84;          // eV·nm
+    const H_EV = 4.135667696e-15; // eV·s
+    const C_LIGHT = 299792458;    // m/s
+    const ME = 9.1093837015e-31;  // kg
+    const E_Q = 1.602176634e-19;  // C (J/eV)
+    const METALS = { Cs: 2.1, K: 2.3, Zn: 4.3, Cu: 4.7, Pt: 5.65 };
+
+    function photoState(metal, lambdaNm, brillo) {
+        const W = METALS[metal];
+        const E = HC / lambdaNm;
+        const emite = E >= W;
+        const K = emite ? E - W : 0;
+        const v = emite ? Math.sqrt(2 * K * E_Q / ME) : 0;
+        return { W, E, emite, K, v, f: C_LIGHT / (lambdaNm * 1e-9), f0: W / H_EV,
+                 lambda0: HC / W, corriente: emite ? brillo : 0 };
+    }
+
+    function wavelengthToColor(w) {
+        if (w < 380) return 'repeating-linear-gradient(45deg,#e9d8fd,#e9d8fd 6px,#fff 6px,#fff 12px)';
+        if (w > 750) return 'repeating-linear-gradient(45deg,#fed7d7,#fed7d7 6px,#fff 6px,#fff 12px)';
+        let r = 0, g = 0, b = 0;
+        if (w < 440) { r = -(w - 440) / 60; b = 1; }
+        else if (w < 490) { g = (w - 440) / 50; b = 1; }
+        else if (w < 510) { g = 1; b = -(w - 510) / 20; }
+        else if (w < 580) { r = (w - 510) / 70; g = 1; }
+        else if (w < 645) { r = 1; g = -(w - 645) / 65; }
+        else { r = 1; }
+        let f = 1;
+        if (w < 420) f = 0.3 + 0.7 * (w - 380) / 40;
+        else if (w > 700) f = 0.3 + 0.7 * (750 - w) / 50;
+        const c = x => Math.round(255 * Math.pow(Math.max(0, x * f), 0.8));
+        return `rgb(${c(r)},${c(g)},${c(b)})`;
+    }
+
+    function fmt(x, d) { return x.toFixed(d).replace('.', ','); }
+
+    function updateExplorer() {
+        const metal = document.getElementById('ex-metal').value;
+        const lam = +document.getElementById('ex-l').value;
+        const bri = +document.getElementById('ex-b').value;
+        const s = photoState(metal, lam, bri);
+        const $ = id => document.getElementById(id);
+
+        $('ex-l-val').textContent = lam + ' nm';
+        $('ex-region').textContent = lam < 380 ? '(ultravioleta, invisible)' : lam > 750 ? '(infrarrojo, invisible)' : '(luz visible)';
+        $('ex-swatch').style.background = wavelengthToColor(lam);
+        $('ex-b-val').textContent = bri + ' %';
+
+        const st = $('ex-status');
+        st.className = 'status ' + (s.emite ? 'yes' : 'no');
+        st.textContent = s.emite
+            ? 'Hay emisión de electrones: cada fotón supera el umbral (E ≥ W).'
+            : 'No hay emisión: cada fotón tiene menos energía que W, por muchos que lleguen.';
+
+        // Barra de reparto de energía del fotón
+        const bar = $('ex-ebar');
+        if (s.emite) {
+            bar.innerHTML = `<span class="w" style="width:${100 * s.W / s.E}%">W</span>` +
+                            `<span class="k" style="width:${100 * s.K / s.E}%">K máx</span>`;
+        } else {
+            bar.innerHTML = `<span class="x" style="width:${100 * s.E / s.W}%">E &lt; W</span>`;
+        }
+
+        $('ex-E').textContent = fmt(s.E, 2) + ' eV';
+        $('ex-W').textContent = fmt(s.W, 2) + ' eV';
+        $('ex-K').textContent = s.emite ? fmt(s.K, 2) + ' eV' : '0';
+        $('ex-v').textContent = s.emite ? fmt(s.v / 1e5, 2) + ' × 10⁵ m/s' : '—';
+        $('ex-V0').textContent = s.emite ? fmt(s.K, 2) + ' V' : '—';
+        $('ex-f0').textContent = fmt(s.lambda0, 0) + ' nm';
+        $('ex-cur').style.width = s.corriente + '%';
+        $('ex-kbar').style.width = Math.min(100, 100 * s.K / 4.5) + '%';
+
+        drawChart(metal, s);
+    }
+
+    function drawChart(metal, s) {
+        const W0 = 44, H0 = 210, W1 = 345, H1 = 12;   // área de trazado (px del viewBox)
+        const fMax = 16, kMax = 5;                    // f en 10^14 Hz, K en eV
+        const X = f => W0 + (W1 - W0) * f / fMax;
+        const Y = k => H0 - (H0 - H1) * k / kMax;
+        const slope = H_EV * 1e14;                    // eV por cada 10^14 Hz
+        let g = '';
+        for (let t = 0; t <= fMax; t += 4) {
+            g += `<line x1="${X(t)}" y1="${H0}" x2="${X(t)}" y2="${H0 + 4}" stroke="#718096"/>` +
+                 `<text x="${X(t)}" y="${H0 + 16}" font-size="10" text-anchor="middle" fill="#4a5568">${t}</text>`;
+        }
+        for (let t = 0; t <= kMax; t++) {
+            g += `<line x1="${W0 - 4}" y1="${Y(t)}" x2="${W0}" y2="${Y(t)}" stroke="#718096"/>` +
+                 `<line x1="${W0}" y1="${Y(t)}" x2="${W1}" y2="${Y(t)}" stroke="#edf2f7"/>` +
+                 `<text x="${W0 - 8}" y="${Y(t) + 3}" font-size="10" text-anchor="end" fill="#4a5568">${t}</text>`;
+        }
+        g += `<line x1="${W0}" y1="${H0}" x2="${W1}" y2="${H0}" stroke="#4a5568"/>` +
+             `<line x1="${W0}" y1="${H1}" x2="${W0}" y2="${H0}" stroke="#4a5568"/>`;
+        // rectas de todos los metales; la elegida resaltada
+        Object.keys(METALS).forEach(m => {
+            const W = METALS[m], f0 = W / slope, kEnd = slope * fMax - W;
+            if (kEnd <= 0) return;
+            const yEnd = Y(Math.min(kEnd, kMax));
+            const xEnd = kEnd > kMax ? X((kMax + W) / slope) : X(fMax);
+            const sel = m === metal;
+            g += `<line x1="${X(f0)}" y1="${Y(0)}" x2="${xEnd}" y2="${yEnd}" stroke="${sel ? '#2b6cb0' : '#cbd5e0'}" stroke-width="${sel ? 2.5 : 1.5}"/>`;
+            if (sel) g += `<text x="${xEnd - 14}" y="${Math.max(yEnd, 14) + 2}" font-size="10" font-weight="bold" text-anchor="end" fill="#2b6cb0">${m}</text>`;
+        });
+        // umbral del metal elegido
+        const fx0 = s.f0 / 1e14;
+        g += `<line x1="${X(fx0)}" y1="${Y(0)}" x2="${X(fx0)}" y2="${H1 + 6}" stroke="#2b6cb0" stroke-dasharray="3,3"/>` +
+             `<text x="${X(fx0) + 3}" y="${H1 + 14}" font-size="9" fill="#2b6cb0">f₀</text>`;
+        // punto actual
+        const fx = s.f / 1e14, ky = s.emite ? s.K : 0;
+        g += `<circle cx="${X(fx)}" cy="${Y(ky)}" r="6" fill="${s.emite ? '#2f855a' : '#c53030'}" stroke="#fff" stroke-width="1.5"/>`;
+        g += `<text x="${(W0 + W1) / 2}" y="246" font-size="10" text-anchor="middle" fill="#4a5568">Frecuencia f (10¹⁴ Hz)</text>`;
+        g += `<text transform="translate(11,${(H0 + H1) / 2}) rotate(-90)" font-size="10" text-anchor="middle" fill="#4a5568">K máx (eV)</text>`;
+        document.getElementById('ex-chart').innerHTML = g;
+    }
+
+    ['ex-metal', 'ex-l', 'ex-b'].forEach(id => document.getElementById(id).addEventListener('input', updateExplorer));
+    (function initFromQuery() {
+        const q = new URLSearchParams(location.search);
+        if (q.get('metal') && METALS[q.get('metal')]) document.getElementById('ex-metal').value = q.get('metal');
+        if (q.get('l')) document.getElementById('ex-l').value = q.get('l');
+        if (q.get('b')) document.getElementById('ex-b').value = q.get('b');
+    })();
+    updateExplorer();
+
+    /* ---------- Inicio (permite abrir una diapositiva con #n) ---------- */
+    (function () {
+        const n = parseInt(location.hash.replace('#', ''), 10);
+        if (!isNaN(n) && n >= 1 && n <= totalSlides) currentSlide = n - 1;
+        showSlide(currentSlide);
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 24: Estructura de la materia - Presentación Académica</title>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #2b6cb0;
+            --text-dark: #1a202c;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --red: #c53030;
+            --gold: #d69e2e;
+            --green: #2f855a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f7fafc;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            position: relative;
+            box-shadow: 0 4px 20px var(--shadow);
+            background: var(--bg-white);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 50px 70px 90px 70px;
+            height: 100%;
+            overflow-y: auto;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.6em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--text-dark);
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a { color: var(--accent); }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .math-block {
+            background: var(--bg-light);
+            padding: 25px 30px;
+            border-left: 4px solid var(--primary);
+            margin: 25px 0;
+            font-size: 1.15em;
+        }
+
+        .image-container {
+            margin: 30px 0;
+            text-align: center;
+            background: var(--bg-light);
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 380px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image-container img + img { margin-top: 15px; }
+
+        .img-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .img-row img {
+            max-width: 48%;
+            max-height: 300px;
+            margin: 0 !important;
+            width: auto;
+            flex: 0 1 auto;
+            min-width: 0;
+        }
+
+        .image-caption {
+            font-size: 0.95em;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: var(--bg-white);
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary);
+            text-align: left;
+        }
+
+        .card.alpha { border-top-color: #c53030; }
+        .card.beta  { border-top-color: #2c5282; }
+        .card.gamma { border-top-color: #d69e2e; }
+        .card.green { border-top-color: #2f855a; }
+
+        .card h4 { margin-top: 0; }
+        .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+
+        .analogy {
+            background: var(--bg-light);
+            border-left: 4px solid var(--secondary);
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-style: normal;
+        }
+
+        .fact-box {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+
+        .fact-box.warn { border-left-color: var(--red); }
+
+        .box-title {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+        }
+
+        .analogy > p:last-child, .fact-box > p:last-child { margin-bottom: 0; }
+
+        /* Controles de navegación */
+        .controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 70px;
+            z-index: 10;
+            background: linear-gradient(to top, rgba(255,255,255,0.98) 70%, rgba(255,255,255,0) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        button {
+            background: var(--bg-white);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 22px;
+            font-size: 0.9em;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+        }
+
+        button:disabled {
+            background: var(--bg-light);
+            color: #cbd5e0;
+            border-color: var(--border);
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 0.95em;
+            color: var(--text-light);
+            font-weight: 500;
+            z-index: 11;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .timeline-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 8px;
+        }
+
+        .timeline-year {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .timeline-year.alt { background: var(--red); }
+
+        .timeline-desc {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light); }
+        ::-webkit-scrollbar-thumb { background: var(--text-light); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-medium); }
+
+        .subtitle {
+            color: var(--text-medium);
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 30px 0;
+        }
+
+        /* ---------- Añadidos para esta presentación ---------- */
+
+        table.tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+        }
+
+        .tabla th {
+            background: var(--primary);
+            color: #fff;
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .tabla td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-medium);
+            vertical-align: top;
+            line-height: 1.5;
+            font-size: 0.98em;
+        }
+
+        .tabla tr:nth-child(even) td { background: var(--bg-light); }
+        .tabla td.ok  { color: var(--green); font-weight: 600; }
+        .tabla td.bad { color: var(--red); font-weight: 600; }
+
+        .video-wrap iframe {
+            width: 100%;
+            height: 315px;
+            border: 0;
+            border-radius: 6px;
+            background: #000;
+        }
+
+        .link-btn {
+            display: inline-block;
+            border: 1px solid var(--primary);
+            padding: 8px 18px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.95em;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        .link-btn:hover { background: var(--primary); color: #fff; }
+
+        .small { font-size: 0.9em; color: var(--text-light); line-height: 1.5; }
+
+        .num-badge {
+            display: inline-flex;
+            width: 30px; height: 30px;
+            align-items: center; justify-content: center;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 0.95em;
+        }
+
+        .img-placeholder {
+            border: 2px dashed #a0aec0;
+            background: #fff;
+            padding: 28px 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .img-placeholder .ph-tag {
+            display: inline-block;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 2px 10px;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .img-placeholder code { color: var(--secondary); font-size: 0.95em; }
+
+        .spectrum-bar {
+            height: 22px;
+            background: linear-gradient(to right, #7f00ff, #3b3bff, #00b7ff, #00d26a, #e6e600, #ff9a00, #ff1a1a);
+            margin: 14px 0 4px 0;
+        }
+        .spectrum-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: var(--text-light);
+        }
+
+        details.qa {
+            border: 1px solid var(--border);
+            background: #fff;
+            margin: 12px 0;
+            padding: 14px 20px;
+        }
+        details.qa summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+        details.qa[open] { background: var(--bg-light); }
+        details.qa .ans { margin-top: 10px; }
+        details.qa .ans p { font-size: 1em; margin-bottom: 6px; }
+
+        /* Explorador interactivo */
+        .explorer {
+            border: 1px solid var(--border);
+            background: #fff;
+            padding: 20px 22px;
+            margin: 10px 0 20px 0;
+        }
+        .explorer label {
+            display: block;
+            font-size: 0.95em;
+            color: var(--text-medium);
+            margin: 12px 0 4px 0;
+        }
+        .explorer label b { color: var(--primary); }
+        .explorer select, .explorer input[type=range] { width: 100%; }
+        .explorer select {
+            padding: 6px 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            border: 1px solid var(--border);
+        }
+        .swatch {
+            height: 26px;
+            border: 1px solid var(--border);
+            margin-top: 6px;
+        }
+        .readouts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            margin-top: 14px;
+            font-size: 0.95em;
+            color: var(--text-medium);
+        }
+        .readouts div b { color: var(--primary); }
+        .status {
+            margin-top: 12px;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .status.yes { background: #f0fff4; color: var(--green); border: 1px solid #9ae6b4; }
+        .status.no  { background: #fff5f5; color: var(--red);   border: 1px solid #feb2b2; }
+        .ebar {
+            display: flex;
+            height: 26px;
+            margin-top: 6px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            font-size: 0.8em;
+            color: #fff;
+            overflow: hidden;
+        }
+        .ebar span { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+        .ebar .w { background: #718096; }
+        .ebar .k { background: var(--accent); }
+        .ebar .x { background: var(--red); }
+        .meter {
+            height: 12px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            margin-top: 4px;
+        }
+        .meter > div { height: 100%; background: var(--accent); width: 0; transition: width 0.15s; }
+        .meter.i > div { background: var(--gold); }
+
+        @media (max-width: 900px) {
+            .slide { padding: 40px 24px 90px 24px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .timeline { flex-wrap: wrap; row-gap: 20px; }
+            .timeline::before { display: none; }
+            .controls { padding: 15px 24px; }
+        }
+    
+        /* ---------- Simuladores ---------- */
+        .sim {
+            border: 1px solid var(--border);
+            background: #fff;
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+        .sim canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #fff;
+            border: 1px solid var(--border);
+        }
+        .sim .title { display:block; color: var(--primary); font-weight: 600; font-size: 1.1em; margin-bottom: 8px; }
+        .sim .ctrls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 4px 22px;
+            margin: 10px 0;
+        }
+        .sim label { display: block; font-size: 0.92em; color: var(--text-medium); margin: 6px 0 2px 0; }
+        .sim label b { color: var(--primary); }
+        .sim input[type=range] { width: 100%; }
+        .sim select, .sim input[type=number] {
+            width: 100%;
+            padding: 5px 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+        .sim .btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px 0; }
+        .sim .btns button { padding: 6px 14px; font-size: 0.88em; }
+        .kv {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 6px 18px;
+            font-size: 0.93em;
+            color: var(--text-medium);
+            margin-top: 10px;
+        }
+        .kv b { color: var(--primary); }
+        .note-line { font-size: 0.88em; color: var(--text-light); line-height: 1.5; margin-top: 8px; }
+        .status.mid { background: #fffaf0; color: #975a16; border: 1px solid #f6e05e; }
+
+        .video-card {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            background: #000;
+        }
+        .video-card img { width: 100%; max-height: none !important; display: block; opacity: 0.92; }
+        .video-card .play {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .video-card .play::after {
+            content: '';
+            border-left: 30px solid #fff;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            margin-left: 8px;
+            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.7));
+        }
+        .video-card .vlabel {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.65);
+            color: #fff;
+            font-size: 0.85em;
+            padding: 6px 10px;
+        }
+        .img-small img { max-height: 240px !important; }
+        table.tabla td.num, table.tabla th.num { text-align: right; font-variant-numeric: tabular-nums; }
+        .tabla.compact td, .tabla.compact th { padding: 6px 10px; font-size: 0.92em; }
+
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+    <div class="slide-number" id="slide-counter">1 / 24</div>
+
+    <!-- SLIDE 0: Portada -->
+    <div class="slide active" id="slide-0">
+        <h1 style="text-align: center; border-bottom: none; font-size: 3em;">Descubriendo la Física</h1>
+        <p style="text-align: center; font-size: 1.5em; color: var(--text-light); margin-bottom: 40px;">2025-2 · Noviembre 19, 2025</p>
+
+        <div class="grid-2" style="align-items: center; margin: 40px 0;">
+            <div>
+                <h2 style="border-bottom: none; font-size: 1.8em;">Clase 24: Estructura de la materia</h2>
+                <p style="font-size: 1.2em; line-height: 1.9;">
+                    Nadie ha visto nunca un átomo con los ojos, y sin embargo sabemos cuántos protones tiene el oro y de qué color emite el hidrógeno. Hoy recorreremos un siglo de ideas, de <span class="highlight">Dalton a Bohr</span>, y veremos cómo cada experimento obligó a rehacer el modelo anterior.
+                </p>
+                <div class="fact-box" style="margin-top: 30px;">
+                    <span class="box-title">Temas que exploraremos:</span>
+                    <ul style="margin: 15px 0 0 0;">
+                        <li>Dalton: átomos indivisibles</li>
+                        <li>Thomson: el electrón y el «pudín de pasas»</li>
+                        <li>Rutherford: el núcleo atómico</li>
+                        <li>Bohr: niveles de energía y espectros</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="images/portada.jpg" alt="Representación artística de un átomo con órbitas luminosas">
+                <div class="image-caption"></div>
+            </div>
+        </div>
+
+        <div class="analogy" style="text-align: center; font-size: 1.1em;">
+            <span class="box-title">Pregunta guía</span>
+            Si nunca vemos un átomo directamente, ¿cómo decidimos qué forma tiene? La respuesta es la misma en toda la clase: lo golpeamos con algo (corrientes eléctricas, partículas alfa, luz) y miramos cómo responde.
+        </div>
+    </div>
+
+    <!-- SLIDE 1: Hoja de ruta -->
+    <div class="slide" id="slide-1">
+        <h2>Cinco modelos en un siglo</h2>
+        <p class="subtitle">Un modelo atómico no es «verdadero» o «falso»: es una herramienta que funciona hasta que aparece un dato que no explica</p>
+
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-year">1803</div><div class="timeline-desc"><b>Dalton</b><br>Átomos indivisibles, como bolas macizas</div></div>
+            <div class="timeline-item"><div class="timeline-year">1897</div><div class="timeline-desc"><b>Thomson</b><br>Descubre el electrón</div></div>
+            <div class="timeline-item"><div class="timeline-year">1904</div><div class="timeline-desc"><b>Thomson</b><br>Esfera positiva con electrones incrustados</div></div>
+            <div class="timeline-item"><div class="timeline-year alt">1911</div><div class="timeline-desc"><b>Rutherford</b><br>Átomo nuclear: casi todo es vacío</div></div>
+            <div class="timeline-item"><div class="timeline-year alt">1913</div><div class="timeline-desc"><b>Bohr</b><br>Niveles de energía cuantizados</div></div>
+            <div class="timeline-item"><div class="timeline-year alt">1926</div><div class="timeline-desc"><b>Schrödinger</b><br>Orbitales: el átomo cuántico</div></div>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/modelos_evolucion.jpg" alt="Evolución de los modelos atómicos: Dalton, Thomson, Rutherford y Bohr" style="max-height: 300px;">
+                <div class="image-caption">Dalton (esfera), Thomson (pudín), Rutherford (núcleo) y Bohr (niveles de energía).</div>
+            </div>
+            <div>
+                <div class="analogy" style="margin-top: 0;">
+                    <span class="box-title">El patrón que se repite</span>
+                    <p>Cada modelo nace de un experimento que el anterior no puede explicar: la electrólisis y los rayos catódicos rompen la esfera de Dalton; el experimento de la lámina de oro rompe el pudín de Thomson; la estabilidad del átomo y los espectros rompen el átomo planetario de Rutherford.</p>
+                </div>
+                <div class="fact-box">
+                    <span class="box-title">Una idea para llevar</span>
+                    <p>El modelo que usamos hoy en química y física no es el último de la lista: es una <em>refinación</em> constante. Cuando aparezca un dato nuevo, el modelo se ajusta; cuando el ajuste ya no alcanza, se reemplaza.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Mapa de la clase</h3>
+        <div class="grid-3">
+            <div class="card"><h4>Parte I · ¿Divisible?</h4><p>Dalton, la electricidad y el descubrimiento del electrón. Simulador del tubo de Thomson.</p></div>
+            <div class="card alpha"><h4>Parte II · El núcleo</h4><p>Experimento de Geiger–Marsden–Rutherford y por qué el átomo de Rutherford sería inestable. Simulador de dispersión.</p></div>
+            <div class="card beta"><h4>Parte III · Los niveles</h4><p>Bohr, espectros atómicos y la fórmula de Balmer. Simulador del átomo de Bohr y espectroscopio virtual.</p></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Dalton -->
+    <div class="slide" id="slide-2">
+        <h2>1. Modelo atómico de Dalton (1803–1808)</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>La idea de que la materia está hecha de «átomos» (del griego <em>átomos</em>, «indivisible») viene de Demócrito, pero era filosofía. John Dalton la convirtió en una teoría química: propuso átomos con <strong>masa</strong> definida y mostró que con ella se podían predecir resultados de laboratorio.</p>
+
+                <div class="fact-box">
+                    <span class="box-title">Postulados</span>
+                    <ol style="margin-bottom: 0;">
+                        <li>Los elementos están formados por átomos: partículas materiales independientes, inalterables e indivisibles.</li>
+                        <li>Los átomos de un mismo elemento son iguales en masa y en el resto de propiedades.</li>
+                        <li>Los átomos de elementos distintos tienen masa y propiedades distintas.</li>
+                        <li>Los compuestos se forman por la unión de átomos de los elementos correspondientes en una relación de números enteros sencillos.</li>
+                    </ol>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/dalton_retrato.png" alt="Retrato de John Dalton" style="max-height: 300px;">
+                    <div class="image-caption">John Dalton (1766–1844), maestro y químico inglés.</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Lo que el modelo explica</h3>
+        <div class="grid-3">
+            <div class="card green">
+                <h4>Conservación de la masa</h4>
+                <p>Lavoisier (1789) había observado que la masa total no cambia en una reacción. Para Dalton es evidente: los átomos <em>ni se crean ni se destruyen</em>, solo se redistribuyen.</p>
+            </div>
+            <div class="card green">
+                <h4>Proporciones definidas</h4>
+                <p>Proust (1799): un compuesto siempre tiene los mismos elementos en la misma proporción de masa. El agua es siempre 1 de H por 8 de O en masa porque siempre es H₂O.</p>
+            </div>
+            <div class="card green">
+                <h4>Proporciones múltiples</h4>
+                <p>Predicción propia de Dalton: si dos elementos forman varios compuestos, las masas de uno que se combinan con una masa fija del otro están en relación de enteros pequeños.</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <table class="tabla compact">
+                    <tr><th>Compuesto</th><th class="num">Masa de C</th><th class="num">Masa de O</th><th class="num">O por 12 g de C</th></tr>
+                    <tr><td>Monóxido de carbono, CO</td><td class="num">12 g</td><td class="num">16 g</td><td class="num">16 g</td></tr>
+                    <tr><td>Dióxido de carbono, CO₂</td><td class="num">12 g</td><td class="num">32 g</td><td class="num">32 g</td></tr>
+                    <tr><td colspan="3"><strong>Relación entre las masas de oxígeno</strong></td><td class="num ok">1 : 2</td></tr>
+                </table>
+                <p class="small" style="margin-top: 8px;">Con 12 g de carbono, el oxígeno que se combina es 16 g o 32 g: nunca 20 g ni 25 g. Los átomos solo se combinan en unidades enteras.</p>
+            </div>
+            <div class="image-container" style="margin: 0;">
+                <img src="images/dalton_agua_hcl.png" alt="Agua (2 átomos de H por 1 de O) y cloruro de hidrógeno (1 átomo de Cl por 1 de H)" style="max-height: 230px;">
+                <div class="image-caption">Relaciones enteras sencillas: agua, 2 de H por 1 de O; cloruro de hidrógeno, 1 de Cl por 1 de H.</div>
+            </div>
+        </div>
+
+        <div class="analogy">
+            <span class="box-title">Una nota sobre las fechas</span>
+            Dalton presentó la teoría en 1803 y la publicó completa en <em>A New System of Chemical Philosophy</em> (1808). Es habitual verla fechada «hacia 1800».
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Límites de Dalton -->
+    <div class="slide" id="slide-3">
+        <h2>2. ¿Qué dejó sin explicar el modelo de Dalton?</h2>
+        <p class="subtitle">Un modelo de esferas macizas no puede dar cuenta de la electricidad, y la electricidad está en todas partes</p>
+
+        <div class="grid-2">
+            <div>
+                <h3>Pistas que se acumularon en el siglo XIX</h3>
+                <ul>
+                    <li><strong>Electrización por frotamiento.</strong> Un peine frotado atrae papelitos: la materia neutra puede cargarse. Si el átomo fuese una esfera sin estructura, ¿de dónde salen las cargas?</li>
+                    <li><strong>Electrólisis (Faraday, 1830s).</strong> La masa depositada en un electrodo es proporcional a la carga que circuló, y los depósitos de distintos elementos guardan relaciones enteras: la carga también parece venir en «paquetes» iguales.</li>
+                    <li><strong>Descargas en gases a baja presión.</strong> Al aplicar alto voltaje a un tubo casi vacío aparece un resplandor: algo sale del electrodo negativo (el cátodo).</li>
+                    <li><strong>Radiactividad (Becquerel, 1896).</strong> Algunos átomos emiten radiación y se transforman en otros: ¡no son «inalterables»!</li>
+                    <li><strong>Espectros de líneas.</strong> Cada elemento emite colores propios. Una bola maciza no tiene por qué dar «huellas dactilares» de luz.</li>
+                </ul>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img class="sug" src="images/tubo_descarga_gas.jpg" alt="Tubo de descarga con gas a baja presión brillando" data-search="Crookes tube glowing cathode ray discharge tube photo" style="max-height: 260px;">
+                    <div class="image-caption">Tubo de descarga: el resplandor señala que «algo» viaja del cátodo al ánodo.</div>
+                </div>
+                <div class="fact-box warn">
+                    <span class="box-title">Se puede conservar el espíritu</span>
+                    <p>Los postulados 1 y 2 son falsos tal como los enunció Dalton, pero la idea central (la materia está hecha de unidades discretas que se reordenan en las reacciones químicas) sigue vigente.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Los postulados de Dalton, vistos hoy</h3>
+        <table class="tabla compact">
+            <tr><th>Postulado</th><th>Veredicto actual</th><th>Qué lo cambió</th></tr>
+            <tr><td>1. Átomos indivisibles e inalterables</td><td class="bad">Falso</td><td>Electrón (1897), núcleo (1911), radiactividad y fisión</td></tr>
+            <tr><td>2. Átomos de un elemento, idénticos en masa</td><td class="bad">Falso en masa; cierto en química</td><td>Isótopos (Soddy y Aston, 1910s): mismo número de protones, distinta masa</td></tr>
+            <tr><td>3. Elementos distintos, átomos distintos</td><td class="ok">Cierto</td><td>El número atómico \(Z\) identifica al elemento</td></tr>
+            <tr><td>4. Combinación en enteros sencillos</td><td class="ok">Cierto en general</td><td>Con excepciones: compuestos no estequiométricos como \(\mathrm{FeO}_{1,05}\)</td></tr>
+            <tr><td>Conservación de los átomos en reacciones químicas</td><td class="ok">Cierto</td><td>Solo falla en reacciones nucleares, donde los átomos sí se transforman</td></tr>
+        </table>
+
+        <div class="analogy">
+            <span class="box-title">¿Y si los átomos son tan pequeños que nunca se verán?</span>
+            En 1908 Jean Perrin usó el movimiento browniano (Einstein, 1905) para medir el número de Avogadro y dejó pocas dudas de que los átomos existen. Desde 1981, el microscopio de efecto túnel permite incluso «ver» átomos individuales sobre una superficie.
+        </div>
+        <div class="image-container">
+            <img class="sug" src="images/atomos_stm.jpg" alt="Imagen de microscopio de efecto túnel con átomos individuales sobre una superficie" data-search="STM image individual atoms surface quantum corral" style="max-height: 260px;">
+            <div class="image-caption">Imagen de microscopio de efecto túnel: cada protuberancia es un átomo.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Electrón -->
+    <div class="slide" id="slide-4">
+        <h2>3. Descubrimiento del electrón (J. J. Thomson, 1897)</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>En un tubo de vidrio casi vacío, el cátodo emite «rayos catódicos» que viajan en línea recta hasta el ánodo, proyectan sombras y hacen brillar la pantalla fluorescente. Durante años se discutió si eran ondas (como la luz) o partículas.</p>
+                <p>Thomson aportó el argumento definitivo mediante tres observaciones:</p>
+                <ol>
+                    <li>Los rayos se <strong>desvían con un campo magnético</strong> como lo haría una partícula con carga negativa.</li>
+                    <li>También se desvían con un <strong>campo eléctrico</strong>, hacia la placa positiva. (Hertz no lo había visto porque el gas residual en su tubo apantallaba el campo; Thomson logró un vacío mejor.)</li>
+                    <li>La relación \(e/m\) medida es la <strong>misma para cualquier metal</strong> del cátodo y para cualquier gas del tubo: el componente es universal.</li>
+                </ol>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/tubo_rayos_catodicos.gif" alt="Tubo de rayos catódicos con cátodo, ánodo, placas del condensador y pantalla fluorescente" style="max-height: 230px;">
+                    <div class="image-caption">Tubo de Thomson: cátodo, ánodo con rendija, placas del condensador y pantalla fluorescente.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <img src="images/tubo_thomson_esquema.png" alt="Esquema detallado del tubo de rayos catódicos con imanes, placas cargadas y escala" style="max-height: 230px;">
+            <div class="image-caption">Montaje con placas cargadas e imanes: los campos eléctrico y magnético se pueden ajustar para compensarse.</div>
+        </div>
+
+        <h3>¿Cómo se mide \(e/m\) sin ver el electrón?</h3>
+        <div class="grid-2">
+            <div class="math-block">
+                <strong>Paso 1.</strong> Se aplican \(E\) y \(B\) cruzados y se ajusta \(B\) hasta que el haz vuelve a ir recto: las fuerzas se compensan.<br>
+                \[ eE = evB \;\Rightarrow\; v = \frac{E}{B} \]
+                <strong>Paso 2.</strong> Se apaga \(B\) y se mide la desviación \(y\) en la pantalla. Con placas de longitud \(L\) y una distancia \(D\) hasta la pantalla:
+                \[ y = \frac{eE\,L}{m\,v^{2}}\left(\frac{L}{2}+D\right) \;\Rightarrow\; \frac{e}{m} = \frac{y\,v^{2}}{E\,L\,(L/2+D)} \]
+            </div>
+            <div>
+                <div class="fact-box">
+                    <span class="box-title">El resultado de Thomson</span>
+                    <p>\(\dfrac{e}{m_e} \approx 1{,}76\times10^{11}\) C/kg. Para el ion de hidrógeno (un protón), la electrólisis ya había dado \(\dfrac{e}{m_p} \approx 9{,}58\times10^{7}\) C/kg.</p>
+                    <p>El cociente es \(\approx 1836\). Como la carga es la misma (ya se intuía), <strong>el electrón es unas 1836 veces más liviano que el átomo más ligero</strong>. Thomson estimó con sus propios datos que su masa era del orden de una milésima de la del hidrógeno.</p>
+                </div>
+                <div class="analogy">
+                    <span class="box-title">La masa sola vino después</span>
+                    <p>Con \(e/m\) no se obtiene \(m\) ni \(e\) por separado. En 1909–1913 Millikan midió \(e = 1{,}602\times10^{-19}\) C con gotas de aceite, y entonces sí: \(m_e = 9{,}109\times10^{-31}\) kg.</p>
+                </div>
+            </div>
+        </div>
+        <p class="small">Thomson recibió el Nobel de Física en 1906. Su hijo, G. P. Thomson, compartió el de 1937 por demostrar que los electrones también se difractan como ondas: el padre descubrió la partícula y el hijo su carácter ondulatorio.</p>
+    </div>
+
+    <!-- SLIDE 5: Simulador del tubo de Thomson -->
+    <div class="slide" id="slide-5">
+        <h2>Simulador: el tubo de Thomson</h2>
+        <p class="subtitle">Reproduce el experimento: desvía el haz con E, compénsalo con B y deduce \(e/m\)</p>
+
+        <div class="sim">
+            <canvas id="tt-cv" width="960" height="380"></canvas>
+            <div class="ctrls">
+                <label>Voltaje de aceleración \(V_a\): <b id="tt-va-val"></b>
+                    <input type="range" id="tt-va" min="200" max="3000" step="10" value="1000"></label>
+                <label>Voltaje entre las placas \(V_p\): <b id="tt-vp-val"></b>
+                    <input type="range" id="tt-vp" min="-300" max="300" step="1" value="150"></label>
+                <label>Campo magnético \(B\): <b id="tt-b-val"></b>
+                    <input type="range" id="tt-b" min="-1.5" max="1.5" step="0.002" value="0"></label>
+            </div>
+            <div class="btns">
+                <button onclick="ttPreset('E')">Solo campo E</button>
+                <button onclick="ttPreset('B')">Solo campo B</button>
+                <button onclick="ttPreset('balance')">Compensar (v = E/B)</button>
+                <button onclick="ttMeasure()">Medir e/m con el método de Thomson</button>
+            </div>
+            <div class="status no" id="tt-status"></div>
+            <div class="kv">
+                <div>Campo eléctrico \(E = V_p/d\): <b id="tt-E"></b></div>
+                <div>Rapidez real de los electrones: <b id="tt-v"></b></div>
+                <div>Velocidad del cociente \(E/B\): <b id="tt-vEB"></b></div>
+                <div>Posición en la pantalla: <b id="tt-y"></b></div>
+                <div>Radio de curvatura (solo B): <b id="tt-r"></b></div>
+                <div id="tt-meas-wrap">Medición de \(e/m\): <b id="tt-meas">pulsa el botón</b></div>
+            </div>
+            <div class="note-line">
+                Geometría: placas de longitud \(L = 5\) cm separadas \(d = 3\) cm; la pantalla está \(D = 20\) cm más allá. Con \(V_p > 0\) la placa inferior es la positiva: el campo \(E\) apunta hacia arriba y el electrón (carga negativa) es atraído hacia abajo (fuerza eléctrica, roja). Con \(B > 0\) (hacia afuera de la pantalla, puntos) la fuerza magnética apunta hacia arriba (azul); con \(B < 0\) (cruces), hacia abajo. La rapidez la fija \(V_a\): \(v = \sqrt{2eV_a/m}\).
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="fact-box">
+                <span class="box-title">Reto 1 · Encuentra la velocidad</span>
+                <p>Pon \(V_p = 150\) V y mueve \(B\) hasta que el haz llegue al centro. Lee \(E/B\): ese es el valor de \(v\), y no necesitas conocer \(V_a\). Compáralo con la rapidez real que muestra el simulador.</p>
+            </div>
+            <div class="fact-box">
+                <span class="box-title">Reto 2 · La clave del experimento</span>
+                <p>Cambia \(V_a\) mientras el haz está compensado: el haz se desvía de nuevo. ¿Por qué? Porque \(v\) cambió pero \(E/B\) no. Cada valor de \(V_a\) necesita su propio \(B\) de compensación.</p>
+            </div>
+        </div>
+        <details class="qa">
+            <summary>¿Qué pasa si invierto el signo de \(V_p\) y de \(B\) a la vez?</summary>
+            <div class="ans"><p>Las dos fuerzas invierten su sentido y siguen compensándose. La condición de equilibrio es \(|E| = v|B|\) con \(E\) y \(B\) del mismo signo.</p></div>
+        </details>
+    </div>
+
+    <!-- SLIDE 6: Modelo de Thomson -->
+    <div class="slide" id="slide-6">
+        <h2>4. Modelo atómico de Thomson (1904)</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>Si los átomos contienen electrones negativos y son neutros en conjunto, debe haber carga positiva que los compense. Thomson imaginó el átomo como una <span class="highlight">esfera maciza de electricidad positiva</span>, de unos \(10^{-10}\) m de radio, con los electrones incrustados en número suficiente para que el conjunto resulte neutro.</p>
+                <p>La imagen popular es la de un <strong>pudín con pasas</strong>: el pudín es la carga positiva repartida, las pasas son los electrones. (En su versión original de 1904, Thomson los disponía en anillos giratorios, con la esperanza de explicar la tabla periódica.)</p>
+
+                <div class="fact-box">
+                    <span class="box-title">Lo que explica</span>
+                    <ul style="margin-bottom: 0;">
+                        <li>Que la materia sea neutra y se electrice al ganar o perder electrones.</li>
+                        <li>La existencia de iones y la conducción eléctrica.</li>
+                        <li>Que los electrones puedan extraerse (rayos catódicos, calentando un metal).</li>
+                        <li>Que el átomo sea estable: el electrón en equilibrio dentro de la esfera.</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/thomson_pudin.png" alt="Esquema del modelo del pudín: esfera positiva con electrones incrustados, junto a un pudín con pasas" style="max-height: 240px;">
+                    <div class="image-caption">Modelo del «pudín de pasas»: esfera positiva con electrones incrustados.</div>
+                </div>
+                <div class="image-container" style="margin-top: 15px;">
+                    <img src="images/thomson_retrato.png" alt="Retrato de J. J. Thomson" style="max-height: 200px;">
+                    <div class="image-caption">Joseph John Thomson (1856–1940).</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Una predicción que ya lo ponía en aprietos</h3>
+        <div class="grid-2">
+            <div>
+                <p>Dentro de una esfera uniforme de carga positiva, el campo crece linealmente con la distancia al centro. Un electrón desplazado sufre una fuerza restauradora proporcional al desplazamiento, es decir, <strong>un oscilador armónico</strong>:</p>
+                <div class="math-block">
+                    \[ E(r) = \frac{Ze\,r}{4\pi\varepsilon_0 R^{3}} \qquad\Rightarrow\qquad \omega = \sqrt{\frac{e^{2}}{4\pi\varepsilon_0\, m_e R^{3}}} \]
+                </div>
+            </div>
+            <div class="analogy" style="margin-top: 0;">
+                <span class="box-title">Hidrógeno según Thomson</span>
+                <p>Con \(R = 0{,}1\) nm resulta \(\omega \approx 1{,}6\times10^{16}\) rad/s, o sea \(f \approx 2{,}5\times10^{15}\) Hz y \(\lambda \approx 118\) nm (ultravioleta). El modelo predice <em>una sola</em> frecuencia de emisión; el hidrógeno real emite <strong>series enteras de líneas</strong>, con colores visibles incluidos. Las cifras no cuadran.</p>
+            </div>
+        </div>
+
+        <details class="qa">
+            <summary>¿Por qué un modelo tan «raro» tuvo éxito?</summary>
+            <div class="ans"><p>Porque encajaba con todo lo que se sabía en 1904: neutralidad, electrización, rayos catódicos. Además era un modelo cuantitativo (se podían hacer cuentas) y venía de la autoridad de quien había descubierto el electrón. Su debilidad solo apareció cuando alguien hizo un experimento capaz de distinguir «carga repartida» de «carga concentrada».</p></div>
+        </details>
+    </div>
+
+    <!-- SLIDE 7: Montaje del experimento de Rutherford -->
+    <div class="slide" id="slide-7">
+        <h2>5. El experimento de Rutherford, Geiger y Marsden (1909–1911)</h2>
+        <p class="subtitle">La mejor manera de comprobar el pudín de Thomson es dispararle proyectiles</p>
+
+        <div class="grid-2">
+            <div>
+                <p>Ernest Rutherford ya sabía que las partículas alfa (emitidas por sustancias radiactivas) son <strong>núcleos de helio</strong> con carga \(+2e\). Eran la sonda ideal: pesadas, con energías de varios MeV y fáciles de detectar. En Manchester, Hans Geiger y el estudiante Ernest Marsden hicieron las mediciones.</p>
+
+                <div class="fact-box">
+                    <span class="box-title">El montaje</span>
+                    <ol style="margin-bottom: 0;">
+                        <li><strong>Fuente:</strong> una sustancia radiactiva (radón y sus descendientes) que emite alfas.</li>
+                        <li><strong>Colimador:</strong> un bloque de plomo con un orificio forma un haz fino.</li>
+                        <li><strong>Blanco:</strong> una lámina de oro, de unos 0,2–1 µm de espesor (del orden de mil capas de átomos). El oro se puede laminar mucho más que cualquier otro metal.</li>
+                        <li><strong>Detector:</strong> una pantalla de sulfuro de zinc que centellea al recibir una alfa, observada con un microscopio que gira alrededor de la lámina. Geiger y Marsden contaban los destellos a mano, en un cuarto oscuro.</li>
+                    </ol>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/rutherford_montaje.png" alt="Esquema del montaje: fuente de partículas alfa, haz, lámina de oro y pantalla luminiscente" style="max-height: 230px;">
+                    <div class="image-caption">Montaje de Geiger y Marsden: fuente, haz colimado, lámina de oro y pantalla detectora.</div>
+                </div>
+                <div class="image-container" style="margin-top: 15px;">
+                    <img src="images/rutherford_retrato.png" alt="Retrato de Ernest Rutherford" style="max-height: 200px;">
+                    <div class="image-caption">Ernest Rutherford (1871–1937).</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>¿Qué esperaba cada modelo?</h3>
+        <div class="grid-2">
+            <div class="image-container" style="margin: 0;">
+                <img src="images/thomson_vs_rutherford.png" alt="Comparación: modelo de Thomson, con trayectorias casi rectas, y modelo de Rutherford, con algunas alfa desviadas y rebotadas" style="max-height: 340px;">
+                <div class="image-caption">Predicción de Thomson (izquierda) frente a lo observado (derecha).</div>
+            </div>
+            <div>
+                <div class="analogy" style="margin-top: 0;">
+                    <span class="box-title">Argumento de Thomson</span>
+                    <p>Una alfa tiene unas 7300 veces la masa de un electrón y viaja a unos 16 000 km/s (≈ 5 % de la velocidad de la luz). Chocar con un electrón es como una bala de cañón contra un mosquito: la desvía menos de una centésima de grado. Y la carga positiva, repartida por un volumen de 10⁻¹⁰ m, produce un campo débil.</p>
+                </div>
+                <div class="fact-box">
+                    <span class="box-title">Predicción</span>
+                    <p>Desviaciones minúsculas, del orden de décimas de grado por átomo y apenas un grado al atravesar toda la lámina. <strong>Ninguna</strong> alfa debería retroceder.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Resultados -->
+    <div class="slide" id="slide-8">
+        <h2>6. Resultados e interpretación</h2>
+
+        <div class="grid-2">
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/rutherford_dispersion_alfa.png" alt="Partículas alfa incidiendo sobre núcleos: la mayoría atraviesa en línea recta, algunas se desvían un poco, pocas rebotan" style="max-height: 360px;">
+                    <div class="image-caption">Lo observado: casi todas pasan, unas pocas se desvían mucho y una de cada ≈ 8000 «da la vuelta».</div>
+                </div>
+            </div>
+            <div>
+                <div class="grid-3" style="grid-template-columns: 1fr; gap: 12px; margin-top: 0;">
+                    <div class="card green"><h4>Casi todas atraviesan</h4><p>La mayoría pasa en línea recta o con desviaciones de décimas de grado, como predecía Thomson. El campo producido por la carga positiva dispersa es débil.</p></div>
+                    <div class="card gamma"><h4>Algunas se desvían mucho</h4><p>Una fracción pequeña se desvía ángulos grandes. Esto exige un campo eléctrico intenso que el pudín no puede crear.</p></div>
+                    <div class="card alpha"><h4>Unas pocas rebotan</h4><p>Del orden de una de cada 8000 sale en sentido contrario (más de 90°). Rutherford lo comparó con disparar un proyectil de 15 pulgadas a un pañuelo de papel y que regresara a golpear al tirador.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>La inferencia de Rutherford (1911)</h3>
+        <div class="grid-2">
+            <div>
+                <ol>
+                    <li>Para frenar y devolver una alfa se necesita un campo muy intenso: <strong>la carga positiva debe estar concentrada</strong> en una región diminuta.</li>
+                    <li>Como la inmensa mayoría de las alfa no sufre nada, esa región debe ser <strong>pequeñísima comparada con el átomo</strong>.</li>
+                    <li>Como las alfa que rebotan lo hacen con poca pérdida de energía, el centro es <strong>mucho más pesado</strong> que una alfa: casi toda la masa está ahí.</li>
+                    <li>Rutherford calculó la distribución angular esperada para una carga puntual (fórmula de dispersión de Rutherford) y coincidió con las medidas de Geiger y Marsden.</li>
+                </ol>
+            </div>
+            <div class="math-block">
+                <strong>Distancia de máximo acercamiento</strong> (choque frontal, alfa de energía \(E\) contra núcleo de carga \(Ze\)):
+                \[ d_{\min} = \frac{2Ze^{2}}{4\pi\varepsilon_0 E} \approx \frac{2{,}88\,Z}{E\,[\text{MeV}]}\ \text{fm} \]
+                Para oro (\(Z = 79\)) con \(E = 5{,}5\) MeV: \(d_{\min} \approx 41\) fm. El núcleo es <em>menor</em> que eso (hoy sabemos que su radio es ≈ 7 fm).
+            </div>
+        </div>
+        <div class="fact-box">
+            <span class="box-title">¿Y los electrones?</span>
+            <p>Rutherford no sabía cómo estaban dispuestos: los imaginó «girando» a cierta distancia, como planetas. Esa parte del modelo fue la más débil y la que Bohr trabajó dos años después.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Simulador de dispersión -->
+    <div class="slide" id="slide-9">
+        <h2>Simulador: dispersión de partículas alfa</h2>
+        <p class="subtitle">El mismo haz de alfas llega a un átomo de Thomson y a un átomo de Rutherford</p>
+
+        <div class="sim">
+            <canvas id="rs-cv" width="960" height="400"></canvas>
+            <div class="ctrls">
+                <label>Elemento de la lámina <select id="rs-el"></select></label>
+                <label>Energía de las alfa: <b id="rs-E-val"></b>
+                    <input type="range" id="rs-E" min="2" max="12" step="0.1" value="5.5"></label>
+                <label>Ventana de observación: <b id="rs-win-val"></b>
+                    <input type="range" id="rs-win" min="40" max="400" step="5" value="150"></label>
+                <label>Espesor de la lámina: <b id="rs-t-val"></b>
+                    <input type="range" id="rs-t" min="0.05" max="5" step="0.05" value="0.4"></label>
+            </div>
+            <div class="status yes" id="rs-status"></div>
+            <div class="kv">
+                <div>Constante \(K\) en \(\tan(\theta/2) = K/b\): <b id="rs-K"></b></div>
+                <div>Acercamiento máximo (frontal): <b id="rs-dmin"></b></div>
+                <div>Radio nuclear real (≈ 1,2 \(A^{1/3}\)): <b id="rs-rn"></b></div>
+                <div>Desviación máx. por átomo (Thomson): <b id="rs-thmax"></b></div>
+            </div>
+
+            <table class="tabla compact" style="margin-top: 14px;">
+                <thead><tr><th>Fracción de alfas desviadas más de…</th><th class="num">Modelo de Thomson</th><th class="num">Modelo de Rutherford</th></tr></thead>
+                <tbody id="rs-table"></tbody>
+            </table>
+            <div class="note-line" id="rs-note"></div>
+            <div class="btns">
+                <button onclick="rsFire()">Disparar 1 000 000 de alfas (Rutherford)</button>
+            </div>
+            <div class="note-line" id="rs-mc">Pulsa el botón para ver cuántas de un millón de alfas aparecen en cada intervalo de ángulo.</div>
+            <div class="note-line">
+                Izquierda: la ventana mostrada es una región de pocos cientos de fm alrededor de un solo átomo de Thomson, con radio de 10⁵ fm: allí el campo es casi uniforme y las trayectorias siguen rectas. Derecha: núcleo puntual y trayectorias hiperbólicas (color según el ángulo). Cálculo de Rutherford en aproximación de dispersión simple, válida para ángulos grandes; el modelo de Thomson incluye dispersión múltiple (suma aleatoria de la desviación en cada capa de átomos).
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="analogy">
+                <span class="box-title">Qué observar</span>
+                <p>Mueve la energía: al subirla, \(K\) y la curvatura de las trayectorias disminuyen. Mueve el elemento: con \(Z\) pequeño (aluminio) la dispersión es más débil que con oro. Aumenta el espesor y verás subir la fracción con ángulos grandes, proporcionalmente.</p>
+            </div>
+            <div>
+                <div class="image-container" style="margin: 0;">
+                    <img src="images/phet_rutherford.jpg" alt="Captura de la simulación de PhET Dispersión de Rutherford" style="max-height: 170px;">
+                    <div class="image-caption">Simulación de PhET «Dispersión de Rutherford».</div>
+                </div>
+                <a class="link-btn" href="https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_es.html" target="_blank" rel="noopener">Abrir en PhET: Dispersión de Rutherford ↗</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: Átomo nuclear -->
+    <div class="slide" id="slide-10">
+        <h2>7. El átomo nuclear</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>Según Rutherford, el átomo consta de:</p>
+                <ul>
+                    <li>un <strong>núcleo</strong> pequeñísimo que concentra toda la carga positiva y más del 99,9 % de la masa;</li>
+                    <li>y, a mucha distancia, los <strong>electrones</strong> que giran como en un sistema planetario, atraídos por la fuerza eléctrica.</li>
+                </ul>
+                <div class="math-block">
+                    \[ \frac{r_{\text{átomo}}}{r_{\text{núcleo}}} \sim 10^{4}\text{–}10^{5} \qquad\Rightarrow\qquad \frac{V_{\text{núcleo}}}{V_{\text{átomo}}} \sim 10^{-15}\text{–}10^{-12} \]
+                </div>
+                <p>Casi todo el volumen del átomo es «vacío» en el sentido de que no hay materia concentrada allí, pero sí campos eléctricos y la nube de electrones, que le dan rigidez y color a la materia.</p>
+            </div>
+            <div class="image-container" style="margin: 0;">
+                <img src="images/atomo_nuclear.jpg" alt="Átomo nuclear: núcleo de protones y neutrones con electrones en órbitas" style="max-height: 280px;">
+                <div class="image-caption">El átomo nuclear. El esquema exagera mucho el tamaño del núcleo.</div>
+            </div>
+        </div>
+
+        <div class="explorer" style="margin-top: 20px;">
+            <span class="box-title">Calculadora de escala</span>
+            <div class="grid-2" style="margin: 0;">
+                <div>
+                    <label>Elemento <select id="sc-el">
+                        <option value="H">Hidrógeno (átomo 53 pm, núcleo 0,84 fm)</option>
+                        <option value="C">Carbono (átomo 70 pm, núcleo 2,5 fm)</option>
+                        <option value="Au" selected>Oro (átomo 135 pm, núcleo 5,4 fm)</option>
+                    </select></label>
+                    <label>Si el núcleo midiera… <select id="sc-obj">
+                        <option value="0.001">un grano de sal (1 mm)</option>
+                        <option value="0.01" selected>una canica (1 cm)</option>
+                        <option value="0.067">una pelota de tenis (6,7 cm)</option>
+                        <option value="0.22">un balón de fútbol (22 cm)</option>
+                    </select></label>
+                </div>
+                <div class="readouts" style="margin-top: 0; grid-template-columns: 1fr;">
+                    <div>Cociente de radios: <b id="sc-ratio"></b></div>
+                    <div>…el átomo tendría un diámetro de <b id="sc-d"></b></div>
+                    <div id="sc-cmp" style="color: var(--text-light);"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="card alpha"><h4>Densidad nuclear</h4><p>≈ \(2{,}3\times10^{17}\) kg/m³. Una cucharadita de materia nuclear pesaría del orden de mil millones de toneladas.</p></div>
+            <div class="card beta"><h4>¿Por qué orbitan?</h4><p>La atracción eléctrica entre núcleo y electrón es \(\sim10^{39}\) veces mayor que la gravitacional entre ellos. Por eso el átomo es un problema eléctrico, no de gravedad.</p></div>
+            <div class="card gamma"><h4>Lo que vino después</h4><p>Rutherford identificó el protón (1919). El neutrón lo descubrió Chadwick (1932) y completó el cuadro del núcleo.</p></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: Limitaciones de Rutherford -->
+    <div class="slide" id="slide-11">
+        <h2>8. Limitaciones del modelo de Rutherford</h2>
+        <p class="subtitle">El átomo planetario predice su propio colapso</p>
+
+        <div class="grid-2">
+            <div>
+                <h3>1. Inestabilidad</h3>
+                <p>Según la electrodinámica clásica, una carga acelerada <strong>radia ondas electromagnéticas</strong> y pierde energía. Un electrón que gira está acelerado (aceleración centrípeta), así que debería perder energía cinética, describir una espiral y caer sobre el núcleo.</p>
+                <div class="math-block">
+                    \[ P = \frac{e^{2}a^{2}}{6\pi\varepsilon_0 c^{3}} \qquad\Rightarrow\qquad t_{\text{colapso}} = \frac{a_0^{3}}{4\,r_e^{2}\,c} \approx 1{,}6\times10^{-11}\ \text{s} \]
+                </div>
+                <p>El átomo de hidrógeno de Rutherford duraría unos <strong>16 picosegundos</strong>. Pero la materia lleva miles de millones de años estable.</p>
+
+                <h3>2. Espectros</h3>
+                <p>Un electrón en espiral irradiaría con una frecuencia que sube continuamente: el espectro sería <em>continuo</em>. Pero los átomos emiten solo <strong>líneas definidas</strong>: ciertas frecuencias, no otras.</p>
+            </div>
+            <div>
+                <div class="sim" style="margin-top: 0;">
+                    <span class="title">Colapso clásico y átomo de Bohr</span>
+                    <canvas id="cl-cv" width="480" height="260"></canvas>
+                    <div class="btns">
+                        <button onclick="clStart()">Reiniciar</button>
+                    </div>
+                    <div class="kv" style="grid-template-columns: 1fr 1fr;">
+                        <div>Tiempo: <b id="cl-t"></b></div>
+                        <div>Radio: <b id="cl-r"></b></div>
+                        <div>Frecuencia radiada: <b id="cl-f"></b></div>
+                    </div>
+                    <div class="note-line">Izquierda: electrón clásico que radia y cae. Derecha: electrón de Bohr en el nivel \(n = 1\), estable. Para poder verlo, cada vuelta dibujada equivale a unas 10 000 vueltas reales; toda la caída dura \(1{,}6\times10^{-11}\) s.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fact-box warn">
+            <span class="box-title">Un dilema serio</span>
+            <p>Rutherford tenía razón sobre el núcleo (experimento) y estaba equivocado sobre la dinámica de los electrones (teoría clásica). La salida no era corregir el modelo, sino aceptar que <strong>la física clásica no describe lo que pasa dentro del átomo</strong>. Ese es el paso de Bohr.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: Bohr: ideas y postulados -->
+    <div class="slide" id="slide-12">
+        <h2>9. Modelo atómico de Bohr (1913)</h2>
+        <p class="subtitle">Si la física clásica no sirve dentro del átomo, hay que cambiar las reglas</p>
+
+        <div class="grid-2">
+            <div>
+                <p>Niels Bohr trabajó con Rutherford en Manchester en 1912 y conoció de primera mano el problema del átomo planetario. En 1913 publicó una solución audaz que combinaba tres ingredientes:</p>
+                <ul>
+                    <li>el <strong>núcleo</strong> de Rutherford;</li>
+                    <li>la <strong>cuantización</strong> de Planck (1900) y Einstein (1905): la energía se intercambia en paquetes \(hf\);</li>
+                    <li>los <strong>espectros de líneas</strong> y la fórmula empírica de Balmer (1885), que nadie sabía explicar.</li>
+                </ul>
+                <p>Su modelo reproducía con exactitud las líneas del hidrógeno, y esa precisión convenció a la comunidad científica. Bohr recibió el Nobel de Física en 1922.</p>
+            </div>
+            <div class="image-container" style="margin-top: 0;">
+                <img src="images/bohr_retrato.png" alt="Retrato de Niels Bohr" style="max-height: 300px;">
+                <div class="image-caption">Niels Bohr (1885–1962).</div>
+            </div>
+        </div>
+
+        <h3>Los tres postulados</h3>
+        <div class="grid-3">
+            <div class="card alpha">
+                <h4><span class="num-badge">1</span>Órbitas permitidas</h4>
+                <p>Los electrones giran en órbitas circulares alrededor del núcleo por la atracción eléctrica. Solo son posibles ciertas órbitas (<em>estados estacionarios</em>), identificadas con \(n = 1, 2, 3, \dots\) y <strong>no existen órbitas intermedias</strong>.</p>
+            </div>
+            <div class="card beta">
+                <h4><span class="num-badge">2</span>Sin radiación</h4>
+                <p>Mientras está en una órbita permitida, el electrón <strong>no radia</strong>, pese a estar acelerado. Cada órbita tiene una energía fija \(E_n\). Esto da <em>estabilidad</em> al átomo y a la materia.</p>
+            </div>
+            <div class="card gamma">
+                <h4><span class="num-badge">3</span>Saltos cuánticos</h4>
+                <p>Al pasar de una órbita a otra, el átomo emite o absorbe un fotón cuya energía es la diferencia entre ambos niveles:
+                \[ hf = |E_f - E_i| \]</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="fact-box">
+                <span class="box-title">Una mezcla incómoda, pero fructífera</span>
+                <p>El modelo de Bohr usa física clásica para la órbita (fuerza de Coulomb, Newton) y postulados cuánticos <em>ad hoc</em> para prohibir lo que la teoría clásica permite. Bohr lo sabía: era un puente provisional hacia una mecánica cuántica completa, que llegó en 1925–1926.</p>
+            </div>
+            <div class="analogy" style="margin-top: 25px;">
+                <span class="box-title">¿Qué significa «cuantizado»?</span>
+                <p>Una rampa permite cualquier altura; una escalera solo ciertas alturas. La energía del electrón en el átomo es como una escalera: puede estar en un escalón o en otro, pero nunca entre ellos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 13: Niveles de energía -->
+    <div class="slide" id="slide-13">
+        <h2>10. Niveles de energía y saltos cuánticos</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>Cuando el átomo recibe energía (calor, una descarga, un fotón), uno o varios electrones saltan a un nivel superior: el átomo queda en un <strong>estado excitado</strong>. Al regresar a un nivel inferior, devuelve la diferencia de energía en forma de fotón.</p>
+
+                <div class="math-block">
+                    <strong>Emisión</strong> (\(n_i > n_f\)): \( hf = E_i - E_f \)<br>
+                    <strong>Absorción</strong> (\(n_i < n_f\)): \( hf = E_f - E_i \)<br>
+                    <strong>Niveles del hidrógeno:</strong> \( E_n = -\dfrac{13{,}6\ \text{eV}}{n^{2}} \)
+                </div>
+
+                <ul>
+                    <li><strong>Estado fundamental</strong> (\(n=1\)): el de menor energía, \(-13{,}6\) eV.</li>
+                    <li><strong>Energía de ionización</strong>: la necesaria para arrancar el electrón desde el fundamental, \(13{,}6\) eV (\(n \to \infty\), \(E = 0\)).</li>
+                    <li>Los niveles se acercan entre sí al aumentar \(n\): se «apilan» hacia 0.</li>
+                </ul>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/bohr_foton.png" alt="Átomo de Bohr con un fotón emitido y otro absorbido" style="max-height: 230px;">
+                    <div class="image-caption">El electrón cambia de órbita al emitir o absorber un fotón.</div>
+                </div>
+                <div class="image-container" style="margin-top: 15px;">
+                    <img src="images/bohr_niveles.png" alt="Órbitas n = 1, 2 y 3 y emisión de un fotón de energía E = hf" style="max-height: 230px;">
+                    <div class="image-caption">Las órbitas aumentan de energía con \(n\); el fotón emitido tiene energía \(E = hf\).</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Consecuencias</h3>
+        <div class="grid-2">
+            <div>
+                <div class="card green">
+                    <h4>Un átomo solo absorbe lo que puede emitir</h4>
+                    <p>Los fotones que el hidrógeno emite son los de energías \(E_i - E_f\), y son exactamente los mismos que absorbe en sentido contrario. Por eso el espectro de absorción es la «imagen en negativo» del de emisión.</p>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <h4>Ejemplo</h4>
+                    <p>Un fotón azul (≈ 3 eV) <strong>no</strong> puede excitar un hidrógeno que está en \(n=1\): el primer salto exige 10,2 eV (ultravioleta, 121,6 nm). En cambio, el salto \(3\to2\) libera 1,89 eV: luz roja de 656 nm.</p>
+                </div>
+            </div>
+            <div>
+                <div class="fact-box">
+                    <span class="box-title">Prueba experimental: Franck y Hertz (1914)</span>
+                    <p>Aceleraron electrones a través de vapor de mercurio. Los electrones solo perdían energía en «paquetes» de <strong>4,9 eV</strong>, y el vapor emitía entonces luz ultravioleta de 254 nm: justo \(1240/4{,}9 \approx 253\) nm. Los niveles de energía no eran una idea teórica; los electrones <em>en el laboratorio</em> los «veían».</p>
+                </div>
+                <div class="image-container" style="margin-top: 15px;">
+                    <img class="sug" src="images/franck_hertz_curva.png" alt="Corriente en función del voltaje en el experimento de Franck-Hertz, con picos separados 4,9 V" data-search="Franck-Hertz experiment current vs voltage curve mercury 4.9 V" style="max-height: 200px;">
+                    <div class="image-caption">Curva de Franck–Hertz: máximos y mínimos separados por 4,9 V.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 14: Cuantización del momento angular -->
+    <div class="slide" id="slide-14">
+        <h2>11. Radios y energías permitidos</h2>
+        <p class="subtitle">De una sola regla de cuantización salen todas las órbitas del hidrógeno</p>
+
+        <div class="grid-2">
+            <div>
+                <p>Bohr eligió una condición que reproduce los espectros: el <strong>momento angular</strong> del electrón solo puede valer múltiplos enteros de \(\hbar = h/2\pi\):</p>
+                <div class="math-block">
+                    \[ L = m v r = n\hbar,\qquad n = 1, 2, 3, \dots \]
+                </div>
+                <p>Se combina con la segunda ley de Newton para la fuerza de Coulomb (\(m v^{2}/r = k e^{2}/r^{2}\)). Despejando:</p>
+                <div class="math-block">
+                    \[ r_n = \frac{n^{2}\hbar^{2}}{m\,k\,e^{2}} = n^{2}a_0,\qquad a_0 = 0{,}0529\ \text{nm} \]
+                    \[ v_n = \frac{k e^{2}}{n\hbar} = \frac{\alpha c}{n},\qquad \alpha \approx \frac{1}{137} \]
+                    \[ E_n = \tfrac12 m v_n^{2} - \frac{k e^{2}}{r_n} = -\frac{k e^{2}}{2 r_n} = -\frac{13{,}6\ \text{eV}}{n^{2}} \]
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/bohr_orbitas_KLMN.png" alt="Órbitas de Bohr alrededor del núcleo, etiquetadas K, L, M, N, O, P, Q para n = 1 a 7" style="max-height: 280px;">
+                    <div class="image-caption">Órbitas \(n = 1\) a \(7\) (capas K, L, M, N, O, P, Q). Los radios crecen como \(n^2\).</div>
+                </div>
+                <div class="fact-box">
+                    <span class="box-title">Una forma de entenderlo</span>
+                    <p>De Broglie propuso en 1924 que el electrón se comporta como una onda de longitud \(\lambda = h/mv\). Entonces \(m v r = n\hbar\) equivale a \(2\pi r = n\lambda\): la órbita permitida es aquella en la que <strong>caben exactamente \(n\) ondas</strong>, como una onda estacionaria en una cuerda cerrada.</p>
+                </div>
+            </div>
+        </div>
+
+        <table class="tabla compact">
+            <thead><tr><th class="num">n</th><th>Capa</th><th class="num">Radio \(r_n\)</th><th class="num">Rapidez \(v_n\)</th><th class="num">Energía \(E_n\)</th><th class="num">Período \(T_n\)</th></tr></thead>
+            <tbody>
+                <tr><td class="num">1</td><td>K</td><td class="num">0,0529 nm</td><td class="num">2,19 × 10⁶ m/s</td><td class="num">−13,6 eV</td><td class="num">1,52 × 10⁻¹⁶ s</td></tr>
+                <tr><td class="num">2</td><td>L</td><td class="num">0,212 nm</td><td class="num">1,09 × 10⁶ m/s</td><td class="num">−3,40 eV</td><td class="num">1,22 × 10⁻¹⁵ s</td></tr>
+                <tr><td class="num">3</td><td>M</td><td class="num">0,476 nm</td><td class="num">7,29 × 10⁵ m/s</td><td class="num">−1,51 eV</td><td class="num">4,10 × 10⁻¹⁵ s</td></tr>
+                <tr><td class="num">4</td><td>N</td><td class="num">0,847 nm</td><td class="num">5,47 × 10⁵ m/s</td><td class="num">−0,850 eV</td><td class="num">9,73 × 10⁻¹⁵ s</td></tr>
+                <tr><td class="num">5</td><td>O</td><td class="num">1,32 nm</td><td class="num">4,38 × 10⁵ m/s</td><td class="num">−0,544 eV</td><td class="num">1,90 × 10⁻¹⁴ s</td></tr>
+            </tbody>
+        </table>
+        <p class="small" style="margin-top: 8px;">El electrón del hidrógeno en el estado fundamental da unas \(6{,}6\times10^{15}\) vueltas por segundo y se mueve a menos del 1 % de la velocidad de la luz, por eso la mecánica no relativista basta.</p>
+
+        <details class="qa">
+            <summary>Si el radio crece como \(n^2\) y la energía cae como \(1/n^2\), ¿por qué la energía es negativa?</summary>
+            <div class="ans"><p>Porque el cero se elige en el electrón libre y en reposo (\(n \to \infty\)). Un electrón ligado tiene <em>menos</em> energía que uno libre: hay que <em>aportar</em> energía para liberarlo. El signo menos solo expresa que está atrapado.</p></div>
+        </details>
+    </div>
+
+    <!-- SLIDE 15: Simulador del átomo de Bohr -->
+    <div class="slide" id="slide-15">
+        <h2>Simulador: el átomo de hidrógeno de Bohr</h2>
+        <p class="subtitle">Elige dos niveles y observa el salto, la energía y el color del fotón</p>
+
+        <div class="sim">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <canvas id="bh-cv" width="470" height="360"></canvas>
+                <canvas id="bh-lv" width="470" height="360"></canvas>
+            </div>
+            <div class="ctrls">
+                <label>Nivel inicial \(n_i\): <b id="bh-ni-val"></b>
+                    <input type="range" id="bh-ni" min="1" max="7" step="1" value="3"></label>
+                <label>Nivel final \(n_f\): <b id="bh-nf-val"></b>
+                    <input type="range" id="bh-nf" min="1" max="7" step="1" value="2"></label>
+            </div>
+            <div class="btns">
+                <button onclick="bhJump()">Saltar</button>
+                <button onclick="bhSet(3,2)">Hα (3 → 2)</button>
+                <button onclick="bhSet(2,1)">Lyman α (2 → 1)</button>
+                <button onclick="bhSet(1,2)">Absorción 1 → 2</button>
+            </div>
+            <div class="status yes" id="bh-status"></div>
+            <div class="kv">
+                <div>Energía del fotón: <b id="bh-dE"></b></div>
+                <div>Longitud de onda: <b id="bh-lam"></b></div>
+                <div>Frecuencia: <b id="bh-f"></b></div>
+                <div>Región del espectro: <b id="bh-reg"></b></div>
+                <div>Serie: <b id="bh-ser"></b></div>
+                <div>Radios: <b id="bh-r"></b></div>
+            </div>
+            <div class="swatch" id="bh-sw"></div>
+
+            <div style="margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--border);">
+                <span class="title">Prueba de absorción: ¿puede el hidrógeno en \(n=1\) absorber este fotón?</span>
+                <label>Energía del fotón incidente: <b id="ab-val"></b>
+                    <input type="range" id="ab-E" min="0" max="16" step="0.01" value="10.2"></label>
+                <div class="status no" id="ab-status"></div>
+            </div>
+            <div class="note-line">Las dos órbitas dibujadas tienen el radio \(r_n = n^2 a_0\) a escala. Las longitudes de onda se calculan con \(\lambda = hc/\Delta E\) y \(E_n = -13{,}6\ \text{eV}/n^2\); los valores son en el vacío (en el aire resultan unos 0,2 nm menores).</div>
+        </div>
+
+        <div class="grid-2">
+            <div class="fact-box">
+                <span class="box-title">Reto 1</span>
+                <p>¿Existe algún salto que termine en \(n=2\) y produzca luz <em>azul</em> (≈ 486 nm)? Encuentra \(n_i\). Luego prueba con ultravioleta cercano (≈ 410 nm).</p>
+            </div>
+            <div class="fact-box">
+                <span class="box-title">Reto 2</span>
+                <p>En la prueba de absorción, busca cuántos valores de energía entre 10 y 13,6 eV son absorbidos. ¿Qué pasa por encima de 13,6 eV?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 16: Espectros atómicos -->
+    <div class="slide" id="slide-16">
+        <h2>12. Espectros atómicos</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <h4>Espectro continuo</h4>
+                <p>Lo emite un sólido o líquido caliente (el filamento de una bombilla): todos los colores, sin saltos.</p>
+            </div>
+            <div class="card alpha">
+                <h4>Espectro de emisión</h4>
+                <p>Un gas poco denso, excitado por calor o descarga, emite solo <strong>líneas</strong> brillantes: unas pocas frecuencias, siempre las mismas para cada elemento.</p>
+            </div>
+            <div class="card beta">
+                <h4>Espectro de absorción</h4>
+                <p>Si luz continua atraviesa un gas más frío, este absorbe las mismas frecuencias que emitiría: aparecen <strong>líneas oscuras</strong> sobre el fondo continuo.</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-container" style="margin: 0;">
+                <img src="images/espectro_emision.png" alt="Gas excitado que emite luz; un prisma la separa en unas pocas líneas brillantes sobre fondo oscuro" style="max-height: 220px;">
+                <div class="image-caption">Emisión: gas excitado → prisma → líneas brillantes.</div>
+            </div>
+            <div class="image-container" style="margin: 0;">
+                <img src="images/espectro_absorcion.png" alt="Luz continua que atraviesa un gas frío y luego un prisma: espectro continuo con líneas oscuras" style="max-height: 220px;">
+                <div class="image-caption">Absorción: luz continua → gas frío → prisma → líneas oscuras.</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3>Una huella digital de cada elemento</h3>
+                <p>Cada elemento tiene sus propios niveles de energía y, por tanto, su propio conjunto de líneas. Gustav Kirchhoff y Robert Bunsen lo explotaron desde 1859: identificaron elementos nuevos (cesio, rubidio) solo por sus líneas.</p>
+                <div class="image-container" style="margin: 15px 0 0 0;">
+                    <img src="images/espectros_elementos.png" alt="Espectros de emisión de calcio, estroncio, bario, zinc, cadmio y mercurio" style="max-height: 200px;">
+                    <div class="image-caption">Espectros de emisión de Ca, Sr, Ba, Zn, Cd y Hg.</div>
+                </div>
+            </div>
+            <div>
+                <h3>El Sol y el helio</h3>
+                <p>El espectro solar es continuo con cientos de líneas oscuras (líneas de Fraunhofer): los gases más fríos de la atmósfera solar absorben luz. En 1868, durante un eclipse, se halló una línea amarilla que no correspondía a ningún elemento conocido en la Tierra. Se llamó <strong>helio</strong> (del griego <em>helios</em>, Sol) y solo se aisló en la Tierra en 1895.</p>
+                <div class="image-container" style="margin: 15px 0 0 0;">
+                    <img class="sug" src="images/espectro_solar_fraunhofer.jpg" alt="Espectro solar con líneas oscuras de Fraunhofer" data-search="Fraunhofer lines solar spectrum high resolution" style="max-height: 200px;">
+                    <div class="image-caption">Espectro solar con líneas de absorción.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="analogy">
+            <span class="box-title">Aplicaciones</span>
+            <p>La astronomía deduce la composición, la temperatura y el movimiento (por el efecto Doppler) de estrellas y galaxias; la química analítica identifica metales por el color de su llama; las lámparas de sodio (589 nm) iluminan calles con luz casi monocromática; los letreros de neón rojo emiten líneas del neón.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 17: Espectroscopio virtual -->
+    <div class="slide" id="slide-17">
+        <h2>Simulador: espectroscopio virtual</h2>
+        <p class="subtitle">Compara las «huellas digitales» de cinco gases en emisión y en absorción</p>
+
+        <div class="sim">
+            <canvas id="sp-cv" width="960" height="250"></canvas>
+            <div class="ctrls">
+                <label>Gas <select id="sp-gas">
+                    <option value="H">Hidrógeno (serie de Balmer)</option>
+                    <option value="He">Helio</option>
+                    <option value="Na">Sodio</option>
+                    <option value="Hg">Mercurio</option>
+                    <option value="Ne">Neón</option>
+                </select></label>
+                <label>Modo <select id="sp-mode">
+                    <option value="em">Emisión (líneas brillantes)</option>
+                    <option value="ab">Absorción (líneas oscuras)</option>
+                    <option value="both">Ambos, para comparar</option>
+                </select></label>
+                <label>Pasa el ratón sobre una línea o mueve el cursor: <b id="sp-cursor">—</b>
+                    <input type="range" id="sp-lam" min="380" max="750" step="0.1" value="589"></label>
+            </div>
+            <div class="kv">
+                <div>Líneas visibles de este gas: <b id="sp-count"></b></div>
+                <div>Línea más cercana al cursor: <b id="sp-near"></b></div>
+                <div>Energía del fotón de esa línea: <b id="sp-eV"></b></div>
+            </div>
+            <div class="note-line" id="sp-note"></div>
+            <div class="note-line">Las líneas son las más intensas de cada espectro en el visible, con longitudes de onda en el aire; el brillo relativo se ha simplificado. En el hidrógeno, las líneas coinciden con la serie de Balmer del siguiente apartado.</div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <div class="image-container" style="margin: 0;">
+                    <img class="sug" src="images/lamparas_descarga_gases.jpg" alt="Tubos de descarga de hidrógeno, helio, neón y otros gases encendidos, y sus espectros" data-search="gas discharge tubes hydrogen helium neon argon spectra photo" style="max-height: 220px;">
+                    <div class="image-caption">Tubos de descarga de varios gases y sus espectros.</div>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin: 0;">
+                    <img class="sug" src="images/farola_sodio.jpg" alt="Lámpara de vapor de sodio de baja presión, con su luz amarilla casi monocromática" data-search="low pressure sodium vapor lamp street light yellow" style="max-height: 220px;">
+                    <div class="image-caption">Lámpara de sodio: casi toda su luz está en el doblete de 589 nm.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 18: Balmer y Rydberg -->
+    <div class="slide" id="slide-18">
+        <h2>13. Las series de Balmer y Rydberg</h2>
+        <p class="subtitle">Una fórmula empírica de 1885 que Bohr logró derivar en 1913</p>
+
+        <div class="grid-2">
+            <div>
+                <p>El maestro suizo Johann Balmer (1885) notó que las cuatro líneas visibles del hidrógeno seguían una regla numérica sencilla. Rydberg (1888) la generalizó y la escribió en términos del número de onda \(1/\lambda\):</p>
+                <div class="math-block">
+                    \[ \frac{1}{\lambda} = R_H\left(\frac{1}{n_f^{2}} - \frac{1}{n_i^{2}}\right),\qquad n_i > n_f \]
+                    \[ R_H = 1{,}097\times10^{7}\ \text{m}^{-1} \]
+                </div>
+                <p>Para la serie de Balmer \(n_f = 2\): \(n_i = 3, 4, 5, 6\) dan las líneas \(656\), \(486\), \(434\) y \(410\) nm. La fórmula funcionaba, pero nadie sabía por qué.</p>
+                <div class="fact-box">
+                    <span class="box-title">El triunfo de Bohr</span>
+                    <p>Del modelo de Bohr, con \(hf = E_i - E_f\), sale la fórmula de Rydberg y además un valor de \(R\) en términos de constantes fundamentales:
+                    \[ R_\infty = \frac{m_e k^{2} e^{4}}{4\pi\hbar^{3}c} \approx 1{,}097\times10^{7}\ \text{m}^{-1} \]
+                    El acuerdo con el valor medido es mejor que 1 %.</p>
+                </div>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 0;">
+                    <img src="images/balmer_serie.png" alt="Espectro de emisión del hidrógeno en la serie de Balmer con las líneas de 653, 486, 434 y 410 nm" style="max-height: 280px;">
+                    <div class="image-caption">Serie de Balmer del hidrógeno. (La figura redondea Hα a 653 nm; el valor medido es 656,3 nm.)</div>
+                </div>
+                <div class="image-container" style="margin-top: 15px;">
+                    <img src="images/bohr_lineas_espectrales.png" alt="Saltos del electrón hacia el nivel n = 2 desde niveles superiores y las líneas espectrales correspondientes" style="max-height: 190px;">
+                    <div class="image-caption">Cada línea de Balmer es un salto desde un nivel superior hasta \(n = 2\).</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Todas las series del hidrógeno</h3>
+        <table class="tabla compact">
+            <thead><tr><th>Serie</th><th class="num">\(n_f\)</th><th>Región</th><th class="num">Primera línea</th><th class="num">Límite de la serie</th><th>Año</th></tr></thead>
+            <tbody>
+                <tr><td>Lyman</td><td class="num">1</td><td>Ultravioleta</td><td class="num">121,6 nm</td><td class="num">91,2 nm</td><td>1906</td></tr>
+                <tr><td>Balmer</td><td class="num">2</td><td>Visible y UV cercano</td><td class="num">656,5 nm</td><td class="num">364,7 nm</td><td>1885</td></tr>
+                <tr><td>Paschen</td><td class="num">3</td><td>Infrarrojo cercano</td><td class="num">1876 nm</td><td class="num">821 nm</td><td>1908</td></tr>
+                <tr><td>Brackett</td><td class="num">4</td><td>Infrarrojo</td><td class="num">4052 nm</td><td class="num">1459 nm</td><td>1922</td></tr>
+                <tr><td>Pfund</td><td class="num">5</td><td>Infrarrojo lejano</td><td class="num">7460 nm</td><td class="num">2279 nm</td><td>1924</td></tr>
+            </tbody>
+        </table>
+        <p class="small" style="margin-top: 8px;">Longitudes de onda en el vacío. Las líneas de Balmer en el aire son ≈ 0,2 nm menores (Hα: 656,3 nm). El «límite» corresponde a \(n_i \to \infty\): el electrón se libera.</p>
+
+                <div class="image-container" style="margin: 15px 0 0 0;">
+            <img class="sug" src="images/nebulosa_emision_halfa.jpg" alt="Nebulosa de emisión con el color rojizo de la línea H-alfa del hidrógeno" data-search="Carina Nebula Hubble H-alpha emission nebula red hydrogen" style="max-height: 220px;">
+            <div class="image-caption">El tono rojizo de las nebulosas de emisión es la línea Hα (\(3\to2\)) del hidrógeno.</div>
+        </div>
+
+        <details class="qa">
+            <summary>¿Por qué solo la serie de Balmer era conocida en 1885?</summary>
+            <div class="ans"><p>Porque es la única que cae (casi toda) en el visible, donde los espectroscopios de la época funcionaban bien. Las demás están en el ultravioleta (Lyman, que el aire absorbe) o en el infrarrojo, y requirieron detectores especiales.</p></div>
+        </details>
+    </div>
+
+    <!-- SLIDE 19: Cuantización en general -->
+    <div class="slide" id="slide-19">
+        <h2>14. Cuantización de la energía</h2>
+
+        <div class="grid-2">
+            <div>
+                <p>La física cuántica establece que, en el micromundo, la energía de un sistema <strong>no puede tomar cualquier valor</strong>: solo ciertos valores discretos. Los cuantos de luz, y en general de la radiación electromagnética, son los fotones con energía \(E = hf\).</p>
+                <div class="fact-box">
+                    <span class="box-title">¿De dónde sale la cuantización?</span>
+                    <p>De <strong>confinar una onda</strong>. Una cuerda de guitarra sujeta en los extremos solo puede vibrar con ciertas frecuencias (armónicos). Una partícula atrapada, como una onda de materia, solo admite ciertas energías. Cuanto más pequeña la región, más separados quedan los niveles.</p>
+                </div>
+                <div class="math-block">
+                    <strong>Partícula en una caja</strong> de ancho \(L\):
+                    \[ E_n = \frac{n^{2}h^{2}}{8\,m\,L^{2}},\quad \psi_n(x)=\sqrt{\tfrac{2}{L}}\sin\!\Big(\frac{n\pi x}{L}\Big) \]
+                </div>
+            </div>
+            <div class="sim" style="margin-top: 0;">
+                <span class="title">Electrón en una caja unidimensional</span>
+                <canvas id="pb-cv" width="470" height="300"></canvas>
+                <div class="ctrls">
+                    <label>Ancho de la caja \(L\): <b id="pb-L-val"></b>
+                        <input type="range" id="pb-L" min="0.05" max="2" step="0.01" value="0.3"></label>
+                    <label>Nivel \(n\): <b id="pb-n-val"></b>
+                        <input type="range" id="pb-n" min="1" max="6" step="1" value="2"></label>
+                </div>
+                <div class="kv">
+                    <div>Energía \(E_n\): <b id="pb-E"></b></div>
+                    <div>Primer salto \(E_2 - E_1\): <b id="pb-dE"></b></div>
+                    <div>Longitud de onda de ese fotón: <b id="pb-lam"></b></div>
+                </div>
+                <div class="note-line">Con \(L \approx 0{,}1\) nm (tamaño atómico) las energías son de decenas de eV: el orden de magnitud de los niveles atómicos. Los gráficos muestran los niveles (izquierda) y la función de onda del nivel elegido (derecha).</div>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="card alpha"><h4>Un átomo</h4><p>Electrón confinado por el núcleo en ≈ 0,1 nm. Niveles separados por varios eV: se ven como líneas.</p></div>
+            <div class="card beta"><h4>Un núcleo</h4><p>Nucleones confinados en ≈ 10⁻¹⁴ m. Niveles separados por MeV: emiten rayos gamma.</p></div>
+            <div class="card gamma"><h4>Un objeto grande</h4><p>Con \(L\) de centímetros, los niveles de un electrón están tan juntos que el espectro parece continuo: la cuantización pasa desapercibida.</p></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 20: Más allá de Bohr -->
+    <div class="slide" id="slide-20">
+        <h2>15. Más allá de Bohr: el átomo cuántico</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>¿Qué se le escapaba al modelo de Bohr?</h3>
+                <ul>
+                    <li><strong>Átomos con más de un electrón</strong>: ya el helio (2 electrones) falla.</li>
+                    <li><strong>Estructura fina</strong> de las líneas, efecto Zeeman (líneas que se desdoblan en un campo magnético) y las <strong>intensidades</strong> relativas.</li>
+                    <li>Predice que el estado fundamental tiene \(L = \hbar\), pero el real tiene \(L = 0\).</li>
+                    <li>No explica <em>por qué</em> los estados estacionarios no radian, ni por qué el momento angular está cuantizado.</li>
+                    <li>La idea de «órbita» con posición y velocidad exactas contradice el principio de incertidumbre de Heisenberg (1927).</li>
+                </ul>
+                <div class="fact-box">
+                    <span class="box-title">Lo que sí conservó</span>
+                    <p>Las <strong>energías</strong> \(E_n = -13{,}6\ \text{eV}/n^2\) del hidrógeno siguen siendo correctas en la teoría actual. Bohr acertó en los niveles y se equivocó en la imagen.</p>
+                </div>
+            </div>
+            <div>
+                <h3>La respuesta de Schrödinger (1926)</h3>
+                <p>El electrón se describe con una <strong>función de onda</strong> \(\psi\) que resuelve la ecuación de Schrödinger. Su cuadrado, \(|\psi|^2\), da la <em>probabilidad</em> de encontrarlo en cada punto: no hay órbitas, hay <strong>orbitales</strong>.</p>
+                <p>Cada orbital se identifica con tres números cuánticos: \(n\) (energía y tamaño), \(l\) (forma, \(l = 0, \dots, n-1\)) y \(m_l\) (orientación). El espín (1927) añade un cuarto.</p>
+                <div class="image-container" style="margin-top: 15px;">
+                    <img class="sug" src="images/orbitales_hidrogeno.png" alt="Orbitales del hidrógeno 1s, 2s, 2p, 3s, 3p y 3d como nubes de probabilidad" data-search="hydrogen atom orbitals 1s 2s 2p 3d probability density chart" style="max-height: 240px;">
+                    <div class="image-caption">Orbitales del hidrógeno: nubes de probabilidad.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sim">
+            <span class="title">Probabilidad radial: ¿dónde está el electrón?</span>
+            <canvas id="rd-cv" width="960" height="280"></canvas>
+            <div class="ctrls">
+                <label>Orbital <select id="rd-orb">
+                    <option value="1,0">1s</option>
+                    <option value="2,0">2s</option>
+                    <option value="2,1" selected>2p</option>
+                    <option value="3,0">3s</option>
+                    <option value="3,1">3p</option>
+                    <option value="3,2">3d</option>
+                </select></label>
+            </div>
+            <div class="kv">
+                <div>Radio más probable (máximo mayor): <b id="rd-peak"></b></div>
+                <div>Radio de Bohr \(n^2 a_0\): <b id="rd-bohr"></b></div>
+                <div>Radio medio \(\langle r\rangle = \tfrac{a_0}{2}[3n^2 - l(l+1)]\): <b id="rd-mean"></b></div>
+                <div>Nodos radiales (\(n - l - 1\)): <b id="rd-nodes"></b></div>
+                <div>Momento angular \(\sqrt{l(l+1)}\,\hbar\): <b id="rd-L"></b></div>
+            </div>
+            <div class="note-line">Curva: \(P(r)=r^2|R_{nl}(r)|^2\), la probabilidad de encontrar el electrón a una distancia \(r\) del núcleo (por unidad de longitud). La línea vertical discontinua marca la órbita de Bohr. Para los orbitales «circulares» (\(l = n-1\): 1s, 2p, 3d), el máximo coincide exactamente con \(n^2 a_0\).</div>
+        </div>
+
+        <div class="grid-2">
+            <div class="analogy">
+                <span class="box-title">Dos mensajes de la simulación</span>
+                <p>1) El orbital 1s tiene su máximo justo en \(a_0\): el radio de Bohr resulta ser el radio <em>más probable</em>. 2) Los orbitales no circulares (2s, 3s, 3p) tienen varios máximos y nodos: el electrón no sigue una trayectoria; su posición solo tiene probabilidades.</p>
+            </div>
+            <div class="image-container" style="margin: 25px 0 0 0;">
+                <img src="images/vceasy_linea_tiempo.jpg" alt="Línea de tiempo del modelo atómico: Dalton, Thomson, Rutherford, Bohr, Schrödinger y Chadwick" style="max-height: 300px;">
+                <div class="image-caption">Línea de tiempo del modelo atómico, de Dalton (1808) a Chadwick (1932).</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 21: Conclusión -->
+    <div class="slide" id="slide-21">
+        <h2>En conclusión…</h2>
+
+        <table class="tabla compact">
+            <thead><tr><th>Modelo</th><th>Idea central</th><th>Explica</th><th>No explica</th><th>Dato que lo derrumba</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Dalton</strong> (1803)</td><td>Átomos macizos e indivisibles</td><td>Leyes de la química (conservación, proporciones)</td><td>Electricidad; isótopos</td><td>Electrólisis, rayos catódicos</td></tr>
+                <tr><td><strong>Thomson</strong> (1904)</td><td>Esfera positiva con electrones</td><td>Neutralidad, electrón</td><td>Dispersión alfa a ángulos grandes; espectros</td><td>Lámina de oro (1909–1911)</td></tr>
+                <tr><td><strong>Rutherford</strong> (1911)</td><td>Núcleo pequeño y electrones afuera</td><td>Dispersión alfa; átomo casi vacío</td><td>Estabilidad; espectros de líneas</td><td>Radiación clásica; espectros</td></tr>
+                <tr><td><strong>Bohr</strong> (1913)</td><td>Niveles de energía cuantizados</td><td>Espectro del hidrógeno; estabilidad</td><td>Átomos con varios electrones; intensidades</td><td>Estructura fina, helio, Zeeman</td></tr>
+                <tr><td><strong>Cuántico</strong> (1926–)</td><td>Orbitales y probabilidades</td><td>Química y espectros de átomos y moléculas</td><td>Se refina con relatividad y electrodinámica cuántica</td><td>—</td></tr>
+            </tbody>
+        </table>
+
+        <div class="grid-2">
+            <div>
+                <h3>Ideas clave</h3>
+                <ul>
+                    <li>La mejor representación de un átomo es su <strong>diagrama de niveles de energía</strong>. Los dibujos con bolitas y órbitas son útiles pero engañosos.</li>
+                    <li>La diferencia entre dos niveles, \(\Delta E = E_f - E_i\), es la energía que el átomo puede <strong>absorber o emitir</strong>.</li>
+                    <li>Emisión y absorción son <strong>saltos entre estados</strong> de energía, no un flujo continuo.</li>
+                    <li>El estudio de la materia consiste en <strong>refinar</strong> cada vez mejor el modelo de Bohr.</li>
+                </ul>
+            </div>
+            <div>
+                <div class="image-container" style="margin-top: 20px;">
+                    <img src="images/modelos_linea_tiempo.png" alt="Flecha con los modelos: Dalton, Thomson, Rutherford, Bohr y mecánica cuántica" style="max-height: 170px;">
+                    <div class="image-caption">De Dalton a la mecánica cuántica.</div>
+                </div>
+                <div class="analogy" style="margin-top: 15px;">
+                    <span class="box-title">Lo que se llevan</span>
+                    <p>Un buen científico no pregunta «¿es verdadero este modelo?» sino «¿para qué sirve y dónde falla?».</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 22: Video y recursos -->
+    <div class="slide" id="slide-22">
+        <h2>Para profundizar</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>Video recomendado</h3>
+                <a class="video-card" href="https://www.youtube.com/watch?v=wxIxWTTsBj4" target="_blank" rel="noopener">
+                    <img src="images/video_atomos_no_son_asi.jpg" alt="Miniatura del video «Los átomos NO son así», de Quantum Fracture">
+                    <span class="play"></span>
+                    <span class="vlabel">Quantum Fracture · «Los átomos NO son así» (YouTube) ↗</span>
+                </a>
+                <p class="small" style="margin-top: 10px;">Explica por qué el átomo de Bohr es un buen punto de partida pero no la imagen correcta, y cómo son realmente los orbitales. Las animaciones, según sus autores, son cualitativas.</p>
+            </div>
+            <div>
+                <h3>Simulaciones y lecturas</h3>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h4>Orbitales atómicos (Falstad)</h4>
+                    <p>Visualiza orbitales del hidrógeno en 3D y cambia \(n, l, m\).</p>
+                    <a class="link-btn" href="http://www.falstad.com/qmatom/" target="_blank" rel="noopener">falstad.com/qmatom ↗</a>
+                </div>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h4>PhET: Dispersión de Rutherford</h4>
+                    <p>Cambia el número de protones y la energía; compara con el pudín de pasas.</p>
+                    <a class="link-btn" href="https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_es.html" target="_blank" rel="noopener">Abrir la simulación ↗</a>
+                </div>
+                <div class="card">
+                    <h4>Ley de Planck</h4>
+                    <p>El antecedente de la cuantización de la energía.</p>
+                    <a class="link-btn" href="https://es.wikipedia.org/wiki/Ley_de_Planck" target="_blank" rel="noopener">Wikipedia: Ley de Planck ↗</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fact-box">
+            <span class="box-title">Si quieres calcular</span>
+            <p>Con las herramientas de esta presentación puedes explorar los temas de la clase: el simulador del tubo de Thomson (diapositiva 6), la dispersión de Rutherford (diapositiva 10), el átomo de Bohr (diapositiva 16) y el espectroscopio virtual (diapositiva 18).</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 23: Preguntas de repaso -->
+    <div class="slide" id="slide-23">
+        <h2>Preguntas de repaso</h2>
+        <p class="subtitle">Intenta responder antes de abrir cada respuesta</p>
+
+        <details class="qa">
+            <summary>1. ¿Qué postulados de Dalton sabemos hoy que son falsos y qué los refutó?</summary>
+            <div class="ans"><p>El de la indivisibilidad (electrón, núcleo, fisión) y el de la igualdad de masa para un elemento (isótopos). Se conservan los de átomos distintos para elementos distintos y la combinación en enteros sencillos.</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>2. En un tubo de Thomson el haz no se desvía con \(E = 6000\) V/m y \(B = 0{,}50\) mT. ¿Qué rapidez tienen los electrones?</summary>
+            <div class="ans"><p>\(v = E/B = 6000/(5{,}0\times10^{-4}) = 1{,}2\times10^{7}\) m/s, es decir, el 4 % de la velocidad de la luz. Esto no necesita saber \(e\) ni \(m\).</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>3. ¿Por qué los resultados de Geiger y Marsden contradicen el modelo del pudín?</summary>
+            <div class="ans"><p>En el modelo de Thomson la carga positiva está repartida y el campo máximo es pequeño: cada átomo desvía una alfa menos de 0,03°, y acumular un retroceso (&gt; 90°) es prácticamente imposible. Que 1 de cada ≈ 8000 rebote exige una carga positiva concentrada.</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>4. ¿Qué tan cerca llega al núcleo de oro una alfa de 7,7 MeV en un choque frontal?</summary>
+            <div class="ans"><p>\(d_{\min} \approx 2{,}88 \times 79 / 7{,}7 \approx 30\) fm. Como el radio del núcleo de oro es ≈ 7 fm, la alfa se detiene mucho antes de tocarlo: solo actúa la repulsión eléctrica.</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>5. Dos razones por las que el átomo de Rutherford es incompatible con la realidad.</summary>
+            <div class="ans"><p>(i) Un electrón que gira está acelerado y, según el electromagnetismo clásico, radia: perdería energía y caería en unos \(10^{-11}\) s. (ii) La radiación tendría un espectro continuo, no líneas.</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>6. Un electrón de hidrógeno baja de \(n=4\) a \(n=2\). ¿Qué fotón emite?</summary>
+            <div class="ans"><p>\(\Delta E = 13{,}6\,(1/4 - 1/16) = 2{,}55\) eV, \(\lambda = 1240/2{,}55 \approx 486\) nm: luz azul-verdosa (la línea Hβ de la serie de Balmer).</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>7. ¿Puede un hidrógeno en \(n=1\) absorber un fotón de 11 eV? ¿Y uno de 15 eV?</summary>
+            <div class="ans"><p>El de 11 eV <strong>no</strong>: no coincide con 10,2 eV (salto a \(n=2\)) ni con 12,09 eV (\(n=3\)). El de 15 eV <strong>sí</strong>: supera 13,6 eV, ioniza el átomo y el electrón sale con 1,4 eV de energía cinética.</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>8. ¿Cómo se explica que en el espectro del Sol haya una línea oscura en 656 nm?</summary>
+            <div class="ans"><p>Hidrógeno de las capas externas del Sol, más frías que la superficie, absorbe justo los fotones de la transición \(3\leftrightarrow2\) (línea Hα). La misma línea aparece brillante en una nebulosa, donde el hidrógeno emite.</p></div>
+        </details>
+
+        <details class="qa">
+            <summary>9. ¿Por qué Bohr decía que el átomo no «se cae» al núcleo, y qué decimos hoy?</summary>
+            <div class="ans"><p>Bohr lo postuló: en las órbitas permitidas no hay radiación. Hoy lo explica la mecánica cuántica: confinar al electrón en una región pequeña le obliga a tener una energía cinética mínima (onda estacionaria), y el estado de menor energía es el fundamental.</p></div>
+        </details>
+    </div>
+
+    <!-- Controles de Navegación -->
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)" disabled>← Anterior</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+</div>
+
+<script>
+    /* ---------- Navegación ---------- */
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('slide-counter');
+    const hooks = {};            // hooks[n] = función que se ejecuta al mostrar la diapositiva n (0-based)
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+
+        counter.textContent = `${n + 1} / ${totalSlides}`;
+        prevBtn.disabled = n === 0;
+        nextBtn.disabled = n === totalSlides - 1;
+
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise([slides[n]]);
+        }
+        if (hooks[n]) hooks[n]();
+
+        slides[n].scrollTop = 0;
+        try { history.replaceState(null, '', '#' + (n + 1)); } catch (e) {}
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        showSlide(currentSlide);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        const t = event.target && event.target.tagName;
+        if (t === 'INPUT' || t === 'SELECT' || t === 'TEXTAREA') return;
+        if (event.key === 'ArrowRight') changeSlide(1);
+        if (event.key === 'ArrowLeft') changeSlide(-1);
+        if (event.key === 'Home') { currentSlide = 0; showSlide(0); }
+        if (event.key === 'End') { currentSlide = totalSlides - 1; showSlide(currentSlide); }
+    });
+
+    /* ---------- Imágenes sugeridas: si el archivo no existe, mostrar un marcador ---------- */
+    function imgFallback(img) {
+        if (img.dataset.done) return;
+        img.dataset.done = '1';
+        const box = document.createElement('div');
+        box.className = 'img-placeholder';
+        const file = (img.getAttribute('src') || '').split('/').pop();
+        const q = img.dataset.search ? '<br>Buscar: <em>' + img.dataset.search + '</em>' : '';
+        box.innerHTML = '<span class="ph-tag">Imagen sugerida</span><br>' + (img.alt || '') +
+                        '<br>Guardar como <code>images/' + file + '</code>' + q;
+        img.replaceWith(box);
+    }
+    document.querySelectorAll('img').forEach(img => {
+        if (img.complete && img.naturalWidth === 0) imgFallback(img);
+        else img.addEventListener('error', () => imgFallback(img));
+    });
+
+    /* ---------- Utilidades ---------- */
+    const $ = id => document.getElementById(id);
+    function fmt(x, d) { return x.toFixed(d).replace('.', ','); }
+    function sci(x, d) {            // notación científica con superíndices Unicode: 1,23 × 10⁻⁵
+        if (x === 0) return '0';
+        const e = Math.floor(Math.log10(Math.abs(x)));
+        const m = x / Math.pow(10, e);
+        const sup = String(e).replace(/-/g, '⁻').replace(/\d/g, c => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]);
+        return fmt(m, d) + ' × 10' + sup;
+    }
+    function wavelengthToColor(w) {
+        if (w < 380) return 'rgb(150,110,200)';
+        if (w > 750) return 'rgb(190,70,70)';
+        let r = 0, g = 0, b = 0;
+        if (w < 440) { r = -(w - 440) / 60; b = 1; }
+        else if (w < 490) { g = (w - 440) / 50; b = 1; }
+        else if (w < 510) { g = 1; b = -(w - 510) / 20; }
+        else if (w < 580) { r = (w - 510) / 70; g = 1; }
+        else if (w < 645) { r = 1; g = -(w - 645) / 65; }
+        else { r = 1; }
+        let f = 1;
+        if (w < 420) f = 0.3 + 0.7 * (w - 380) / 40;
+        else if (w > 700) f = 0.3 + 0.7 * (750 - w) / 50;
+        const c = x => Math.round(255 * Math.pow(Math.max(0, x * f), 0.8));
+        return `rgb(${c(r)},${c(g)},${c(b)})`;
+    }
+    function setupCanvas(cv) {      // lienzo nítido en pantallas de alta densidad
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = +cv.getAttribute('width'), h = +cv.getAttribute('height');
+        cv.width = w * dpr; cv.height = h * dpr;
+        const ctx = cv.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { ctx, w, h };
+    }
+
+    /* =====================================================================
+       Constantes físicas
+       ===================================================================== */
+    const E_Q = 1.602176634e-19;      // C
+    const ME = 9.1093837015e-31;      // kg
+    const EM = E_Q / ME;              // e/m, C/kg
+    const MP_EM = 9.5788332e7;        // e/m del protón, C/kg
+    const HC = 1239.84198;            // eV·nm
+    const H_EV = 4.135667696e-15;     // eV·s
+    const C_LIGHT = 299792458;
+    const A0_NM = 0.0529177210903;    // radio de Bohr, nm
+    const RY = 13.59844;              // eV (hidrógeno, con masa reducida: R_H·h·c)
+    const KE2 = 1.43996454;           // e²/(4πε0), MeV·fm
+
+    /* =====================================================================
+       1. Tubo de Thomson
+       ===================================================================== */
+    const TT = { L: 0.05, d: 0.03, D: 0.20, x0: 170, s: 2800, cy: 190 };
+    const ttC = setupCanvas($('tt-cv'));
+
+    function ttTrajectory(Va, Vp, Bt) {
+        const v = Math.sqrt(2 * EM * Va);
+        const E = Vp / TT.d;
+        let x = 0, y = 0, vx = v, vy = 0;
+        const pts = [[0, 0]];
+        const T = TT.L / v, dt = T / 300;
+        const acc = (vx_, vy_) => [-EM * vy_ * Bt, EM * vx_ * Bt - EM * E];
+        let steps = 0, back = false;
+        while (x < TT.L && steps < 3000) {
+            const a1 = acc(vx, vy);
+            const k1 = { x: vx, y: vy, vx: a1[0], vy: a1[1] };
+            const a2 = acc(vx + 0.5 * dt * k1.vx, vy + 0.5 * dt * k1.vy);
+            const k2 = { x: vx + 0.5 * dt * k1.vx, y: vy + 0.5 * dt * k1.vy, vx: a2[0], vy: a2[1] };
+            const a3 = acc(vx + 0.5 * dt * k2.vx, vy + 0.5 * dt * k2.vy);
+            const k3 = { x: vx + 0.5 * dt * k2.vx, y: vy + 0.5 * dt * k2.vy, vx: a3[0], vy: a3[1] };
+            const a4 = acc(vx + dt * k3.vx, vy + dt * k3.vy);
+            const k4 = { x: vx + dt * k3.vx, y: vy + dt * k3.vy, vx: a4[0], vy: a4[1] };
+            x += dt / 6 * (k1.x + 2 * k2.x + 2 * k3.x + k4.x);
+            y += dt / 6 * (k1.y + 2 * k2.y + 2 * k3.y + k4.y);
+            vx += dt / 6 * (k1.vx + 2 * k2.vx + 2 * k3.vx + k4.vx);
+            vy += dt / 6 * (k1.vy + 2 * k2.vy + 2 * k3.vy + k4.vy);
+            pts.push([x, y]);
+            steps++;
+            if (vx <= 0 || Math.abs(y) > 0.05) { back = true; break; }
+        }
+        let ys = NaN;
+        if (!back) {
+            ys = y + (TT.L + TT.D - x) * (vy / vx);
+            pts.push([TT.L + TT.D, ys]);
+        }
+        return { pts, v, E, ys, back };
+    }
+
+    function arrow(ctx, x1, y1, x2, y2, color, w) {
+        const ang = Math.atan2(y2 - y1, x2 - x1), hl = 8;
+        ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = w || 2;
+        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x2, y2);
+        ctx.lineTo(x2 - hl * Math.cos(ang - 0.4), y2 - hl * Math.sin(ang - 0.4));
+        ctx.lineTo(x2 - hl * Math.cos(ang + 0.4), y2 - hl * Math.sin(ang + 0.4));
+        ctx.closePath(); ctx.fill();
+    }
+
+    function ttDraw() {
+        const { ctx, w, h } = ttC;
+        const Va = +$('tt-va').value, Vp = +$('tt-vp').value, Bmt = +$('tt-b').value, Bt = Bmt * 1e-3;
+        const r = ttTrajectory(Va, Vp, Bt);
+        const PX = m => TT.x0 + m * TT.s, PY = m => TT.cy - m * TT.s;
+
+        ctx.clearRect(0, 0, w, h);
+        // tubo
+        ctx.fillStyle = '#f7fafc'; ctx.strokeStyle = '#a0aec0'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.rect(40, 24, 860, 332); ctx.fill(); ctx.stroke();
+        // cañón de electrones
+        ctx.fillStyle = '#cbd5e0';
+        ctx.fillRect(58, 150, 16, 80); ctx.fillStyle = '#718096'; ctx.fillRect(58, 150, 6, 80);
+        ctx.fillStyle = '#a0aec0'; ctx.fillRect(120, 120, 8, 52); ctx.fillRect(120, 208, 8, 52);
+        ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+        ctx.fillText('cátodo (−)', 66, 275); ctx.fillText('ánodo (+)', 124, 275);
+        ctx.fillText('V_a', 95, 140);
+        ctx.strokeStyle = '#90cdf4'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(74, TT.cy); ctx.lineTo(TT.x0, TT.cy); ctx.stroke();
+
+        // placas
+        const yTop = PY(TT.d / 2), yBot = PY(-TT.d / 2);
+        const botPos = Vp > 0, bothOff = Vp === 0;      // Vp > 0: placa inferior positiva, E hacia arriba
+        ctx.fillStyle = bothOff ? '#a0aec0' : (botPos ? '#3182ce' : '#e53e3e');
+        ctx.fillRect(PX(0), yTop - 10, TT.L * TT.s, 10);
+        ctx.fillStyle = bothOff ? '#a0aec0' : (botPos ? '#e53e3e' : '#3182ce');
+        ctx.fillRect(PX(0), yBot, TT.L * TT.s, 10);
+        ctx.fillStyle = '#fff'; ctx.font = 'bold 12px Georgia';
+        if (!bothOff) {
+            ctx.fillText(botPos ? '−' : '+', PX(TT.L / 2), yTop - 1);
+            ctx.fillText(botPos ? '+' : '−', PX(TT.L / 2), yBot + 9);
+        }
+        // flechas de E (de la placa + a la placa −)
+        if (!bothOff) {
+            for (let i = 0; i < 5; i++) {
+                const xx = PX(TT.L * (i + 0.5) / 5);
+                if (botPos) arrow(ctx, xx, yBot - 4, xx, yTop + 4, 'rgba(197,48,48,0.45)', 1.5);
+                else arrow(ctx, xx, yTop + 4, xx, yBot - 4, 'rgba(197,48,48,0.45)', 1.5);
+            }
+        }
+        // símbolos de B
+        if (Math.abs(Bmt) > 0.001) {
+            ctx.strokeStyle = 'rgba(43,108,176,0.55)'; ctx.fillStyle = 'rgba(43,108,176,0.55)'; ctx.lineWidth = 1.2;
+            for (let i = 0; i < 6; i++) for (let j = 0; j < 4; j++) {
+                const cx = PX(TT.L * (i + 0.5) / 6), cyy = PY(TT.d / 2 * (-0.75 + j * 0.5));
+                if (Bmt > 0) { ctx.beginPath(); ctx.arc(cx, cyy, 3.2, 0, 6.3); ctx.stroke(); ctx.beginPath(); ctx.arc(cx, cyy, 1, 0, 6.3); ctx.fill(); }
+                else { ctx.beginPath(); ctx.moveTo(cx - 3, cyy - 3); ctx.lineTo(cx + 3, cyy + 3); ctx.moveTo(cx + 3, cyy - 3); ctx.lineTo(cx - 3, cyy + 3); ctx.stroke(); }
+            }
+        }
+        // pantalla
+        const xs = PX(TT.L + TT.D);
+        ctx.fillStyle = '#e6fffa'; ctx.fillRect(xs, 24, 8, 332);
+        ctx.fillStyle = '#4a5568'; ctx.textAlign = 'left'; ctx.font = '11px Georgia';
+        for (let c = -5; c <= 5; c++) {
+            const yy = PY(c * 0.01);
+            ctx.fillStyle = '#718096'; ctx.fillRect(xs + 8, yy, c % 5 === 0 ? 9 : 5, 1);
+            if (c % 5 === 0) { ctx.fillStyle = '#4a5568'; ctx.fillText(String(c).replace('-', '−') + ' cm', xs + 19, yy + 4); }
+        }
+        ctx.save(); ctx.translate(xs - 6, 190); ctx.rotate(-Math.PI / 2); ctx.textAlign = 'center';
+        ctx.fillStyle = '#4a5568'; ctx.fillText('pantalla fluorescente', 0, 0); ctx.restore();
+
+        // trayectoria
+        ctx.strokeStyle = '#2f855a'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+        ctx.beginPath();
+        r.pts.forEach((p, i) => { const X = PX(p[0]), Y = PY(p[1]); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); });
+        ctx.stroke();
+        // punto en la pantalla
+        if (!r.back && Math.abs(r.ys) <= 0.059) {
+            const g = ctx.createRadialGradient(xs + 4, PY(r.ys), 1, xs + 4, PY(r.ys), 16);
+            g.addColorStop(0, 'rgba(72,187,120,1)'); g.addColorStop(1, 'rgba(72,187,120,0)');
+            ctx.fillStyle = g; ctx.beginPath(); ctx.arc(xs + 4, PY(r.ys), 16, 0, 6.3); ctx.fill();
+        }
+        // fuerzas (en el centro de las placas)
+        const fE = EM * Math.abs(r.E), fB = EM * r.v * Math.abs(Bt);
+        const fMax = Math.max(fE, fB, 1);
+        const mid = r.pts[Math.floor(r.pts.length / 2)] || [TT.L / 2, 0];
+        const mx = PX(mid[0]), my = PY(mid[1]);
+        const scale = 55 / Math.max(EM * 10000, fMax);
+        if (fE > 0) { arrow(ctx, mx, my, mx, my + Math.sign(-r.E) * -fE * scale, '#c53030', 3); }
+        if (fB > 0) { arrow(ctx, mx, my, mx, my - Math.sign(Bt) * fB * scale, '#2b6cb0', 3); }
+        ctx.font = 'bold 12px Georgia'; ctx.textAlign = 'left';
+        ctx.fillStyle = '#c53030'; ctx.fillText('F_E (eléctrica)', 60, 60);
+        ctx.fillStyle = '#2b6cb0'; ctx.fillText('F_B (magnética)', 60, 78);
+        ctx.fillStyle = '#718096'; ctx.fillText('B > 0: sale de la pantalla (puntos)', 60, 96);
+        if (r.back) { ctx.fillStyle = '#c53030'; ctx.textAlign = 'center'; ctx.font = 'bold 14px Georgia'; ctx.fillText('El haz se curva demasiado y no llega a la pantalla', 520, 340); }
+        else if (Math.abs(r.ys) > 0.059) { ctx.fillStyle = '#c53030'; ctx.textAlign = 'center'; ctx.font = 'bold 14px Georgia'; ctx.fillText('El haz sale de la pantalla', 520, 340); }
+
+        // lecturas
+        $('tt-va-val').textContent = Va + ' V';
+        $('tt-vp-val').textContent = Vp + ' V';
+        $('tt-b-val').textContent = fmt(Bmt, 3) + ' mT';
+        $('tt-E').textContent = fmt(r.E / 1000, 2) + ' kV/m';
+        $('tt-v').textContent = fmt(r.v / 1e7, 3) + ' × 10⁷ m/s';
+        const vEB = Math.abs(Bt) > 1e-7 && r.E * Bt > 0 ? Math.abs(r.E / Bt) : NaN;
+        $('tt-vEB').textContent = isNaN(vEB) ? '—' : fmt(vEB / 1e7, 3) + ' × 10⁷ m/s';
+        $('tt-y').textContent = r.back ? 'no llega' : fmt(r.ys * 100, 2) + ' cm';
+        const rc = Math.abs(Bt) > 1e-9 ? r.v / (EM * Math.abs(Bt)) : NaN;
+        $('tt-r').textContent = isNaN(rc) ? '—' : (rc < 1 ? fmt(rc * 100, 1) + ' cm' : fmt(rc, 2) + ' m');
+
+        const st = $('tt-status');
+        const net = Math.abs(r.v * Bt - r.E);
+        const ref = Math.max(Math.abs(r.E), Math.abs(r.v * Bt));
+        if (ref < 1) { st.className = 'status mid'; st.textContent = 'Sin campos: el haz va recto y llega al centro de la pantalla.'; }
+        else if (net < 0.02 * ref) { st.className = 'status yes'; st.textContent = 'Fuerzas compensadas: el haz va recto y se cumple v = E/B.'; }
+        else if (r.back) { st.className = 'status no'; st.textContent = 'El campo magnético es tan intenso que el haz da la vuelta antes de salir de la región de campos.'; }
+        else { st.className = 'status no'; st.textContent = 'El haz se desvía hacia ' + (r.ys > 0 ? 'arriba' : 'abajo') + ': domina la fuerza ' + (r.v * Bt > r.E ? 'magnética.' : 'eléctrica.'); }
+    }
+
+    function ttSet(va, vp, bmt) {
+        $('tt-va').value = va; $('tt-vp').value = vp; $('tt-b').value = bmt; ttDraw();
+    }
+    function ttPreset(kind) {
+        const Va = +$('tt-va').value;
+        if (kind === 'E') ttSet(Va, 150, 0);
+        else if (kind === 'B') ttSet(Va, 0, 0.5);
+        else {
+            let Vp = +$('tt-vp').value; if (Vp === 0) Vp = 150;
+            const v = Math.sqrt(2 * EM * Va);
+            let bmt = (Vp / TT.d / v) * 1e3;
+            if (Math.abs(bmt) > 1.5) { Vp = Math.sign(Vp) * Math.floor(1.5e-3 * v * TT.d); bmt = (Vp / TT.d / v) * 1e3; }
+            bmt = Math.round(bmt / 0.002) * 0.002;
+            ttSet(Va, Vp, +bmt.toFixed(3));
+        }
+    }
+    function ttMeasure() {
+        const Va = +$('tt-va').value, Vp = +$('tt-vp').value, Bt = +$('tt-b').value * 1e-3;
+        const out = $('tt-meas');
+        const E = Vp / TT.d;
+        if (Vp === 0) { out.textContent = 'pon un voltaje V_p distinto de cero'; return; }
+        const v = Math.sqrt(2 * EM * Va);
+        if (!(Bt * E > 0) || Math.abs(v * Bt - E) > 0.02 * Math.abs(E)) { out.textContent = 'primero compensa el haz (botón «Compensar»)'; return; }
+        const vEst = Math.abs(E / Bt);
+        const y0 = ttTrajectory(Va, Vp, 0).ys;     // desviación con solo E (apagando B)
+        const emEst = Math.abs(y0) * vEst * vEst / (Math.abs(E) * TT.L * (TT.L / 2 + TT.D));
+        out.innerHTML = sci(emEst, 2) + ' C/kg (≈ ' + Math.round(emEst / MP_EM) + ' veces el del ion H⁺)';
+    }
+    ['tt-va', 'tt-vp', 'tt-b'].forEach(id => $(id).addEventListener('input', () => { $('tt-meas').textContent = 'pulsa el botón'; ttDraw(); }));
+    hooks[5] = ttDraw;
+    ttDraw();
+
+    /* =====================================================================
+       2. Dispersión de Rutherford
+       ===================================================================== */
+    const RS_EL = {
+        Al: { Z: 13, A: 27,   n: 6.02e28, name: 'Aluminio (Z = 13)' },
+        Cu: { Z: 29, A: 63.5, n: 8.49e28, name: 'Cobre (Z = 29)' },
+        Ag: { Z: 47, A: 108,  n: 5.86e28, name: 'Plata (Z = 47)' },
+        Au: { Z: 79, A: 197,  n: 5.90e28, name: 'Oro (Z = 79)' },
+        Pb: { Z: 82, A: 207,  n: 3.30e28, name: 'Plomo (Z = 82)' }
+    };
+    const RS_R = 1e5;      // radio del átomo de Thomson, fm
+    const rsC = setupCanvas($('rs-cv'));
+    Object.keys(RS_EL).forEach(k => {
+        const o = document.createElement('option'); o.value = k; o.textContent = RS_EL[k].name;
+        if (k === 'Au') o.selected = true; $('rs-el').appendChild(o);
+    });
+
+    function sup(n) { return String(n).replace(/-/g, '⁻').replace(/\d/g, c => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]); }
+    function groups(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+    // desviación (rad) de una alfa con parámetro de impacto b por un átomo de Thomson (radio R, A/E = 2K)
+    function thomsonAngle(b, K, R) {
+        const A_E = 2 * K;
+        if (b >= R) return A_E / b;
+        const s = Math.sqrt(R * R - b * b);
+        return A_E * (b * s / (R * R * R) + (1 / b) * (1 - s / R));
+    }
+    function thomsonMeanSq(K, R) {       // <θ²> promedio sobre el disco de radio R
+        let sum = 0; const N = 400;
+        for (let i = 0; i < N; i++) {
+            const b = R * (i + 0.5) / N, t = thomsonAngle(b, K, R);
+            sum += t * t * b;
+        }
+        return 2 * sum * (R / N) / (R * R);
+    }
+    // trayectoria hiperbólica (Rutherford) para parámetro de impacto b>0; devuelve puntos en fm con la alfa entrando desde la izquierda
+    function rutherfordPath(b, K, rmax) {
+        const th = 2 * Math.atan(K / b);
+        const eps = 1 / Math.sin(th / 2);
+        const l = b * b / K;
+        const phiLim = Math.acos(Math.min(1, (1 + l / rmax) / eps));
+        const gam = -(Math.PI / 2 + th / 2), cg = Math.cos(gam), sg = Math.sin(gam);
+        const pts = [], N = 160;
+        for (let i = 0; i <= N; i++) {
+            const u = -1 + 2 * i / N;
+            const phi = Math.sign(u) * Math.pow(Math.abs(u), 1.6) * phiLim;
+            const r = l / (eps * Math.cos(phi) - 1);
+            const xp = r * Math.cos(phi), yp = r * Math.sin(phi);
+            pts.push([xp * cg - yp * sg, -(xp * sg + yp * cg)]);   // rotación + reflexión: b > 0 por encima del núcleo
+        }
+        return { pts, th };
+    }
+    function rsDraw() {
+        const el = RS_EL[$('rs-el').value];
+        const E = +$('rs-E').value, W = +$('rs-win').value, t_um = +$('rs-t').value;
+        const K = KE2 * el.Z / E;                 // fm  (= A/2E con A = 2·Z·e²k)
+        const dmin = 2 * K;
+        const Rn = 1.2 * Math.pow(el.A, 1 / 3);
+        const touch = dmin < Rn + 1.7;
+
+        $('rs-E-val').textContent = fmt(E, 1) + ' MeV';
+        $('rs-win-val').textContent = '± ' + W + ' fm';
+        $('rs-t-val').textContent = fmt(t_um, 2) + ' µm';
+        $('rs-K').textContent = fmt(K, 1) + ' fm';
+        $('rs-dmin').textContent = fmt(dmin, 1) + ' fm';
+        $('rs-rn').textContent = fmt(Rn, 1) + ' fm';
+        const thmax = 2 * K / RS_R;
+        $('rs-thmax').textContent = fmt(thmax * 180 / Math.PI, 3) + '°';
+        const st = $('rs-status');
+        if (touch) { st.className = 'status no'; st.textContent = 'La alfa llega a tocar el núcleo (acercamiento ' + fmt(dmin, 1) + ' fm): la fórmula de Rutherford deja de valer, actúan las fuerzas nucleares.'; }
+        else { st.className = 'status yes'; st.textContent = 'La alfa se detiene a ' + fmt(dmin, 1) + ' fm, sin tocar el núcleo: la dispersión es puramente eléctrica (Coulomb).'; }
+
+        const { ctx, w, h } = rsC;
+        ctx.clearRect(0, 0, w, h);
+        const PW = 460, PH = 380, py0 = 10, cyP = py0 + PH / 2;
+        const s = (PH / 2) / W;                              // px por fm
+        const panels = [{ x0: 10, name: 'Modelo de Thomson' }, { x0: 490, name: 'Modelo de Rutherford' }];
+        const NT = 20;
+        panels.forEach((p, idx) => {
+            const cxP = p.x0 + PW / 2;
+            ctx.save();
+            ctx.beginPath(); ctx.rect(p.x0, py0, PW, PH); ctx.clip();
+            ctx.fillStyle = idx === 0 ? '#fff5f0' : '#f7fafc'; ctx.fillRect(p.x0, py0, PW, PH);
+            if (idx === 0) {
+                const g = ctx.createRadialGradient(cxP, cyP, 10, cxP, cyP, PW * 0.7);
+                g.addColorStop(0, 'rgba(252,129,129,0.35)'); g.addColorStop(1, 'rgba(252,129,129,0.25)');
+                ctx.fillStyle = g; ctx.fillRect(p.x0, py0, PW, PH);
+            }
+            // trayectorias
+            for (let k = 0; k < NT; k++) {
+                const b = (k - (NT - 1) / 2) * (1.9 * W / (NT - 1));
+                const ab = Math.abs(b);
+                let pts, th;
+                if (idx === 0) {
+                    th = thomsonAngle(ab, K, RS_R) * Math.sign(b);
+                    pts = [[-1.4 * W, b], [1.4 * W, b + 2.8 * W * Math.tan(th)]];
+                } else {
+                    const r = rutherfordPath(ab, K, 3 * W);
+                    th = r.th;
+                    pts = r.pts.map(q => [q[0], q[1] * Math.sign(b)]);
+                }
+                const ang = Math.abs(th);
+                ctx.strokeStyle = idx === 0 ? '#2b6cb0' : `hsl(${220 - 220 * Math.min(1, ang / Math.PI)},75%,42%)`;
+                ctx.lineWidth = 1.6; ctx.beginPath();
+                pts.forEach((q, i) => { const X = cxP + q[0] * s, Y = cyP - q[1] * s; i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); });
+                ctx.stroke();
+            }
+            if (idx === 1) {
+                ctx.strokeStyle = '#a0aec0'; ctx.setLineDash([4, 4]); ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.arc(cxP, cyP, dmin * s, 0, 6.3); ctx.stroke(); ctx.setLineDash([]);
+                ctx.fillStyle = '#c53030'; ctx.beginPath(); ctx.arc(cxP, cyP, Math.max(3, Rn * s), 0, 6.3); ctx.fill();
+                ctx.fillStyle = '#4a5568'; ctx.font = '11px Georgia'; ctx.textAlign = 'left';
+                ctx.fillText('acercamiento máx.', cxP + dmin * s * 0.72 + 4, cyP - dmin * s * 0.72);
+                ctx.fillText('núcleo', cxP + 8, cyP + 16);
+            } else {
+                ctx.fillStyle = '#4a5568'; ctx.font = '11px Georgia'; ctx.textAlign = 'left';
+                ctx.fillStyle = 'rgba(255,245,240,0.9)'; ctx.fillRect(p.x0 + 8, py0 + 30, 250, 18); ctx.fillStyle = '#4a5568'; ctx.fillText('carga positiva repartida (R = 10⁵ fm)', p.x0 + 12, py0 + 43);
+            }
+            // barra de escala
+            const bar = W >= 200 ? 100 : 50;
+            ctx.strokeStyle = '#1a202c'; ctx.lineWidth = 2; ctx.beginPath();
+            ctx.moveTo(p.x0 + 14, py0 + PH - 16); ctx.lineTo(p.x0 + 14 + bar * s, py0 + PH - 16); ctx.stroke();
+            ctx.fillStyle = '#1a202c'; ctx.font = '12px Georgia'; ctx.textAlign = 'left';
+            ctx.fillText(bar + ' fm', p.x0 + 14 + bar * s + 6, py0 + PH - 12);
+            ctx.font = 'bold 14px Georgia'; ctx.fillStyle = '#1a365d';
+            ctx.fillText(p.name, p.x0 + 12, py0 + 22);
+            ctx.restore();
+            ctx.strokeStyle = '#cbd5e0'; ctx.lineWidth = 1; ctx.strokeRect(p.x0, py0, PW, PH);
+        });
+        rsTable(el, E, t_um, K);
+    }
+
+    function rsTable(el, E, t_um, K) {
+        const nt = el.n * (t_um * 1e-6) * 1e-30;         // núcleos por fm² en la lámina
+        const Nlay = t_um * 1e-6 * Math.pow(el.n, 1 / 3);
+        const th2 = Nlay * thomsonMeanSq(K, RS_R);       // <θ²> total, dispersión múltiple
+        const angles = [1, 5, 10, 30, 90, 150];
+        let rows = '';
+        angles.forEach(a => {
+            const t0 = a * Math.PI / 180;
+            // Thomson: distribución de Rayleigh, P(>θ0) = exp(-θ0²/<θ²>)
+            const lg = -(t0 * t0 / th2) / Math.LN10;
+            let pT;
+            if (lg > -2) pT = fmt(100 * Math.pow(10, lg), 1) + ' %';
+            else if (lg > -300) pT = '≈ 10' + sup(Math.round(lg));
+            else pT = '≈ 10' + sup(Math.round(lg));
+            // Rutherford: dispersión simple
+            const cot = 1 / Math.tan(t0 / 2);
+            const sigma = Math.PI * K * K * cot * cot;
+            const p = 1 - Math.exp(-sigma * nt);
+            let pR;
+            if (p >= 0.01) pR = fmt(100 * p, 1) + ' %';
+            else pR = sci(p, 1) + ' (1 de ' + groups(1 / p) + ')';
+            rows += `<tr><td>${a}°</td><td class="num">${pT}</td><td class="num">${pR}</td></tr>`;
+        });
+        $('rs-table').innerHTML = rows;
+        $('rs-note').innerHTML = 'Lámina: ≈ ' + groups(Nlay) + ' capas de átomos. Thomson: desviación típica acumulada ≈ ' + fmt(Math.sqrt(th2) * 180 / Math.PI, 2) +
+            '°, y una probabilidad como 10' + sup(-100) + ' significa «imposible». Rutherford: los ángulos pequeños incluyen varios choques; los grandes, solo uno.';
+    }
+
+    function rsFire() {
+        const el = RS_EL[$('rs-el').value];
+        const E = +$('rs-E').value, t_um = +$('rs-t').value;
+        const K = KE2 * el.Z / E;
+        const nt = el.n * (t_um * 1e-6) * 1e-30;
+        const N = 1000000, lims = [1, 10, 90].map(a => Math.PI * K * K / Math.pow(Math.tan(a * Math.PI / 360), 2));
+        // x = -ln(1-u) = π·nt·b²  ⇒  b² = x/(π nt);  θ > θ0  ⇔  b < K cot(θ0/2)  ⇔  x < π nt K² cot²
+        const th = lims.map(l => l * nt);
+        const cnt = [0, 0, 0];
+        for (let i = 0; i < N; i++) {
+            const x = -Math.log(1 - Math.random());
+            if (x < th[0]) { cnt[0]++; if (x < th[1]) { cnt[1]++; if (x < th[2]) cnt[2]++; } }
+        }
+        const rest = N - cnt[0];
+        $('rs-mc').innerHTML = 'De ' + groups(N) + ' alfas: <b>' + groups(rest) + '</b> con menos de 1°; <b>' + groups(cnt[0] - cnt[1]) + '</b> entre 1° y 10°; <b>' +
+            groups(cnt[1] - cnt[2]) + '</b> entre 10° y 90°; <b>' + groups(cnt[2]) + '</b> con más de 90°' +
+            (cnt[2] > 0 ? ' (≈ 1 de ' + groups(N / cnt[2]) + ').' : ' (ninguna esta vez).');
+    }
+    ['rs-el', 'rs-E', 'rs-win', 'rs-t'].forEach(id => $(id).addEventListener('input', () => { $('rs-mc').textContent = 'Pulsa el botón para ver cuántas de un millón de alfas aparecen en cada intervalo de ángulo.'; rsDraw(); }));
+    hooks[9] = rsDraw;
+    rsDraw();
+
+    /* =====================================================================
+       3. Calculadora de escala del átomo
+       ===================================================================== */
+    const SC = { H: [53e-12, 0.84e-15], C: [70e-12, 2.5e-15], Au: [135e-12, 5.4e-15] };
+    function scUpdate() {
+        const [ra, rn] = SC[$('sc-el').value];
+        const dObj = +$('sc-obj').value;
+        const ratio = ra / rn, D = dObj * ratio;
+        $('sc-ratio').textContent = sci(ratio, 1);
+        $('sc-d').textContent = D < 1000 ? fmt(D, D < 10 ? 1 : 0) + ' m' : fmt(D / 1000, 2) + ' km';
+        let cmp = D < 5 ? 'el tamaño de una habitación' : D < 50 ? 'una piscina olímpica' : D < 150 ? 'una cancha de fútbol' :
+                  D < 1000 ? 'unas cuantas manzanas de ciudad' : D < 5000 ? 'un barrio pequeño' : 'un pueblo';
+        $('sc-cmp').textContent = '≈ ' + cmp + ', con el núcleo como un objeto diminuto en el centro y los electrones en la periferia.';
+    }
+    ['sc-el', 'sc-obj'].forEach(id => $(id).addEventListener('input', scUpdate));
+    scUpdate();
+
+    /* =====================================================================
+       4. Colapso clásico del átomo de Rutherford
+       ===================================================================== */
+    const clC = setupCanvas($('cl-cv'));
+    const CL = { tau: 1.556e-11, f0: 6.58e15, T: 8, t0: 0, running: false, trail: [], hold: 0 };
+    const PHI_SCALE = 1e4;                // 1 vuelta dibujada ≈ 10 000 vueltas reales
+    function clDraw(tt) {
+        const { ctx, w, h } = clC;
+        ctx.clearRect(0, 0, w, h);
+        const R0 = 78, cl_x = 125, cl_y = 130, bo_x = 360, bo_y = 130;
+        ctx.fillStyle = '#4a5568'; ctx.font = 'bold 13px Georgia'; ctx.textAlign = 'center';
+        ctx.fillText('Rutherford (clásico)', cl_x, 22); ctx.fillText('Bohr (n = 1)', bo_x, 22);
+        // órbita inicial
+        ctx.strokeStyle = '#cbd5e0'; ctx.setLineDash([3, 3]);
+        [[cl_x, cl_y], [bo_x, bo_y]].forEach(c => { ctx.beginPath(); ctx.arc(c[0], c[1], R0, 0, 6.3); ctx.stroke(); });
+        ctx.setLineDash([]);
+        const f = Math.min(tt / CL.tau, 1);
+        const rr = R0 * Math.pow(Math.max(1 - f, 0), 1 / 3);
+        const phi = (2 * 4.13e16 * CL.tau * (1 - Math.sqrt(Math.max(1 - f, 0)))) / PHI_SCALE;
+        const ex = cl_x + rr * Math.cos(phi), ey = cl_y + rr * Math.sin(phi);
+        CL.trail.push([ex, ey]); if (CL.trail.length > 4000) CL.trail.shift();
+        ctx.strokeStyle = 'rgba(229,62,62,0.6)'; ctx.lineWidth = 1.3; ctx.beginPath();
+        CL.trail.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke();
+        ctx.fillStyle = '#c53030'; ctx.beginPath(); ctx.arc(cl_x, cl_y, 6, 0, 6.3); ctx.fill();
+        ctx.fillStyle = '#2b6cb0'; ctx.beginPath(); ctx.arc(ex, ey, 5, 0, 6.3); ctx.fill();
+        // Bohr: movimiento uniforme, sin pérdida
+        const pb = (tt / CL.tau) * 40;
+        ctx.fillStyle = '#c53030'; ctx.beginPath(); ctx.arc(bo_x, bo_y, 6, 0, 6.3); ctx.fill();
+        ctx.fillStyle = '#2b6cb0'; ctx.beginPath(); ctx.arc(bo_x + R0 * Math.cos(pb), bo_y + R0 * Math.sin(pb), 5, 0, 6.3); ctx.fill();
+        ctx.fillStyle = '#718096'; ctx.font = '12px Georgia';
+        ctx.fillText(f >= 1 ? '¡colapso!' : 'radia y cae en espiral', cl_x, 245);
+        ctx.fillText('sin radiación: estable', bo_x, 245);
+
+        $('cl-t').textContent = fmt(tt * 1e12, 1) + ' ps';
+        $('cl-r').textContent = fmt(Math.pow(Math.max(1 - f, 0), 1 / 3) * 52.9, 1) + ' pm';
+        $('cl-f').textContent = f >= 1 ? '→ ∞' : fmt(CL.f0 / Math.sqrt(1 - f) / 1e15, 1) + ' × 10¹⁵ Hz';
+    }
+    function clLoop(now) {
+        if (!slides[11].classList.contains('active')) { CL.running = false; return; }
+        const el = (now - CL.t0) / 1000;
+        if (el < CL.T) clDraw(CL.tau * el / CL.T);
+        else {
+            clDraw(CL.tau);
+            if (el > CL.T + 2.2) { CL.t0 = now; CL.trail = []; }
+        }
+        requestAnimationFrame(clLoop);
+    }
+    function clStart() {
+        CL.trail = []; CL.t0 = performance.now();
+        if (!CL.running) { CL.running = true; requestAnimationFrame(clLoop); }
+    }
+    hooks[11] = clStart;
+    clDraw(0);
+
+    /* =====================================================================
+       5. Átomo de Bohr
+       ===================================================================== */
+    const bhC = setupCanvas($('bh-cv')), lvC = setupCanvas($('bh-lv'));
+    const SERIES = { 1: 'Lyman', 2: 'Balmer', 3: 'Paschen', 4: 'Brackett', 5: 'Pfund', 6: 'Humphreys' };
+    const BH = { anim: null };
+    const En = n => -RY / (n * n);
+
+    function regionOf(lam) {
+        if (lam < 10) return 'rayos X';
+        if (lam < 380) return 'ultravioleta';
+        if (lam <= 750) return 'visible';
+        return 'infrarrojo';
+    }
+    function photonColor(lam) { return (lam >= 380 && lam <= 750) ? wavelengthToColor(lam) : (lam < 380 ? '#805ad5' : '#9b2c2c'); }
+
+    function bhState() {
+        const ni = +$('bh-ni').value, nf = +$('bh-nf').value;
+        const dE = Math.abs(En(nf) - En(ni));
+        const lam = dE > 0 ? HC / dE : NaN;
+        return { ni, nf, dE, lam, emit: ni > nf };
+    }
+    function bhInfo() {
+        const s = bhState();
+        $('bh-ni-val').textContent = s.ni; $('bh-nf-val').textContent = s.nf;
+        const st = $('bh-status');
+        if (s.ni === s.nf) {
+            st.className = 'status no'; st.textContent = 'Elige dos niveles distintos: sin salto no hay fotón.';
+            ['bh-dE', 'bh-lam', 'bh-f', 'bh-reg', 'bh-ser'].forEach(id => $(id).textContent = '—');
+            $('bh-sw').style.background = '#fff';
+        } else {
+            st.className = 'status yes';
+            st.textContent = s.emit
+                ? 'Emisión: el electrón baja de n = ' + s.ni + ' a n = ' + s.nf + ' y el átomo emite un fotón.'
+                : 'Absorción: el átomo toma un fotón de ' + fmt(s.dE, 2) + ' eV y el electrón sube de n = ' + s.ni + ' a n = ' + s.nf + '.';
+            $('bh-dE').textContent = fmt(s.dE, 3) + ' eV';
+            $('bh-lam').textContent = (s.lam < 1000 ? fmt(s.lam, 1) + ' nm' : fmt(s.lam / 1000, 2) + ' µm');
+            $('bh-f').textContent = sci(s.dE / H_EV, 2) + ' Hz';
+            $('bh-reg').textContent = regionOf(s.lam);
+            const lower = Math.min(s.ni, s.nf);
+            $('bh-ser').textContent = SERIES[lower] ? SERIES[lower] + ' (n = ' + lower + ')' : 'n = ' + lower;
+            $('bh-sw').style.background = (s.lam >= 380 && s.lam <= 750) ? wavelengthToColor(s.lam) : 'repeating-linear-gradient(45deg,' + photonColor(s.lam) + ' 0 6px,#fff 6px 12px)';
+        }
+        $('bh-r').textContent = fmt(s.ni * s.ni * A0_NM, 3) + ' → ' + fmt(s.nf * s.nf * A0_NM, 3) + ' nm';
+    }
+
+    const BH_SCALE = 3.4;     // px por a0
+    function bhDraw(tm) {
+        const s = bhState();
+        const { ctx, w, h } = bhC, cx = w / 2, cy = h / 2;
+        ctx.clearRect(0, 0, w, h);
+        for (let n = 1; n <= 7; n++) {
+            const r = n * n * BH_SCALE;
+            ctx.strokeStyle = (n === s.ni) ? '#2b6cb0' : (n === s.nf ? '#c53030' : '#cbd5e0');
+            ctx.lineWidth = (n === s.ni || n === s.nf) ? 2 : 1;
+            ctx.setLineDash(n === s.ni || n === s.nf ? [] : [3, 3]);
+            ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.3); ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = '#718096'; ctx.font = '11px Georgia'; ctx.textAlign = 'left';
+            if (n >= 4) ctx.fillText('n=' + n, cx + r * Math.cos(-0.75) + 3, cy + r * Math.sin(-0.75) - 2);
+        }
+        ctx.fillStyle = '#c53030'; ctx.beginPath(); ctx.arc(cx, cy, 3.5, 0, 6.3); ctx.fill();
+
+        // posición del electrón y del fotón durante la animación
+        let nCur = s.ni, phi = 0.9, photon = null;
+        const col = photonColor(s.lam), vis = s.lam >= 380 && s.lam <= 750;
+        if (tm !== undefined && s.ni !== s.nf) {
+            const ease = x => x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x);
+            phi = 0.9 + tm * 2.2;
+            const rEnd = 190, ri = s.ni * s.ni * BH_SCALE;
+            if (s.emit) {
+                nCur = s.ni + (s.nf - s.ni) * ease(tm / 0.8);
+                if (tm > 0.6) photon = { r0: ri, d: Math.min(1, (tm - 0.6) / 1.4), dir: 0.9 + 0.6 * 2.2, out: true };
+            } else {
+                if (tm < 1.0) photon = { r0: ri, d: tm / 1.0, dir: 0.9 + 1.0 * 2.2, out: false };
+                nCur = s.ni + (s.nf - s.ni) * ease((tm - 1.0) / 0.8);
+            }
+        }
+        if (tm === undefined) nCur = s.ni;
+        const rE = nCur * nCur * BH_SCALE;
+        const ex = cx + rE * Math.cos(phi), ey = cy + rE * Math.sin(phi);
+        if (photon) {
+            const head = photon.out ? photon.r0 + (200 - photon.r0) * photon.d : photon.r0 + (190 - photon.r0) * (1 - photon.d);
+            const ux = Math.cos(photon.dir), uy = Math.sin(photon.dir);
+            const len = 70, amp = 7, k = 2 * Math.PI / (vis ? 14 + (s.lam - 380) / 25 : (s.lam < 380 ? 9 : 26));
+            ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.beginPath();
+            let started = false;
+            for (let i = 0; i <= 140; i++) {
+                const t = i / 140 * len;
+                const dist = photon.out ? head - len + t : head + t;      // posición radial de ese punto del paquete de onda
+                if (dist < (photon.out ? photon.r0 : 0) || dist > 200) continue;
+                const px = cx + ux * dist - uy * amp * Math.sin(k * t);
+                const py = cy + uy * dist + ux * amp * Math.sin(k * t);
+                if (!started) { ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+        }
+        ctx.fillStyle = '#2b6cb0'; ctx.beginPath(); ctx.arc(ex, ey, 5.5, 0, 6.3); ctx.fill();
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+        ctx.fillText('Órbitas a escala: r = n² a₀', cx, h - 10);
+        ctx.textAlign = 'left'; ctx.fillStyle = '#2b6cb0'; ctx.fillText('● órbita inicial', 12, 20); ctx.fillStyle = '#c53030'; ctx.fillText('● órbita final', 12, 36);
+        bhLevels(s, nCur);
+    }
+
+    function bhLevels(s, nCur) {
+        const { ctx, w, h } = lvC;
+        ctx.clearRect(0, 0, w, h);
+        const Y = e => 335 - (e + 14.6) / 15.6 * 300;
+        ctx.fillStyle = '#edf2f7'; ctx.fillRect(60, 18, 300, Y(0) - 18);
+        ctx.fillStyle = '#718096'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+        ctx.fillText('continuo (electrón libre): E ≥ 0', 210, 40);
+        for (let n = 1; n <= 7; n++) {
+            const y = Y(En(n));
+            ctx.strokeStyle = (n === s.ni) ? '#2b6cb0' : (n === s.nf ? '#c53030' : '#4a5568');
+            ctx.lineWidth = (n === s.ni || n === s.nf) ? 3 : 1.5;
+            ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(360, y); ctx.stroke();
+            ctx.fillStyle = '#1a202c'; ctx.font = '12px Georgia'; ctx.textAlign = 'right';
+            if (n <= 4) {
+                ctx.fillText('n = ' + n, 54, y + 4);
+                ctx.textAlign = 'left'; ctx.fillStyle = '#4a5568';
+                ctx.fillText(fmt(En(n), n === 1 ? 1 : 2) + ' eV', 366, y + 4);
+            } else if (n === 6) {
+                ctx.fillText('n ≥ 5', 54, y - 6);
+                ctx.textAlign = 'left'; ctx.fillStyle = '#4a5568';
+                ctx.fillText('−0,54 … −0,28 eV', 366, y - 6);
+            }
+        }
+        ctx.strokeStyle = '#718096'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(60, Y(0)); ctx.lineTo(360, Y(0)); ctx.stroke();
+        if (s.ni !== s.nf) {
+            const col = photonColor(s.lam), x = 210;
+            arrow(ctx, x, Y(En(s.ni)), x, Y(En(s.nf)) + (s.emit ? -3 : 3), col, 4);
+            ctx.fillStyle = '#1a202c'; ctx.font = 'bold 13px Georgia'; ctx.textAlign = 'left';
+            ctx.fillText((s.lam < 1000 ? fmt(s.lam, 1) + ' nm' : fmt(s.lam / 1000, 2) + ' µm') + ' · ' + fmt(s.dE, 2) + ' eV', x + 12, (Y(En(s.ni)) + Y(En(s.nf))) / 2 + 4);
+        }
+        // electrón en su nivel
+        const ey = Y(En(nCur));
+        ctx.fillStyle = '#2b6cb0'; ctx.beginPath(); ctx.arc(120, ey, 6, 0, 6.3); ctx.fill();
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+        ctx.fillText('Diagrama de niveles de energía', 210, h - 8);
+    }
+
+    function bhJump() {
+        const s = bhState(); if (s.ni === s.nf) return;
+        const t0 = performance.now(), T = 2.6;
+        BH.anim = t0;
+        (function loop(now) {
+            if (BH.anim !== t0) return;
+            const tm = (now - t0) / 1000;
+            if (tm >= T) { BH.anim = null; bhDraw(); return; }
+            bhDraw(tm);
+            requestAnimationFrame(loop);
+        })(t0);
+    }
+    function bhSet(ni, nf) { $('bh-ni').value = ni; $('bh-nf').value = nf; bhInfo(); bhJump(); }
+    ['bh-ni', 'bh-nf'].forEach(id => $(id).addEventListener('input', () => { BH.anim = null; bhInfo(); bhDraw(); }));
+
+    function abUpdate() {
+        const E = +$('ab-E').value;
+        $('ab-val').textContent = fmt(E, 2) + ' eV';
+        const st = $('ab-status');
+        if (E >= RY) {
+            st.className = 'status yes';
+            st.textContent = 'Se absorbe: supera la energía de ionización (13,6 eV). El electrón sale libre con ' + fmt(E - RY, 2) + ' eV de energía cinética.';
+            return;
+        }
+        let best = null, bd = 1e9;
+        for (let k = 2; k <= 40; k++) { const e = RY * (1 - 1 / (k * k)), d = Math.abs(e - E); if (d < bd) { bd = d; best = { k, e }; } }
+        if (bd <= 0.03) {
+            st.className = 'status yes';
+            st.textContent = 'Se absorbe: coincide con el salto 1 → ' + best.k + ' (' + fmt(best.e, 2) + ' eV, λ = ' + fmt(HC / best.e, 1) + ' nm, línea de Lyman).';
+        } else {
+            st.className = 'status no';
+            st.textContent = 'No se absorbe: no coincide con ninguna diferencia de energía permitida. El fotón atraviesa el gas.';
+        }
+    }
+    $('ab-E').addEventListener('input', abUpdate);
+    hooks[15] = () => { bhInfo(); bhDraw(); abUpdate(); };
+    bhInfo(); bhDraw(); abUpdate();
+
+    /* =====================================================================
+       6. Espectroscopio virtual
+       ===================================================================== */
+    const GASES = {
+        H:  { lines: [[410.2, .35], [434.0, .5], [486.1, .8], [656.3, 1]],
+              note: 'Hidrógeno: las cuatro líneas visibles de la serie de Balmer (Hα roja, Hβ azul-verdosa, Hγ y Hδ violetas). Es el único espectro que el modelo de Bohr reproduce con exactitud.' },
+        He: { lines: [[447.1, .6], [471.3, .4], [492.2, .4], [501.6, .7], [587.6, 1], [667.8, .5], [706.5, .5]],
+              note: 'Helio: la línea amarilla de 587,6 nm se vio en el Sol en 1868, antes de conocerse el elemento en la Tierra.' },
+        Na: { lines: [[568.8, .15], [589.0, 1], [589.6, 1], [615.4, .15]],
+              note: 'Sodio: el famoso doblete D (589,0 y 589,6 nm). Es el color amarillo de la sal en una llama y de las lámparas de sodio.' },
+        Hg: { lines: [[404.7, .7], [407.8, .3], [435.8, 1], [491.6, .2], [546.1, 1], [577.0, .6], [579.1, .6]],
+              note: 'Mercurio: violeta, azul, verde y amarillo. Además emite un ultravioleta intenso a 254 nm, invisible, que se convierte en luz visible dentro de un tubo fluorescente.' },
+        Ne: { lines: [[540.1, .4], [585.2, 1], [588.2, .7], [594.5, .5], [603.0, .6], [607.4, .7], [614.3, .8], [626.6, .7], [633.4, .7], [640.2, 1], [650.6, .6], [659.9, .4], [692.9, .5], [703.2, .4]],
+              note: 'Neón: muchas líneas naranja y rojas; su suma da el rojo anaranjado de los letreros luminosos.' }
+    };
+    const spC = setupCanvas($('sp-cv'));
+    const SP = { x0: 30, x1: 930, l0: 380, l1: 750 };
+    const spX = l => SP.x0 + (l - SP.l0) / (SP.l1 - SP.l0) * (SP.x1 - SP.x0);
+    function spStrip(ctx, y, hgt, lines, mode) {
+        if (mode === 'em') { ctx.fillStyle = '#0a0a12'; ctx.fillRect(SP.x0, y, SP.x1 - SP.x0, hgt); }
+        else {
+            for (let x = SP.x0; x < SP.x1; x++) {
+                const l = SP.l0 + (x - SP.x0) / (SP.x1 - SP.x0) * (SP.l1 - SP.l0);
+                ctx.fillStyle = wavelengthToColor(l); ctx.fillRect(x, y, 1.2, hgt);
+            }
+        }
+        lines.forEach(([l, I]) => {
+            const x = spX(l), col = wavelengthToColor(l);
+            if (mode === 'em') {
+                const g = ctx.createLinearGradient(x - 6, 0, x + 6, 0);
+                g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, col); g.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.globalAlpha = 0.35 + 0.65 * I; ctx.fillStyle = g; ctx.fillRect(x - 6, y, 12, hgt);
+                ctx.globalAlpha = 0.5 + 0.5 * I; ctx.fillStyle = '#fff'; ctx.fillRect(x - 0.8, y, 1.6, hgt);
+                ctx.globalAlpha = 1;
+            } else {
+                ctx.globalAlpha = 0.35 + 0.65 * I; ctx.fillStyle = '#05050a'; ctx.fillRect(x - 1.6, y, 3.2, hgt); ctx.globalAlpha = 1;
+            }
+        });
+        ctx.strokeStyle = '#718096'; ctx.lineWidth = 1; ctx.strokeRect(SP.x0 - 0.5, y - 0.5, SP.x1 - SP.x0 + 1, hgt + 1);
+    }
+    function spDraw() {
+        const { ctx, w, h } = spC;
+        const g = GASES[$('sp-gas').value], mode = $('sp-mode').value, lam = +$('sp-lam').value;
+        ctx.clearRect(0, 0, w, h);
+        let yAxis;
+        if (mode === 'both') {
+            spStrip(ctx, 28, 70, g.lines, 'em'); spStrip(ctx, 118, 70, g.lines, 'ab');
+            ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'left';
+            ctx.fillText('Emisión', SP.x0, 20); ctx.fillText('Absorción', SP.x0, 110);
+            yAxis = 196;
+        } else {
+            spStrip(ctx, 36, 120, g.lines, mode);
+            ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'left';
+            ctx.fillText(mode === 'em' ? 'Emisión' : 'Absorción', SP.x0, 24);
+            yAxis = 164;
+        }
+        ctx.strokeStyle = '#4a5568'; ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+        for (let l = 400; l <= 750; l += 50) {
+            const x = spX(l); ctx.beginPath(); ctx.moveTo(x, yAxis); ctx.lineTo(x, yAxis + 6); ctx.stroke();
+            ctx.fillText(l, x, yAxis + 20);
+        }
+        ctx.fillText('Longitud de onda (nm)', (SP.x0 + SP.x1) / 2, yAxis + 40);
+        // cursor
+        const xc = spX(lam);
+        ctx.strokeStyle = '#c53030'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.moveTo(xc, 14); ctx.lineTo(xc, yAxis); ctx.stroke(); ctx.setLineDash([]);
+        $('sp-cursor').textContent = fmt(lam, 1) + ' nm';
+        $('sp-count').textContent = g.lines.length;
+        let near = g.lines[0], d0 = 1e9;
+        g.lines.forEach(L => { const d = Math.abs(L[0] - lam); if (d < d0) { d0 = d; near = L; } });
+        $('sp-near').textContent = fmt(near[0], 1) + ' nm (' + (d0 < 0.05 ? 'justo en el cursor' : 'a ' + fmt(d0, 1) + ' nm') + ')';
+        $('sp-eV').textContent = fmt(HC / near[0], 2) + ' eV';
+        $('sp-note').textContent = g.note;
+    }
+    $('sp-gas').addEventListener('input', () => { const L = GASES[$('sp-gas').value].lines; $('sp-lam').value = L.reduce((a, b) => b[1] > a[1] ? b : a)[0]; spDraw(); });
+    ['sp-mode', 'sp-lam'].forEach(id => $(id).addEventListener('input', spDraw));
+    $('sp-cv').addEventListener('mousemove', e => {
+        const r = e.target.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width * 960;
+        const l = SP.l0 + (x - SP.x0) / (SP.x1 - SP.x0) * (SP.l1 - SP.l0);
+        if (l >= SP.l0 && l <= SP.l1) { $('sp-lam').value = l.toFixed(1); spDraw(); }
+    });
+    hooks[17] = spDraw;
+    $('sp-lam').value = 656.3; spDraw();
+
+    /* =====================================================================
+       7. Partícula en una caja
+       ===================================================================== */
+    const pbC = setupCanvas($('pb-cv'));
+    const EBOX = 0.376030;   // h²/(8 m_e), eV·nm²
+    function pbDraw() {
+        const L = +$('pb-L').value, n = +$('pb-n').value;
+        const En_ = k => EBOX * k * k / (L * L);
+        const { ctx, w, h } = pbC;
+        ctx.clearRect(0, 0, w, h);
+        $('pb-L-val').textContent = fmt(L, 2) + ' nm';
+        $('pb-n-val').textContent = n;
+        const Emax = En_(6), Yl = e => 270 - e / Emax * 230;
+        // niveles
+        ctx.font = '11px Georgia';
+        for (let k = 1; k <= 6; k++) {
+            const y = Yl(En_(k));
+            ctx.strokeStyle = k === n ? '#c53030' : '#4a5568'; ctx.lineWidth = k === n ? 3 : 1.5;
+            ctx.beginPath(); ctx.moveTo(20, y); ctx.lineTo(110, y); ctx.stroke();
+            ctx.fillStyle = k === n ? '#c53030' : '#4a5568'; ctx.textAlign = 'left';
+            const e = En_(k);
+            ctx.fillText((k === n ? '' : '') + (e < 0.01 ? sci(e, 1) : fmt(e, e < 10 ? 2 : 1)) + ' eV', 114, y + 4);
+        }
+        ctx.fillStyle = '#718096'; ctx.textAlign = 'left'; ctx.fillText('niveles de energía', 20, 22);
+        // pozo
+        const x0 = 235, x1 = 450, yb = 150, A = 62;
+        ctx.strokeStyle = '#1a202c'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(x0, 40); ctx.lineTo(x0, 270); ctx.lineTo(x1, 270); ctx.lineTo(x1, 40); ctx.stroke();
+        ctx.strokeStyle = '#cbd5e0'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x0, yb); ctx.lineTo(x1, yb); ctx.stroke();
+        ctx.fillStyle = 'rgba(197,48,48,0.2)'; ctx.beginPath(); ctx.moveTo(x0, yb);
+        for (let i = 0; i <= 200; i++) { const x = i / 200, p = Math.pow(Math.sin(n * Math.PI * x), 2) * 2; ctx.lineTo(x0 + x * (x1 - x0), yb - p * A * 0.5); }
+        ctx.lineTo(x1, yb); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = '#2b6cb0'; ctx.lineWidth = 2.5; ctx.beginPath();
+        for (let i = 0; i <= 200; i++) { const x = i / 200, p = Math.sin(n * Math.PI * x); const X = x0 + x * (x1 - x0), Y = yb - p * A; i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }
+        ctx.stroke();
+        ctx.fillStyle = '#4a5568'; ctx.textAlign = 'center';
+        ctx.fillText('ψ (azul) y |ψ|² (rojo) para n = ' + n, (x0 + x1) / 2, 28);
+        ctx.fillText('0', x0, 288); ctx.fillText('L', x1, 288);
+        $('pb-E').textContent = (En_(n) < 0.01 ? sci(En_(n), 2) : fmt(En_(n), 3)) + ' eV';
+        const dE = En_(2) - En_(1);
+        $('pb-dE').textContent = (dE < 0.01 ? sci(dE, 2) : fmt(dE, 3)) + ' eV';
+        const lam = HC / dE;
+        $('pb-lam').textContent = lam < 1000 ? fmt(lam, 0) + ' nm' : fmt(lam / 1000, 1) + ' µm';
+    }
+    ['pb-L', 'pb-n'].forEach(id => $(id).addEventListener('input', pbDraw));
+    hooks[19] = pbDraw;
+    pbDraw();
+
+    /* =====================================================================
+       8. Probabilidad radial del hidrógeno
+       ===================================================================== */
+    const RNL = {
+        '1,0': r => 2 * Math.exp(-r),
+        '2,0': r => (1 / Math.sqrt(2)) * (1 - r / 2) * Math.exp(-r / 2),
+        '2,1': r => (1 / (2 * Math.sqrt(6))) * r * Math.exp(-r / 2),
+        '3,0': r => (2 / (81 * Math.sqrt(3))) * (27 - 18 * r + 2 * r * r) * Math.exp(-r / 3),
+        '3,1': r => (8 / (27 * Math.sqrt(6))) * r * (1 - r / 6) * Math.exp(-r / 3),
+        '3,2': r => (4 / (81 * Math.sqrt(30))) * r * r * Math.exp(-r / 3)
+    };
+    const rdC = setupCanvas($('rd-cv'));
+    function rdDraw() {
+        const key = $('rd-orb').value, [n, l] = key.split(',').map(Number);
+        const R = RNL[key], rmax = n === 1 ? 10 : (n === 2 ? 26 : 50);
+        const P = r => r * r * R(r) * R(r);
+        const N = 600; let pmax = 0, rpk = 0;
+        for (let i = 0; i <= N; i++) { const r = rmax * i / N, p = P(r); if (p > pmax) { pmax = p; rpk = r; } }
+        const { ctx, w, h } = rdC;
+        ctx.clearRect(0, 0, w, h);
+        const X0 = 60, X1 = 930, Y0 = 228, Y1 = 24;
+        const X = r => X0 + (X1 - X0) * r / rmax, Y = p => Y0 - (Y0 - Y1) * p / (pmax * 1.1);
+        ctx.fillStyle = 'rgba(43,108,176,0.2)'; ctx.beginPath(); ctx.moveTo(X(0), Y0);
+        for (let i = 0; i <= N; i++) ctx.lineTo(X(rmax * i / N), Y(P(rmax * i / N)));
+        ctx.lineTo(X(rmax), Y0); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = '#2b6cb0'; ctx.lineWidth = 2.5; ctx.beginPath();
+        for (let i = 0; i <= N; i++) { const r = rmax * i / N; i ? ctx.lineTo(X(r), Y(P(r))) : ctx.moveTo(X(r), Y(P(r))); }
+        ctx.stroke();
+        ctx.strokeStyle = '#4a5568'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X0, Y0); ctx.lineTo(X1, Y0); ctx.moveTo(X0, Y0); ctx.lineTo(X0, Y1); ctx.stroke();
+        const stepT = rmax <= 10 ? 1 : (rmax <= 26 ? 2 : 5);
+        ctx.fillStyle = '#4a5568'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+        for (let r = 0; r <= rmax; r += stepT) { ctx.beginPath(); ctx.moveTo(X(r), Y0); ctx.lineTo(X(r), Y0 + 5); ctx.stroke(); ctx.fillText(r, X(r), Y0 + 19); }
+        ctx.fillText('r (en unidades de a₀ = 0,0529 nm)', (X0 + X1) / 2, Y0 + 38);
+        ctx.save(); ctx.translate(16, (Y0 + Y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText('P(r) (prob. por unidad de longitud)', 0, 0); ctx.restore();
+        const rb = n * n;
+        ctx.strokeStyle = '#c53030'; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(X(rb), Y0); ctx.lineTo(X(rb), Y1); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = '#c53030'; ctx.textAlign = 'left'; ctx.font = 'bold 12px Georgia';
+        ctx.fillText('órbita de Bohr n²a₀ = ' + rb + ' a₀', X(rb) + 6, Y1 + 12);
+        ctx.fillStyle = '#2f855a'; ctx.beginPath(); ctx.arc(X(rpk), Y(pmax), 5, 0, 6.3); ctx.fill();
+
+        $('rd-peak').textContent = fmt(rpk, 2) + ' a₀ (' + fmt(rpk * A0_NM, 3) + ' nm)';
+        $('rd-bohr').textContent = rb + ' a₀ (' + fmt(rb * A0_NM, 3) + ' nm)';
+        const mean = 0.5 * (3 * n * n - l * (l + 1));
+        $('rd-mean').textContent = fmt(mean, 1) + ' a₀';
+        $('rd-nodes').textContent = n - l - 1;
+        $('rd-L').textContent = l === 0 ? '0' : '√' + (l * (l + 1)) + ' ħ ≈ ' + fmt(Math.sqrt(l * (l + 1)), 2) + ' ħ';
+    }
+    $('rd-orb').addEventListener('input', rdDraw);
+    hooks[20] = rdDraw;
+    rdDraw();
+
+    /* ---------- Inicio (permite abrir una diapositiva con #n) ---------- */
+    (function () {
+        const n = parseInt(location.hash.replace('#', ''), 10);
+        if (!isNaN(n) && n >= 1 && n <= totalSlides) currentSlide = n - 1;
+        showSlide(currentSlide);
+    })();
+
+</script>
+
+</body>
+</html>
